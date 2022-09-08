@@ -24,13 +24,24 @@
     }
   ],
   "tabBar": {
+	"iconfontSrc": "./static/font/iconfont.ttf",
     "list": [{
         "text": "首页",
-        "pagePath": "pages/index/index"
+        "pagePath": "pages/index/index",
+		"iconPath": "static/bottom/homepage-no.png",
+		"selectedIconPath": "static/bottom/homepage.png"
+		// "iconfont": {
+		// 	"text": "\ue641",
+		// 	"selectedText": "\ue644",
+		// 	"fontSize": "30px",
+		// 	"color": "blue"
+		// }
       },
       {
         "text": "我的",
-        "pagePath": "pages/my/index"
+        "pagePath": "pages/my/index",
+		"iconPath": "static/bottom/my-no.png",
+		"selectedIconPath": "static/bottom/my.png"
       }
     ]
   },
@@ -46,5 +57,15 @@
       "fui-(.*)": "firstui-uni/firstui/fui-$1/fui-$1.vue"
     }
   },
-  "uniIdRouter": {}
+  "uniIdRouter": {},
+	"condition" : { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [
+			{
+				"name": "", //模式名称
+				"path": "", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
+			}
+		]
+	}
 }
