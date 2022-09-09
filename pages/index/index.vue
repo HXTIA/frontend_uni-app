@@ -15,7 +15,6 @@
   import {
     watchStore
   } from "../../utils/pinia/subscribe.js"
-
   import {
     timeFormat
   } from "@/utils/format/time.js"
@@ -34,14 +33,6 @@
     month: "long",
     day: "numeric"
   })
-
-
-
-
-
-  setTimeout(() => {
-    store.setName("SG")
-  }, 2000)
 
   let title = reactive({
     name: "闫德强",
