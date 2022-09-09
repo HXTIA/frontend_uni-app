@@ -19,6 +19,14 @@
       "path": "pages/detail/index",
       "style": {
         "navigationBarTitleText": "详细",
+        "navigationStyle": "default",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/login/index",
+      "style": {
+        "navigationBarTitleText": "登录",
         "navigationStyle": "default"
       }
     }
