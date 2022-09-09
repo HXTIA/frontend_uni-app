@@ -1,0 +1,148 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3635986 */
+  src: 
+	url('@/static/font/iconfont.woff2') format('woff2'),
+	url('@/static/font/iconfont.woff') format('woff'),
+	url('~@/static/font/iconfont.ttf') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-bianji:before {
+  content: "\e63f";
+}
+
+.icon-fenxiang:before {
+  content: "\e641";
+}
+
+.icon-dianzan:before {
+  content: "\e642";
+}
+
+.icon-dingshi:before {
+  content: "\e643";
+}
+
+.icon-rili:before {
+  content: "\e644";
+}
+
+.icon-shouye:before {
+  content: "\e645";
+}
+
+.icon-sousuo:before {
+  content: "\e646";
+}
+
+.icon-shezhi:before {
+  content: "\e647";
+}
+
+.icon-xiaoxi:before {
+  content: "\e648";
+}
+
+.icon-huiyuan:before {
+  content: "\e649";
+}
+
+.icon-xihuan:before {
+  content: "\e64a";
+}
+
+.icon-shoucang:before {
+  content: "\e64b";
+}
+
+.icon-a-25wode2:before {
+  content: "\edc4";
+}
+
+.icon-a-29shouye1:before {
+  content: "\edc5";
+}
+
+.icon-a-32yaoqingma:before {
+  content: "\edc6";
+}
+
+.icon-lishi:before {
+  content: "\edc7";
+}
+
+.icon-zengjia:before {
+  content: "\edc8";
+}
+
+.icon-jianshao:before {
+  content: "\edc9";
+}
+
+.icon-cuowu:before {
+  content: "\edca";
+}
+
+.icon-zhengque:before {
+  content: "\edcb";
+}
+
+.icon-gengduo:before {
+  content: "\edcc";
+}
+
+.icon-lianjie:before {
+  content: "\e640";
+}
+
+.icon-a-01pinglun1:before {
+  content: "\edb8";
+}
+
+.icon-a-10daka:before {
+  content: "\edba";
+}
+
+.icon-a-07biaoqian:before {
+  content: "\edbb";
+}
+
+.icon-a-12sousuo:before {
+  content: "\edbc";
+}
+
+.icon-a-13shezhi:before {
+  content: "\edbd";
+}
+
+.icon-a-11shoucang:before {
+  content: "\edbe";
+}
+
+.icon-a-14naozhong:before {
+  content: "\edbf";
+}
+
+.icon-a-15dingdan2:before {
+  content: "\edc0";
+}
+
+.icon-a-16dingdan1:before {
+  content: "\edc1";
+}
+
+.icon-a-23:before {
+  content: "\edc2";
+}
+
+.icon-a-22:before {
+  content: "\edc3";
+}
+
