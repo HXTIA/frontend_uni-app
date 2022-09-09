@@ -1,5 +1,7 @@
 <template>
-  <view class="a">12312</view>
+  <view class="a" v-for="item in store.getUserInfo">
+    {{ item }}
+  </view>
 </template>
 
 <script setup>
@@ -10,6 +12,13 @@
     uniInstance,
     reqAbc
   } from "./api/index.js"
+
+  import userStore from "@/stores/users/index.js"
+
+  const store = userStore()
+
+  console.log(store.userInfo);
+
   uniInstance(uni);
   onLoad(async () => {
     const res = await reqAbc({
