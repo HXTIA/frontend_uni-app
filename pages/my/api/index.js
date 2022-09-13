@@ -8,6 +8,10 @@ export const uniInstance = (instance) => {
   uni = instance;
 }
 
-export const reqAbc = (options, flag) => {
+export const userInfo = (options, flag) => {
   return http(uni, options, flag)
+}
+
+export const uploadFile = (options, flag) => {
+  return http(uni, options, flag);
 }

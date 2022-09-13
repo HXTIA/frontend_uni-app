@@ -32,6 +32,7 @@ export const http = async (uni, options, flag) => {
   instance.interceptor({
     header: {
       Authorization: token ? `Bearer ${token}` : "saa"
+      // "content-type": "multipart/form-data"
     },
   })
 
