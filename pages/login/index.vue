@@ -12,7 +12,7 @@
 
   onMounted(async () => {
     const res = await handleLogin(uni);
-    console.log(res);
+
     if (!res) {
       return uni.showModal({
         title: 'WARNING！',

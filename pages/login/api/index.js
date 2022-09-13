@@ -18,6 +18,8 @@ export const handleLogin = async (uni) => {
       return false;
     }
 
+    console.log(res);
+
     // 本地存储code
     setStorage(uni, "code", res.code)
     // 状态管理存储个人信息
@@ -28,6 +30,4 @@ export const handleLogin = async (uni) => {
     //TODO handle the exception
     return false;
   }
-
-
 }
