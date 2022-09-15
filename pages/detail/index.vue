@@ -11,9 +11,7 @@
   onPullDownRefresh(() => {
     console.log("刷新了！");
   })
-  onLoad((options) => {
-    console.log(options);
-  })
+  onLoad(() => {})
 </script>
 
 <style lang="scss" scoped>
