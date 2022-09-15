@@ -1,6 +1,7 @@
 import App from './App'
 import stores from "./stores"
 import plugin from "@/plugin/index.js"
+import "./uni.scss"
 
 // #ifndef VUE3
 import Vue from 'vue'

@@ -17,6 +17,9 @@
     uploadFile
   } from "./api/index.js"
 
+  onLoad((ops) => {
+
+  })
 
 
   import {
@@ -29,14 +32,6 @@
 
   const store = userStore()
 
-  // onLoad(async () => {
-  //   const res = await userInfo({
-  //     method: "GET",
-  //     url: "http://www.baidu.com"
-  //   }, false)
-  //   console.log(res, 12);
-  // })
-
   let files = reactive([])
 
   const chooseFile = () => {
@@ -47,24 +42,6 @@
     //     console.log(res);
     //   }
     // })
-    uni.chooseMessageFile({
-      count: 9,
-      type: "all",
-      success(res) {
-        console.log(res.tempFiles[0]);
-        uni.uploadFile({
-          url: "http://82.157.48.184:8080/user/url",
-          name: res.tempFiles[0].name,
-          filePath: res.tempFiles[0].path,
-          // header: {
-          //   "Content-Type": "multipart/form-data"
-          // },
-          success(res1) {
-            console.log(res1);
-          }
-        })
-      }
-    })
   }
 </script>
 

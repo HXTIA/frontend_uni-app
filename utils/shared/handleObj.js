@@ -12,7 +12,11 @@ export const addAttribute = (options) => {
   return obj
 }
 
-
+/**
+ * 复制一个对象的属性到另一个函数
+ * @param {*} target 
+ * @param {*} options 
+ */
 export const copyObject = (target, options) => {
   for (const item in options) {
     const ele = options[item];
