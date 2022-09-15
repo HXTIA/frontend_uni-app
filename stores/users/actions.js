@@ -1,7 +1,7 @@
 export default {
   actions: {
-    setName(name) {
-      this.name = name;
+    setUserInfo(userInfo) {
+      this.userInfo = userInfo;
     }
   }
 }

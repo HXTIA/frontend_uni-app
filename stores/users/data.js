@@ -1,10 +1,10 @@
 export default {
   state() {
     return {
-      name: '闫德强'
+      userInfo: {}
     }
   },
-  // getters: {
-  //   getName: (state) => state.name;
-  // }
+  getters: {
+    getUserInfo: (state) => state.userInfo || undefined
+  }
 }

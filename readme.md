@@ -1,6 +1,6 @@
 # 天津理工大学华信软件学院科技创新协会
 ![](https://avatars.githubusercontent.com/u/112747103?s=200&v=4)
-uni-app小程序前端界面
+# uni-app小程序前端界面
 ### 技术栈：
 1. Vue3
 2. uni-app
