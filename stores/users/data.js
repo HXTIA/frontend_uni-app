@@ -1,10 +1,15 @@
+import {
+  getStorage
+} from "@/utils/shared/handleStatus.js"
 export default {
   state() {
     return {
-      userInfo: {}
+      userInfo: {},
+      isLogin: false,
+      uni: {}
     }
   },
   getters: {
-    getUserInfo: (state) => state.userInfo || undefined
+    getUserInfo: (state) => state.userInfo || getStorage(state.uni, "userInfo") || undefined
   }
 }
