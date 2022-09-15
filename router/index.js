@@ -21,7 +21,7 @@ export default (uni, options) => {
       url: "/pages/login/index"
     })
   } else {
-    options.url = joinPath(options.url)
+    options.url = joinPath(options)
     uni.navigateTo(options)
   }
 }
@@ -61,6 +61,16 @@ function checkIsLogin(uni) {
 }
 
 
-function joinPath(url) {
-  return `/pages/${url}/index`;
+function joinPath(options) {
+  const {
+    url
+  } = options;
+  const params = options.params || {};
+
+  // 如果存在参数，则拼接字符串并拼至url结尾
+  let str = "";
+  for (let key in params) {
+    str += `${key}=${params[key]}&`;
+  }
+  return `/pages/${url}/index?` + str.substring(0, str.length - 1);
 }

@@ -1,8 +1,7 @@
 <template>
   <view class="header-wrapper">
     <view class="header-wrapper-main">
-      <fui-input class="qnm" label="标题文字" backgroundColor="#eaebf0" clearable isFillet :bottomLeft="0"
-        placeholder="请输入文本内容">
+      <fui-input label="标题文字" backgroundColor="#eaebf0" clearable isFillet :bottomLeft="0" placeholder="请输入文本内容">
       </fui-input>
     </view>
   </view>
@@ -28,10 +27,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-
-      .qnm {
-        height: 20% !important;
-      }
     }
   }
 </style>
