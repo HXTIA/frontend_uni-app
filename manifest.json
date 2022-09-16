@@ -58,6 +58,11 @@
     "uniStatistics": {
       "enable": true
     }
+    // "permission": {
+    //   "scope.userLocation": {
+    //     "desc": ""
+    //   }
+    // }
   },
   "mp-alipay": {
     "usingComponents": true
