@@ -1,49 +1,64 @@
 <template>
-  <view v-for="item in store.getUserInfo || []" :key="item">
-    {{ item }}
+  <view class="myPages-wrapper">
+    <view class="myPages-wrapper-avatar">
+      <img :src="userInfo.avatarUrl">
+      <view class="myPages-wrapper-avatar-name">
+        {{ nickName }}
+      </view>
+      <view class="myPages-wrapper-avatar-button">
+        <fui-button></fui-button>
+      </view>
+    </view>
   </view>
-  <fui-button @click="chooseFile">选择文件</fui-button>
-  <img :src="item.path" decoding="async" v-for="item in files" :key="item">
 </template>
 
 <script setup>
-  import {
+  import mod from "./module.js"
+  const {
     onShow,
-    onLoad
-  } from "@dcloudio/uni-app"
-  import {
-    uniInstance,
-    userInfo,
-    uploadFile
-  } from "./api/index.js"
+    onLoad,
+    getUserInfo,
+    reactive,
+    userStore
+  } = mod
+  const {
+    nickName,
+    gender,
+    avatarUrl
+  } = getUserInfo(uni)
 
-  onLoad((ops) => {
-
+  let userInfo = reactive({
+    nickName,
+    gender,
+    avatarUrl
   })
-
-
-  import {
-    reactive
-  } from "vue"
-
-  uniInstance(uni);
-
-  import userStore from "@/stores/users/index.js"
-
-  const store = userStore()
-
-  let files = reactive([])
-
-  const chooseFile = () => {
-    // uni.chooseImage({
-    //   count: 9,
-    //   type: "all",
-    //   success(res) {
-    //     console.log(res);
-    //   }
-    // })
-  }
 </script>
 
 <style lang="scss" scoped>
+  .myPages-wrapper {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    padding: 20rpx 10rpx;
+
+    &-avatar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 90%;
+      height: 40%;
+      background-color: green;
+      // background: url("https://thirdwx.qlogo.cn/mmopen/vi_32/POVCIKtk1iaDpic6vy58cdicWJSP6Y5icPe5iaBNXo3jXL0ILeK6icF6BYO1welicq0lyXwkJk0yFMa5W5Qs0IQEuIBxg/0");
+
+      image {
+        width: 180rpx;
+        height: 180rpx;
+        border-radius: 50%;
+      }
+    }
+  }
 </style>

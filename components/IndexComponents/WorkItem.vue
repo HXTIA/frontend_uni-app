@@ -18,37 +18,7 @@
     defineProps
   } from "vue"
 
-  const detail = (id) => {
-    router(uni, {
-      url: "detail",
-      params: {
-        id,
-      }
-    })
-  }
-
-
-  defineProps({
-    // time: {
-    //   type: String,
-    //   default: "时间"
-    // },
-    // title: {
-    //   type: String,
-    //   default: "这是一个标题"
-    // },
-    // desc: {
-    //   type: String,
-    //   default: "简短描述"
-    // },
-    // tag: {
-    //   type: Array,
-    //   default: []
-    // },
-    // ddl: {
-    //   type: String,
-    //   default: "最后时间"
-    // },
+  const props = defineProps({
     data: {
       type: Object,
       default: {
@@ -61,12 +31,24 @@
       }
     }
   })
+
+  const detail = (id) => {
+    router(uni, {
+      url: "detail",
+      params: {
+        id,
+      },
+    })
+  }
 </script>
 
 <style lang="scss" scoped>
   .workItem-wrapper {
-    width: 100%;
-    height: 200rpx;
+    box-sizing: border-box;
+    // width: 95%;
+    height: 300rpx;
+    padding: 16rpx 20rpx;
+    border-radius: 30rpx;
     background-color: skyblue;
     margin-bottom: 10rpx;
   }
