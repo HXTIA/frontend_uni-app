@@ -4,7 +4,8 @@ export const data = [{
     title: "数据库概论",
     desc: "这是一段简短的描述",
     tag: ["作业二"],
-    ddl: "2022-09-06 13:34:22"
+    ddl: "2022-09-06 13:34:22",
+    grade: "normal"
   },
   {
     id: 2,
@@ -12,7 +13,8 @@ export const data = [{
     title: "数据库概论",
     desc: "这是一段简短的描述",
     tag: ["作业二"],
-    ddl: "2022-09-06 13:34:22"
+    ddl: "2022-09-06 13:34:22",
+    grade: "danger"
   },
   {
     id: 3,
@@ -20,7 +22,8 @@ export const data = [{
     title: "数据库概论",
     desc: "这是一段简短的描述",
     tag: ["作业二"],
-    ddl: "2022-09-06 13:34:22"
+    ddl: "2022-09-06 13:34:22",
+    grade: "normal"
   },
   {
     id: 4,
@@ -28,7 +31,8 @@ export const data = [{
     title: "数据库概论",
     desc: "这是一段简短的描述",
     tag: ["作业二"],
-    ddl: "2022-09-06 13:34:22"
+    ddl: "2022-09-06 13:34:22",
+    grade: "normal"
   },
   {
     id: 5,
@@ -36,7 +40,8 @@ export const data = [{
     title: "数据库概论",
     desc: "这是一段简短的描述",
     tag: ["作业二"],
-    ddl: "2022-09-06 13:34:22"
+    ddl: "2022-09-06 13:34:22",
+    grade: "normal"
   },
   {
     id: 6,
@@ -44,7 +49,8 @@ export const data = [{
     title: "数据库概论",
     desc: "这是一段简短的描述",
     tag: ["作业二"],
-    ddl: "2022-09-06 13:34:22"
+    ddl: "2022-09-06 13:34:22",
+    grade: "normal"
   },
   {
     id: 7,
@@ -52,7 +58,8 @@ export const data = [{
     title: "数据库概论",
     desc: "这是一段简短的描述",
     tag: ["作业二"],
-    ddl: "2022-09-06 13:34:22"
+    ddl: "2022-09-06 13:34:22",
+    grade: "normal"
   },
   {
     id: 8,
@@ -60,6 +67,7 @@ export const data = [{
     title: "数据库概论",
     desc: "这是一段简短的描述",
     tag: ["作业二"],
-    ddl: "2022-09-06 13:34:22"
+    ddl: "2022-09-06 13:34:22",
+    grade: "normal"
   }
 ]

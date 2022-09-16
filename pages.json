@@ -1,18 +1,10 @@
 {
   "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
     {
-      "path": "pages/my/index",
-      "style": {
-        "navigationBarTitleText": "我的",
-        "navigationStyle": "default"
-      }
-    },
-    {
       "path": "pages/Index/index",
       "style": {
         "navigationBarTitleText": "首页",
         "navigationStyle": "default"
-        // "enablePullDownRefresh": true
       }
     },
     {
@@ -22,13 +14,13 @@
         "navigationStyle": "default"
       }
     },
-    // {
-    //   "path": "pages/my/index",
-    //   "style": {
-    //     "navigationBarTitleText": "我的",
-    //     "navigationStyle": "default"
-    //   }
-    // },
+    {
+      "path": "pages/my/index",
+      "style": {
+        "navigationBarTitleText": "我的",
+        "navigationStyle": "default"
+      }
+    },
     {
       "path": "pages/detail/index",
       "style": {
@@ -40,6 +32,31 @@
       "path": "pages/login/index",
       "style": {
         "navigationBarTitleText": "登录",
+        "navigationStyle": "default"
+      }
+    },
+    {
+      "path": "pages/Lesson/index",
+      "style": {
+        // "navigationBarTitleText": "登录",
+        "navigationStyle": "default"
+      }
+    },
+    {
+      "path": "pages/More/index",
+      "style": {
+        "navigationStyle": "default"
+      }
+    },
+    {
+      "path": "pages/Suggest/index",
+      "style": {
+        "navigationStyle": "default"
+      }
+    },
+    {
+      "path": "pages/About/index",
+      "style": {
         "navigationStyle": "default"
       }
     }

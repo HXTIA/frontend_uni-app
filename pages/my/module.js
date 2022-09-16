@@ -13,10 +13,15 @@ import {
 
 import userStore from "@/stores/users/index.js"
 
+import {
+  itemOptions
+} from "./options.js"
+
 export default {
   onShow,
   onLoad,
   getUserInfo,
   reactive,
-  userStore
+  userStore,
+  itemOptions
 }
