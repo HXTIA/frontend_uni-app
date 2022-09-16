@@ -12,7 +12,11 @@ export const addAttribute = (options) => {
   return obj
 }
 
-
+/**
+ * 复制一个对象的属性到另一个函数
+ * @param {*} target 
+ * @param {*} options 
+ */
 export const copyObject = (target, options) => {
   for (const item in options) {
     const ele = options[item];
@@ -28,8 +32,12 @@ export const copyObject = (target, options) => {
  */
 export const addTargetAttribute = (target, options) => {
   for (const item in options) {
-    let ele = options[item]
-    target[item] = ele
+    const ele = options[item]
+    if (typeof ele === "object" && target.hasOwnProperty(item)) {
+      Object.assign(target[item], ele);
+    } else {
+      target[item] = ele
+    }
   }
   return target
 }

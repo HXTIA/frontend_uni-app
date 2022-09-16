@@ -1,66 +1,123 @@
 <template>
   <view class="indexPage-wrapper">
-    {{ title }}
-    {{ time }}
-    <navigator url="/pages/detail/index?name=闫德强&age=21">
-      <view class="main-icon t-icon t-icon-a-29shouye1"></view>1221
-    </navigator>
-	<MyWorkicon></MyWorkicon>
+    <view class="indexPage-wrapper-header">
+      <IndexHeaderCom></IndexHeaderCom>
+    </view>
+    <view class="indexPage-wrapper-scroller">
+      <IndexWorkItemCom v-for="item in data" :key="item" :data="item"></IndexWorkItemCom>
+    </view>
   </view>
 </template>
 
 <script setup>
+  import IndexHeaderCom from "@/components/IndexComponents/Header.vue"
+  import IndexWorkItemCom from "@/components/IndexComponents/WorkItem.vue"
+
   import {
     reactive,
-    watch,
   } from "vue"
-  import userStore from "../../stores/users/index.js"
-  import {
-    watchStore
-  } from "../../utils/pinia/subscribe.js"
-  import {
-    timeFormat
-  } from "@/utils/format/time.js"
-  
-  import MyWorkicon from "../../components/MyWorkicon/index.vue"
 
+  
+  // import MyWorkicon from "../../components/MyWorkicon/index.vue"
+  import {
+    checkLogin
+  } from "./api/index.js"
+
+
+  import {
+    onLoad
+  } from "@dcloudio/uni-app"
+
+  import userStore from "@/stores/users/index.js"
   const store = userStore();
 
-  const res = watchStore(store, "name", () => {
-    console.log("变化了");
-  })
-  
-  let time = timeFormat(new Date(), {
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: false,
-    weekday: "long",
-    month: "long",
-    day: "numeric"
-  })
+
+  let data = reactive([{
+      id: 1,
+      time: "2022-09-05 13:34:22",
+      title: "数据库概论",
+      desc: "这是一段简短的描述",
+      tag: ["作业二"],
+      ddl: "2022-09-06 13:34:22"
+    },
+    {
+      id: 2,
+      time: "2022-09-05 13:34:22",
+      title: "数据库概论",
+      desc: "这是一段简短的描述",
+      tag: ["作业二"],
+      ddl: "2022-09-06 13:34:22"
+    },
+    {
+      id: 3,
+      time: "2022-09-05 13:34:22",
+      title: "数据库概论",
+      desc: "这是一段简短的描述",
+      tag: ["作业二"],
+      ddl: "2022-09-06 13:34:22"
+    },
+    {
+      id: 4,
+      time: "2022-09-05 13:34:22",
+      title: "数据库概论",
+      desc: "这是一段简短的描述",
+      tag: ["作业二"],
+      ddl: "2022-09-06 13:34:22"
+    },
+    {
+      id: 5,
+      time: "2022-09-05 13:34:22",
+      title: "数据库概论",
+      desc: "这是一段简短的描述",
+      tag: ["作业二"],
+      ddl: "2022-09-06 13:34:22"
+    },
+    {
+      id: 6,
+      time: "2022-09-05 13:34:22",
+      title: "数据库概论",
+      desc: "这是一段简短的描述",
+      tag: ["作业二"],
+      ddl: "2022-09-06 13:34:22"
+    },
+    {
+      id: 7,
+      time: "2022-09-05 13:34:22",
+      title: "数据库概论",
+      desc: "这是一段简短的描述",
+      tag: ["作业二"],
+      ddl: "2022-09-06 13:34:22"
+    },
+    {
+      id: 8,
+      time: "2022-09-05 13:34:22",
+      title: "数据库概论",
+      desc: "这是一段简短的描述",
+      tag: ["作业二"],
+      ddl: "2022-09-06 13:34:22"
+    }
+  ])
 
 
 
 
-
-
-  let title = reactive({
-    name: "闫德强",
-    age: 21
+  onLoad(async () => {
+    // 存储uni实例
+    store.setUni(uni);
+    // 检测是否已登录，未登录跳转去登录
+    checkLogin(uni)
   })
 </script>
 
 <style lang="scss" scoped>
-  .indexPage-wrapper {}
+  .indexPage-wrapper {
+    width: 100vw;
+    height: auto;
+    background-color: black;
 
-  .t-icon {
-    width: 30px;
-    height: 30px;
-  }
-
-  .main-icon {
-    width: 100px;
-    height: 100px;
-    background-repeat: no-repeat;
+    &-header {
+      width: 100%;
+      height: 7%;
+    }
   }
 </style>

@@ -31,6 +31,7 @@ export const setStorage = (uni, key, data) => {
 
 /**
  * 处理响应回的数据 
+ * 将响应的数据传入，判断状态码，进行是否具有权限的判定。
  * @param {*} res 
  */
 export const handleRequestRes = (uni, res) => {

@@ -1,32 +1,48 @@
 <template>
-  <view class="a" v-for="item in store.getUserInfo">
+  <view v-for="item in store.getUserInfo || []" :key="item">
     {{ item }}
   </view>
+  <fui-button @click="chooseFile">选择文件</fui-button>
+  <img :src="item.path" decoding="async" v-for="item in files" :key="item">
 </template>
 
 <script setup>
   import {
+    onShow,
     onLoad
   } from "@dcloudio/uni-app"
   import {
     uniInstance,
-    reqAbc
+    userInfo,
+    uploadFile
   } from "./api/index.js"
+
+  onLoad((ops) => {
+
+  })
+
+
+  import {
+    reactive
+  } from "vue"
+
+  uniInstance(uni);
 
   import userStore from "@/stores/users/index.js"
 
   const store = userStore()
 
-  console.log(store.userInfo);
+  let files = reactive([])
 
-  uniInstance(uni);
-  onLoad(async () => {
-    const res = await reqAbc({
-      method: "GET",
-      url: "http://www.baidu.com"
-    }, true)
-    console.log(res);
-  })
+  const chooseFile = () => {
+    // uni.chooseImage({
+    //   count: 9,
+    //   type: "all",
+    //   success(res) {
+    //     console.log(res);
+    //   }
+    // })
+  }
 </script>
 
 <style lang="scss" scoped>

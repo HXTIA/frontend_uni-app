@@ -10,3 +10,4 @@ for (const item in options) {
 }
 
 export default defineStore('userStore', store);
+

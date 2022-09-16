@@ -18,16 +18,19 @@ export const handleLogin = async (uni) => {
       return false;
     }
 
+    console.log(res, "login-api");
+
+    // TODO: 根据code向后端发起请求，重新获取token
+
     // 本地存储code
-    setStorage(uni, "code", res.code)
-    // 状态管理存储个人信息
-    store.setUserInfo(res.userInfo);
+    setStorage(uni, "token", res.code)
+
+    // 状态管理存储个人信息 & 更新本地存储
+    store.setUserInfo(res.userInfo, uni);
 
     return true
   } catch (e) {
     //TODO handle the exception
     return false;
   }
-
-
 }
