@@ -59,6 +59,12 @@
       "style": {
         "navigationStyle": "default"
       }
+    },
+    {
+      "path": "pages/Count/index",
+      "style": {
+        "navigationStyle": "default"
+      }
     }
   ],
   "tabBar": {

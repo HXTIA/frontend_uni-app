@@ -8,7 +8,6 @@
         </view>
         <fui-button type="danger" height="70rpx" width="160rpx" @click="setCountMessage">编辑资料</fui-button>
       </view>
-      <!-- <mySettingItem :data="itemOptions[0]"></mySettingItem> -->
       <view class="myPages-wrapper-lining-settingMain">
         <mySettingItem v-for="item in itemOptions" :key="item" :data="item"></mySettingItem>
       </view>
@@ -26,7 +25,8 @@
     getUserInfo,
     reactive,
     userStore,
-    itemOptions
+    itemOptions,
+    router
   } = mod
   const {
     nickName,
@@ -39,7 +39,9 @@
   })
 
   const setCountMessage = () => {
-    console.log("修改资料");
+    router(uni, {
+      url: "Count"
+    })
   }
 </script>
 

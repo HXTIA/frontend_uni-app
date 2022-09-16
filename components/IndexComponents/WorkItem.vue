@@ -1,11 +1,10 @@
 <template>
   <uni-swipe-action>
-    <uni-swipe-action-item :right-options="todoSlideBlockRightOptions">
+    <uni-swipe-action-item :right-options="todoSlideBlockRightOptions" @click="clickSlide">
       <view class="workItem-wrapper" :class="[data.grade]" @click="detail(data.id)">
         <view>{{ data.time }}</view>
         <view>{{ data.title }}</view>
         <view>{{ data.desc }}</view>
-        <view>{{ data.grade }}</view>
         <view>
           <view v-for="item in data.tag" :key="item">
             {{ item }}
@@ -49,6 +48,16 @@
         id,
       },
     })
+  }
+
+  const clickSlide = (e) => {
+    const {
+      content
+    } = e;
+    if (content.text === enumSlideBlockOptionsEnum.FIRST_BUTTON) {
+      console.log("点击了完成");
+      // TODO: 完成逻辑实现
+    }
   }
 </script>
 

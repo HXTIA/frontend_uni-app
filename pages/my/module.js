@@ -17,11 +17,14 @@ import {
   itemOptions
 } from "./options.js"
 
+import router from "@/router/index.js"
+
 export default {
   onShow,
   onLoad,
   getUserInfo,
   reactive,
   userStore,
-  itemOptions
+  itemOptions,
+  router
 }
