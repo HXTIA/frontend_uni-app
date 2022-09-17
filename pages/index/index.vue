@@ -35,7 +35,8 @@
   .indexPage-wrapper {
     width: 100vw;
     height: auto;
-    background-color: aqua;
+    background-color: #e0e0e0;
+	
 
     &-header {
       // position: fixed;
