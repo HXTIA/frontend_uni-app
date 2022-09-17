@@ -26,12 +26,13 @@ export const http = async (uni, options, flag) => {
   options.method = options.method.toUpperCase();
 
   // 获取token
-  let token = getStorage(uni, "code")
+  let token = getStorage(uni, "token")
 
   // 配置请求拦截器
   instance.interceptor({
     header: {
-      Authorization: token ? `Bearer ${token}` : "saa"
+      Token: token ? `Bearer ${token}` : "saa"
+      // "content-type": "multipart/form-data"
     },
   })
 

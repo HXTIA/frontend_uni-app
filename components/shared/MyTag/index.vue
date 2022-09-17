@@ -17,7 +17,4 @@
 </script>
 
 <style lang="scss" scoped>
-	.mytag{
-		padding: 5px;
-	}
 </style>

@@ -2,16 +2,10 @@ import {
   http
 } from "@/request/http.js"
 
-let uni;
+import {
+  getStorage
+} from "@/utils/shared/handleStatus.js"
 
-export const uniInstance = (instance) => {
-  uni = instance;
-}
-
-export const userInfo = (options, flag) => {
-  return http(uni, options, flag)
-}
-
-export const uploadFile = (options, flag) => {
-  return http(uni, options, flag);
+export const getUserInfo = (uni) => {
+  return getStorage(uni, "userInfo")
 }
