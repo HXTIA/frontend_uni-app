@@ -16,19 +16,12 @@
   const {
     data,
     reactive,
-    checkLogin,
-    onLoad,
-    userStore,
+    // onLoad,
   } = mod
 
-  const store = userStore();
-
-  onLoad(async () => {
-    // 存储uni实例
-    store.setUni(uni);
-    // 检测是否已登录，未登录跳转去登录
-    checkLogin(uni)
-  })
+  // onLoad(async () => {
+  // 检测是否已登录，未登录跳转去登录
+  // })
 </script>
 
 <style lang="scss" scoped>
@@ -36,7 +29,7 @@
     width: 100vw;
     height: auto;
     background-color: #e0e0e0;
-	
+
 
     &-header {
       // position: fixed;

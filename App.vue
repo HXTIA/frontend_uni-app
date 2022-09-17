@@ -1,10 +1,14 @@
 <script>
+  import {
+    checkLogin
+  } from "./utils/shared/checkLogin.js"
   export default {
-    onLaunch: function() {},
+    onLaunch: function() {
+      // 在这里检测是否登录
+      checkLogin(uni)
+    },
     onShow: function() {},
-    onHide: function() {
-      console.log('App Hide')
-    }
+    onHide: function() {}
   }
 </script>
 

@@ -9,6 +9,7 @@
       <view class="suggestPages-wrapper-suggest-image">
         <uploaderComponents title="截图" count="3" @upload-image="uploadImage"></uploaderComponents>
       </view>
+      <button @click="click">发起接口</button>
     </view>
   </view>
 </template>
@@ -21,6 +22,17 @@
   const uploadImage = (url) => {
     // imageList.push(url);
     console.log("触发了");
+  }
+  const click = () => {
+    uni.requestSubscribeMessage({
+      tmplIds: ["V8JzyKTZZ16srBpi1QQMMUDCLMYzutIVvWGy8irgxiM"],
+      success(ops) {
+        console.log(ops)
+      },
+      fail(ops) {
+        console.log(ops);
+      }
+    })
   }
 </script>
 <style lang="scss" scoped>

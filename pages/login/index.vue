@@ -4,13 +4,13 @@
 
 <script setup>
   import {
-    onMounted
-  } from "vue"
+    onLoad
+  } from "@dcloudio/uni-app"
   import {
     handleLogin
   } from "./api/index.js"
 
-  onMounted(async () => {
+  onLoad(async () => {
     const res = await handleLogin(uni);
 
     if (!res) {
