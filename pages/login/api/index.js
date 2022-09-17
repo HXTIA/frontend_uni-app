@@ -5,6 +5,10 @@ import {
   setStorage
 } from "@/utils/shared/handleStatus.js"
 
+import {
+  http
+} from "@/request/http.js"
+
 import userStore from "@/stores/users/index.js"
 
 const store = userStore();
@@ -22,8 +26,19 @@ export const handleLogin = async (uni) => {
 
     // TODO: 根据code向后端发起请求，重新获取token
 
+    // const reqRes = http(uni, {
+    //   url: "",
+    //   method: "GET",
+    //   data: {
+    //     code: res.code
+    //   }
+    // }, false)
+
     // 本地存储code -> 伪token -> 依靠后端返还token做判断
     setStorage(uni, "token", res.code)
+    // setStorage(uni, "token", reqRes.data.data);
+
+
 
     // 状态管理存储个人信息 & 更新本地存储
 

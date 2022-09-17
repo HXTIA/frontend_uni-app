@@ -4,7 +4,7 @@
       <IndexHeaderCom></IndexHeaderCom>
     </view>
     <view class="indexPage-wrapper-scroller">
-      <IndexWorkItemCom v-for="item in data" :key="item" :data="item"></IndexWorkItemCom>
+      <IndexWorkItemCom v-for="(item,index) in data" :key="index" :data="item"></IndexWorkItemCom>
     </view>
   </view>
 </template>
