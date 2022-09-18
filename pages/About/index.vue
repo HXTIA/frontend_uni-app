@@ -19,13 +19,16 @@
         华信科协
       </view>
       <view class="aboutPages-wrapper-footer-edition">
-        版本号：v0.9
+        版本号：V {{ edition.verson }}
       </view>
     </view>
   </view>
 </template>
 
 <script setup>
+  import {
+    edition
+  } from "@/data/publicOptions.js"
 </script>
 
 <style lang="scss" scoped>

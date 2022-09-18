@@ -15,13 +15,7 @@
   import mod from "./module.js"
   const {
     data,
-    reactive,
-    // onLoad,
   } = mod
-
-  // onLoad(async () => {
-  // 检测是否已登录，未登录跳转去登录
-  // })
 </script>
 
 <style lang="scss" scoped>

@@ -6,12 +6,20 @@
 
 <script setup>
   import moreItemComponent from "@/components/MoreComponents/index.vue"
+
   import {
-    data,
-    createInstance
+    onShow
+  } from "@dcloudio/uni-app";
+
+  import {
+    returnData,
   } from "./options/index.js"
 
-  createInstance(uni);
+  let data = returnData(uni);
+
+  onShow(() => {
+    data = returnData(uni)
+  })
 </script>
 
 <style lang="scss" scoped>

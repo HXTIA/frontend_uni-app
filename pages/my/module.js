@@ -19,6 +19,7 @@ import {
 
 import router from "@/router/index.js"
 
+
 export default {
   onShow,
   onLoad,
@@ -26,5 +27,5 @@ export default {
   reactive,
   userStore,
   itemOptions,
-  router
+  router,
 }

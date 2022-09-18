@@ -10,6 +10,10 @@ import {
   addTargetAttribute
 } from "@/utils/shared/handleObj.js"
 
+import {
+  templateId
+} from "@/data/publicOptions.js"
+
 // 在这里检测是否登录: 
 // 是否存有token
 // 登陆态是否过期 -> 过期 -> 重新登录并授权
@@ -40,6 +44,29 @@ export const checkLogin = async (uni) => {
             url: "/pages/login/index"
           })
         }, 1000)
+      }
+    })
+  }
+}
+
+
+// 监测是否已经授权，授权了则每次都默认进行订阅
+export const checkSubscribe = async (uni) => {
+  const {
+    subscriptionsSetting
+  } = await uni.getSetting({
+    withSubscriptions: true
+  })
+
+  if (subscriptionsSetting.mainSwitch) {
+    // 代表已经同意订阅
+    uni.requestSubscribeMessage({
+      tmplIds: [templateId.HOMEWORK_FIVE_KEY],
+      success(ops) {
+        console.log(ops);
+      },
+      fail(ops) {
+        console.log(ops);
       }
     })
   }

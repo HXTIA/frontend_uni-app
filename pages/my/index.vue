@@ -26,7 +26,7 @@
     reactive,
     userStore,
     itemOptions,
-    router
+    router,
   } = mod
   const {
     nickName,

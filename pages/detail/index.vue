@@ -101,6 +101,7 @@
         justify-content: space-between;
         width: 100%;
         margin-top: 10px;
+        flex-flow: wrap;
 
         &-item {
           width: 30%;

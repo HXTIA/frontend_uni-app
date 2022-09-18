@@ -2,7 +2,7 @@
   <view class="moreItem-wrapper">
     <view class="moreItem-wrapper-title">{{ data.title }}</view>
     <view class="moreItem-wrapper-switch">
-      <fui-switch @change="changeStatus"></fui-switch>
+      <switch checked="true" @change="changeStatus" :checked="data.isChecked" />
     </view>
   </view>
 </template>
@@ -19,16 +19,17 @@
         title: "功能一",
         handleFunction: () => {
           console.log("默认");
-        }
+        },
+        isChecked: false
       }
     }
   })
 
-  const changeStatus = (e) => {
+  const changeStatus = async (e) => {
     const {
       detail
     } = e;
-    props.data.handleFunction(detail.value)
+    const flag = await props.data.handleFunction(detail.value);
   }
 </script>
 

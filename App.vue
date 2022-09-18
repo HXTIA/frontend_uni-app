@@ -1,6 +1,7 @@
 <script>
   import {
-    checkLogin
+    checkLogin,
+    checkSubscribe
   } from "./utils/shared/checkLogin.js"
   export default {
     onLaunch: function() {

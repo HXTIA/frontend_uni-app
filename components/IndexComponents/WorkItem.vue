@@ -1,7 +1,7 @@
 <template>
   <uni-swipe-action>
     <uni-swipe-action-item :left-options="todoSlideBlockRightOptions" @click="clickSlide">
-      <view class="workItem-wrapper" :class="[data.grade]" @click="detail(data.id)">
+      <view class="workItem-wrapper" :class="[data.grade]">
         <fui-row margin-bottom="24rpx">
           <fui-col :span="1">
             <view class="workItem-wrapper-left"></view>
@@ -9,7 +9,10 @@
           <fui-col :span="23">
             <view class="workItem-wrapper-top">
               <MyTag v-for="item in data.tag" :key="item" :title="item"></MyTag>
-              <fui-icon name="more-fill" class="workItem-wrapper-top-icon"></fui-icon>
+              <fui-dropdown-menu :size="28" selectedColor="#465CFF" :options="options" @click="rangeItemClick"
+                @close="rangeClose" ref="ddmRange">
+                <fui-icon name="more-fill" class="workItem-wrapper-top-icon" @tap="filterTap"></fui-icon>
+              </fui-dropdown-menu>
             </view>
             <view class="workItem-wrapper-right">
               <view class="title">
@@ -42,6 +45,14 @@
     enumSlideBlockOptionsEnum
   } from "@/data/options.js"
 
+  import {
+    templateId
+  } from "@/data/publicOptions.js"
+
+  import {
+    checkSubscribe
+  } from "@/utils/shared/checkLogin.js"
+
   const props = defineProps({
     data: {
       type: Object,
@@ -58,6 +69,9 @@
   })
 
   const detail = (id) => {
+    // 如果已经设置订阅就进行发起请求
+    checkSubscribe(uni)
+    // 跳转路由
     router(uni, {
       url: "detail",
       params: {
@@ -157,12 +171,4 @@
       }
     }
   }
-
-  // .danger {
-  //   background-color: red;
-  // }
-
-  // .normal {
-  //   background-color: #ffe1f9;
-  // }
 </style>
