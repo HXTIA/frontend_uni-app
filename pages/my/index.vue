@@ -6,10 +6,10 @@
         <view class="myPages-wrapper-lining-avatar-name">
           {{ nickName }}
         </view>
-        <fui-button type="danger" height="70rpx" width="160rpx" @click="setCountMessage">编辑资料</fui-button>
+        <fui-button type="danger" height="70rpx" width="160rpx" @click="setCountMessage" text="编辑资料"></fui-button>
       </view>
       <view class="myPages-wrapper-lining-settingMain">
-        <mySettingItem v-for="item in itemOptions" :key="item" :data="item"></mySettingItem>
+        <mySettingItem v-for="(item,index) in itemOptions" :key="index" :data="item"></mySettingItem>
       </view>
     </view>
   </view>
@@ -26,7 +26,7 @@
     reactive,
     userStore,
     itemOptions,
-    router
+    router,
   } = mod
   const {
     nickName,
@@ -70,7 +70,9 @@
         background-color: green;
         border-radius: 40rpx 40rpx 0 0;
         background: url("https://axure-file.lanhuapp.com/a165925e-434b-479f-a9b0-ed136649f420__6215a13351e11c7d65b4aad4e24a519b.png") center center;
-        background-size: cover;
+        // background-size: cover;
+        background-size: contain;
+        // opacity: 0.6;
 
         image {
           width: 140rpx;

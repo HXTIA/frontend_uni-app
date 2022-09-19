@@ -31,7 +31,7 @@ export const http = async (uni, options, flag) => {
   // 配置请求拦截器
   instance.interceptor({
     header: {
-      Token: token ? `Bearer ${token}` : "saa"
+      Token: token ? token : ""
       // "content-type": "multipart/form-data"
     },
   })

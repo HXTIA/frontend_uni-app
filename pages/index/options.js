@@ -1,11 +1,11 @@
 export const data = [{
     id: 1,
-    time: "2022-09-05 13:34:22",
-    title: "数据库概论",
-    desc: "这是一段简短的描述",
+    time: "2022-09-05 13:34",
+    title: "数据库概论论论论-456班",
+    desc: "这是一段简短的描述，这是一段简短的描述，这是一段简短的描述",
     tag: ["作业二"],
-    ddl: "2022-09-06 13:34:22",
-    grade: "normal"
+    ddl: "2022-09-06 13:34",
+    grade: "danger"
   },
   {
     id: 2,
@@ -69,5 +69,29 @@ export const data = [{
     tag: ["作业二"],
     ddl: "2022-09-06 13:34:22",
     grade: "normal"
+  }
+]
+
+import Controller from "./Controller/index.js"
+
+export const dropDownOptions = [{
+    title: '置顶',
+    index: 0,
+    handleFunction: Controller.handleSticky
+  }, {
+    title: '生成分享图',
+    index: 1,
+    handleFunction: Controller.handleSharePhoto
+  }, {
+    title: '查看详情',
+    index: 2,
+    handleFunction: Controller.handleDetail
+  },
+  {
+    title: '设置提醒',
+    index: 3,
+    handleFunction: (id) => {
+      console.log('设置提醒', id)
+    }
   }
 ]

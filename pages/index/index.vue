@@ -4,8 +4,10 @@
       <IndexHeaderCom></IndexHeaderCom>
     </view>
     <view class="indexPage-wrapper-scroller">
-      <IndexWorkItemCom v-for="item in data" :key="item" :data="item"></IndexWorkItemCom>
+      <IndexWorkItemCom v-for="(item,index) in data" :key="index" :data="item" :dropDownOptions="dropDownOptions">
+      </IndexWorkItemCom>
     </view>
+    <fui-divider text="没有更多了" backgroundColor="#e0e0e0" color="#000000" height="50"></fui-divider>
   </view>
 </template>
 
@@ -13,29 +15,20 @@
   import IndexHeaderCom from "@/components/IndexComponents/Header.vue"
   import IndexWorkItemCom from "@/components/IndexComponents/WorkItem.vue"
   import mod from "./module.js"
+
   const {
     data,
-    reactive,
-    checkLogin,
-    onLoad,
-    userStore,
+    http,
+    dropDownOptions
   } = mod
-
-  const store = userStore();
-
-  onLoad(async () => {
-    // 存储uni实例
-    store.setUni(uni);
-    // 检测是否已登录，未登录跳转去登录
-    checkLogin(uni)
-  })
 </script>
 
 <style lang="scss" scoped>
   .indexPage-wrapper {
     width: 100vw;
     height: auto;
-    background-color: aqua;
+    background-color: #e0e0e0;
+
 
     &-header {
       // position: fixed;

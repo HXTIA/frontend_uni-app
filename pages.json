@@ -1,5 +1,13 @@
 {
   "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    // {
+    //   "path": "pages/Suggest/index",
+    //   "style": {
+    //     // "navigationBarTitleText": "反馈",
+    //     "navigationBarTitleText": "",
+    //     "navigationStyle": "default"
+    //   }
+    // },
     {
       "path": "pages/Index/index",
       "style": {
@@ -38,25 +46,29 @@
     {
       "path": "pages/Lesson/index",
       "style": {
-        // "navigationBarTitleText": "登录",
+        "navigationBarTitleText": "课程选择",
         "navigationStyle": "default"
       }
     },
     {
       "path": "pages/More/index",
       "style": {
+        "navigationBarTitleText": "更多设置",
         "navigationStyle": "default"
       }
     },
     {
       "path": "pages/Suggest/index",
       "style": {
+        "navigationBarTitleText": "反馈",
         "navigationStyle": "default"
       }
     },
     {
       "path": "pages/About/index",
       "style": {
+        // "navigationBarTitleText": "关于我们",
+        "navigationBarTitleText": "",
         "navigationStyle": "default"
       }
     },
@@ -68,7 +80,6 @@
     }
   ],
   "tabBar": {
-    "iconfontSrc": "./static/font/iconfont.ttf",
     "list": [{
         "text": "首页",
         "pagePath": "pages/Index/index",

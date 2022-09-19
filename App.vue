@@ -1,10 +1,20 @@
 <script>
+  import {
+    checkLogin,
+    checkSubscribe
+  } from "./utils/shared/checkLogin.js";
+  import {
+    createInstance
+  } from "./utils/shared/createUniInstance.js";
+
   export default {
-    onLaunch: function() {},
+    onLaunch: function() {
+      // 在这里检测是否登录
+      checkLogin(uni)
+      createInstance(uni);
+    },
     onShow: function() {},
-    onHide: function() {
-      console.log('App Hide')
-    }
+    onHide: function() {}
   }
 </script>
 

@@ -5,20 +5,26 @@ import {
 import {
   reactive,
 } from "vue"
-import {
-  checkLogin
-} from "./api/index.js"
 
 import {
   onLoad
 } from "@dcloudio/uni-app"
 
+import {
+  http
+} from "@/request/http.js"
+
 import userStore from "@/stores/users/index.js"
+
+import {
+  dropDownOptions
+} from "./options.js"
 
 export default {
   data,
   reactive,
-  checkLogin,
   onLoad,
   userStore,
+  http,
+  dropDownOptions
 }
