@@ -7,6 +7,7 @@
       <IndexWorkItemCom v-for="(item,index) in data" :key="index" :data="item" :dropDownOptions="dropDownOptions">
       </IndexWorkItemCom>
     </view>
+    <fui-divider text="没有更多了" backgroundColor="#e0e0e0" color="#000000" height="50"></fui-divider>
   </view>
 </template>
 

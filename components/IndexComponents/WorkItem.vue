@@ -16,15 +16,16 @@
               </view>
             </view>
             <view class="workItem-wrapper-right" @click="detail(data.id)">
-              <view class="title">
-                <h1>{{ data.title }}</h1>
+              <view class="workItem-wrapper-right">
+                <view class="title">
+                  <h1>{{ data.title }}</h1>
+                </view>
+                <view class="desc">{{ data.desc }}</view>
+                <MyDate :ddl="data.ddl"></MyDate>
+                <!-- https://s1.ax1x.com/2022/09/17/xpMRZ6.png -->
+                <!-- https://s1.ax1x.com/2022/09/17/xpSLyd.png -->
+                <img src="https://s1.ax1x.com/2022/09/17/xpMRZ6.png" alt="截止" class="image">
               </view>
-              <view class="desc">{{ data.desc }}</view>
-              <view class="date">
-                <view class="date-icon t-icon t-icon-dingshi"></view>
-                <view class="data-ddl">截止日期:{{ data.ddl }}</view>
-              </view>
-              <img src="https://s1.ax1x.com/2022/09/17/xpSLyd.png" alt="截止" class="image">
             </view>
           </fui-col>
         </fui-row>
@@ -35,6 +36,7 @@
 
 <script setup>
   import MyTag from "@/components/shared/MyTag/index.vue"
+  import MyDate from "@/components/shared/MyDate/index.vue"
   import DropDownCom from "@/components/shared/DropDown/index.vue"
   import mod from "./module.js"
 
