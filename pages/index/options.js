@@ -85,9 +85,7 @@ export const dropDownOptions = [{
   }, {
     title: '查看详情',
     index: 2,
-    handleFunction: (id) => {
-      console.log('查看详情', id)
-    }
+    handleFunction: Controller.handleDetail
   },
   {
     title: '设置提醒',
