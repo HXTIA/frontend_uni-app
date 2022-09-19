@@ -4,7 +4,8 @@
       <IndexHeaderCom></IndexHeaderCom>
     </view>
     <view class="indexPage-wrapper-scroller">
-      <IndexWorkItemCom v-for="(item,index) in data" :key="index" :data="item"></IndexWorkItemCom>
+      <IndexWorkItemCom v-for="(item,index) in data" :key="index" :data="item" :dropDownOptions="dropDownOptions">
+      </IndexWorkItemCom>
     </view>
   </view>
 </template>
@@ -13,8 +14,11 @@
   import IndexHeaderCom from "@/components/IndexComponents/Header.vue"
   import IndexWorkItemCom from "@/components/IndexComponents/WorkItem.vue"
   import mod from "./module.js"
+
   const {
     data,
+    http,
+    dropDownOptions
   } = mod
 </script>
 

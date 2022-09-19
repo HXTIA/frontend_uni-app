@@ -58,16 +58,9 @@ export const checkSubscribe = async (uni) => {
     withSubscriptions: true
   })
 
-  if (subscriptionsSetting.mainSwitch) {
-    // 代表已经同意订阅
-    uni.requestSubscribeMessage({
-      tmplIds: [templateId.HOMEWORK_FIVE_KEY],
-      success(ops) {
-        console.log(ops);
-      },
-      fail(ops) {
-        console.log(ops);
-      }
-    })
-  }
+  // if (!subscriptionsSetting.mainSwitch) {
+  //   // 代表已经同意订阅
+  //   console.log("未授权");
+  // }
+  console.log(subscriptionsSetting);
 }

@@ -9,12 +9,13 @@
           <fui-col :span="23">
             <view class="workItem-wrapper-top">
               <MyTag v-for="item in data.tag" :key="item" :title="item"></MyTag>
-              <fui-dropdown-menu :size="28" selectedColor="#465CFF" :options="options" @click="rangeItemClick"
-                @close="rangeClose" ref="ddmRange">
-                <fui-icon name="more-fill" class="workItem-wrapper-top-icon" @tap="filterTap"></fui-icon>
-              </fui-dropdown-menu>
+              <view class="workItem-wrapper-top-dropdown">
+                <DropDownCom :data="dropDownOptions" :id="data.id">
+                  <fui-icon name="more-fill" class="workItem-wrapper-top-icon"></fui-icon>
+                </DropDownCom>
+              </view>
             </view>
-            <view class="workItem-wrapper-right">
+            <view class="workItem-wrapper-right" @click="detail(data.id)">
               <view class="title">
                 <h1>{{ data.title }}</h1>
               </view>
@@ -23,10 +24,8 @@
                 <view class="date-icon t-icon t-icon-dingshi"></view>
                 <view class="data-ddl">截止日期:{{ data.ddl }}</view>
               </view>
-
               <img src="https://s1.ax1x.com/2022/09/17/xpSLyd.png" alt="截止" class="image">
             </view>
-
           </fui-col>
         </fui-row>
       </view>
@@ -35,23 +34,20 @@
 </template>
 
 <script setup>
-  import router from "@/router/index.js"
   import MyTag from "@/components/shared/MyTag/index.vue"
-  import {
-    defineProps
-  } from "vue"
-  import {
+  import DropDownCom from "@/components/shared/DropDown/index.vue"
+  import mod from "./module.js"
+
+  const {
+    router,
+    defineProps,
+    ref,
+    provide,
     todoSlideBlockRightOptions,
-    enumSlideBlockOptionsEnum
-  } from "@/data/options.js"
-
-  import {
-    templateId
-  } from "@/data/publicOptions.js"
-
-  import {
-    checkSubscribe
-  } from "@/utils/shared/checkLogin.js"
+    enumSlideBlockOptionsEnum,
+    checkSubscribe,
+    onHide
+  } = mod
 
   const props = defineProps({
     data: {
@@ -65,8 +61,13 @@
         ddl: "2022-09-06 13:34",
         grade: "danger"
       }
+    },
+    dropDownOptions: {
+      type: Array,
+      default: []
     }
   })
+
 
   const detail = (id) => {
     // 如果已经设置订阅就进行发起请求
@@ -89,6 +90,17 @@
       // TODO: 完成逻辑实现
     }
   }
+
+  // 控制三个点的开闭
+  let flag = ref(false);
+  provide("flag", flag)
+
+  // 处理三个点闭合的善后
+  onHide(() => {
+    if (flag.value) {
+      flag.value = false
+    }
+  })
 </script>
 
 <style lang="scss" scoped>
@@ -166,8 +178,11 @@
       justify-content: space-between;
       align-items: center;
 
-      &-icon {
-        padding-right: 10px;
+      &-dropdown {
+        position: absolute;
+        z-index: 100;
+        width: 100px;
+        right: 10rpx;
       }
     }
   }
