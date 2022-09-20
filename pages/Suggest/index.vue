@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-  import uploaderComponents from "@/components/uploaderComponents/index.vue"
+  import uploaderComponents from "@/components/shared/uploaderComponents/index.vue"
 
   let imageList = [];
 
@@ -44,7 +44,7 @@
     height: 100vh;
     flex-direction: column;
     align-items: center;
-    background: url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fitbbs%2F1510%2F20%2Fc4%2F14177260_1445297071493.jpg&refer=http%3A%2F%2Fimg.pconline.com.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666004146&t=9e75f5957372f9d96395aa9e82d74921") no-repeat;
+    // background: url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fitbbs%2F1510%2F20%2Fc4%2F14177260_1445297071493.jpg&refer=http%3A%2F%2Fimg.pconline.com.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666004146&t=9e75f5957372f9d96395aa9e82d74921") no-repeat;
     background-size: cover;
 
     &-header {
