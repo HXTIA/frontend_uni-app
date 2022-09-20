@@ -58,7 +58,6 @@
     flex-direction: row;
     align-items: center;
     height: auto;
-    padding: 10rpx 20rpx;
 
     &-icon {
       position: absolute;

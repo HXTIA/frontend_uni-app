@@ -82,14 +82,16 @@
       &-desc {
         width: 95%;
         margin-top: 10rpx;
+
         font-size: 30rpx;
         line-height: 36rpx;
       }
 
       &-urls {
         display: flex;
-        flex-wrap: wrap;
         justify-content: space-between;
+        flex-flow: wrap;
+        align-items: center;
         width: 100%;
         margin-top: 10px;
 
@@ -108,14 +110,8 @@
         display: flex;
         align-items: center;
         flex-flow: wrap;
-      }
 
-      // &-ddl {
-      //   &-msg {
-      //     font-size: 38rpx;
-      //     font-weight: 700;
-      //   }
-      // }
+      }
     }
   }
 </style>
