@@ -31,16 +31,17 @@
 
 
     &-header {
-      // position: fixed;
-      // top: 0;
-      width: 100%;
-      height: 7%;
+      position: fixed;
+      top: 0;
+      width: 100vw;
+      height: 70rpx;
+      z-index: 10000;
     }
 
     &-scroller {
       display: flex;
       flex-direction: column;
-      // align-items: center;
+      margin-top: 90rpx;
     }
   }
 </style>

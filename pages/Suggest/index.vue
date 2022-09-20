@@ -1,83 +1,156 @@
 <template>
   <view class="suggestPages-wrapper">
-    <view class="suggestPages-wrapper-header">
-      意见反馈
-    </view>
-    <view class="suggestPages-wrapper-suggest">
-      <span class="suggestPages-wrapper-suggest-border"></span>
-      <textarea maxlength="200" class="suggestPages-wrapper-suggest-textarea" placeholder="请输入对我们的建议....."></textarea>
-      <view class="suggestPages-wrapper-suggest-image">
-        <uploaderComponents title="截图" count="3" @upload-image="uploadImage"></uploaderComponents>
+    <view class="suggestPages-wrapper-mainArea">
+      <view class="suggestPages-wrapper-mainArea-header">意见反馈</view>
+      <view class="suggestPages-wrapper-mainArea-suggest">
+        <span class="suggestPages-wrapper-mainArea-suggest-border"></span>
+        <textarea maxlength="200" v-model="suggest" class="suggestPages-wrapper-mainArea-suggest-textarea"
+          placeholder="请输入对我们的建议....."></textarea>
+        <span class="suggestPages-wrapper-mainArea-suggest-border"></span>
+        <view class="suggestPages-wrapper-mainArea-suggest-image">
+          <uploaderComponents title="截图" :count="3" @upload-image="uploadImage"></uploaderComponents>
+        </view>
+        <span class="suggestPages-wrapper-mainArea-suggest-border"></span>
+        <view class="suggestPages-wrapper-mainArea-suggest-connect">
+          <span>联系方式：</span>
+          <span><input type="text" v-model="connectWay" placeholder="邮箱/手机号"></span>
+        </view>
+        <span class="suggestPages-wrapper-mainArea-suggest-border"></span>
       </view>
-      <button @click="click">发起接口</button>
+    </view>
+    <view class="suggestPages-wrapper-checkbox">
+      <!-- <fui-checkbox :value="isChecked"></fui-checkbox> -->
+      <fui-checkbox-group name="checkbox" v-model="isChecked">
+        <view class="fui-list__item">
+          <fui-label>
+            <view class="fui-align__center">
+              <fui-checkbox value="1" checked></fui-checkbox>
+              <text class="suggestPages-wrapper-checkbox-desc">允许开发者在48小时内通过消息联系我</text>
+            </view>
+          </fui-label>
+        </view>
+      </fui-checkbox-group>
+    </view>
+    <view class="suggestPages-wrapper-button">
+      <fui-button text="提交" width="200rpx" @click="submit"></fui-button>
     </view>
   </view>
 </template>
 
 <script setup>
   import uploaderComponents from "@/components/shared/uploaderComponents/index.vue"
+  import {
+    uploadFile,
+    submitMsg
+  } from "./api/index.js"
+
+  import {
+    ref,
+    watchEffect
+  } from "vue"
+
+  let suggest = ref("");
+  let connectWay = ref();
+  let isChecked = ref(true)
 
   let imageList = [];
-
   const uploadImage = (url) => {
-    // imageList.push(url);
-    console.log("触发了");
+    imageList.push(...url);
   }
-  const click = () => {
-    uni.requestSubscribeMessage({
-      tmplIds: ["V8JzyKTZZ16srBpi1QQMMUDCLMYzutIVvWGy8irgxiM"],
-      success(ops) {
-        console.log(ops)
-      },
-      fail(ops) {
-        console.log(ops);
+
+  // 处理提交任务
+  const submit = async () => {
+    // 处理未填数值的内容
+    if (suggest.value == "" || connectWay.value == "") {
+      return;
+    }
+    const urls = uploadFile(uni, imageList);
+    const options = {
+      url: "",
+      method: "POST",
+      data: {
+        urls,
+        suggest: suggest.value,
+        connectWay: connectWay.value,
+        flag: isChecked.value
       }
-    })
+    }
+    const res = await submitMsg(uni, options, true);
   }
 </script>
 <style lang="scss" scoped>
   .suggestPages-wrapper {
     box-sizing: border-box;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20rpx;
     width: 100vw;
     height: 100vh;
-    flex-direction: column;
-    align-items: center;
-    // background: url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fitbbs%2F1510%2F20%2Fc4%2F14177260_1445297071493.jpg&refer=http%3A%2F%2Fimg.pconline.com.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666004146&t=9e75f5957372f9d96395aa9e82d74921") no-repeat;
+    background: url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fitbbs%2F1510%2F20%2Fc4%2F14177260_1445297071493.jpg&refer=http%3A%2F%2Fimg.pconline.com.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666004146&t=9e75f5957372f9d96395aa9e82d74921") no-repeat;
     background-size: cover;
 
-    &-header {
-      font-size: 40rpx;
-      font-weight: 600;
-      color: white;
-      margin-bottom: 80rpx;
+    &-mainArea {
+      display: flex;
+      width: 100%;
+      height: auto;
+      flex-direction: column;
+      align-items: center;
+
+      &-header {
+        font-size: 40rpx;
+        font-weight: 600;
+        color: white;
+        margin-bottom: 80rpx;
+      }
+
+
+      &-suggest {
+        width: 80%;
+        height: auto;
+        padding: 40rpx 20rpx;
+        border-radius: 5%;
+        background-color: rgba(255, 255, 255, 1);
+        box-shadow: 0 0 5rpx #303030;
+
+        &-textarea {
+          width: 100%;
+          outline: none;
+          resize: none;
+          font-size: 30rpx;
+        }
+
+        &-border {
+          display: block;
+          width: 100%;
+          height: 1px;
+          margin-top: 10rpx;
+          margin-bottom: 20rpx;
+          background-color: #a8aca3;
+        }
+
+        &-connect {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          margin-bottom: 30rpx;
+        }
+      }
     }
 
+    &-checkbox {
+      display: flex;
+      align-items: center;
+      margin-top: 16rpx;
 
-    &-suggest {
-      width: 80%;
-      height: 45%;
-      padding: 40rpx 20rpx;
-      border-radius: 5%;
-      background-color: rgba(255, 255, 255, 1);
-      box-shadow: 0 0 5rpx #303030;
-
-      &-textarea {
-        width: 100%;
-        outline: none;
-        resize: none;
-        font-size: 30rpx;
+      &-desc {
+        color: #fff;
+        font-size: 26rpx;
       }
+    }
 
-      &-border {
-        display: block;
-        width: 100%;
-        height: 1px;
-        margin-top: 10rpx;
-        margin-bottom: 20rpx;
-        background-color: #a8aca3;
-      }
+    &-button {
+      margin-top: 20rpx;
     }
   }
 </style>
