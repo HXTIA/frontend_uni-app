@@ -55,67 +55,62 @@
 </template>
 
 <style lang="scss" scoped>
-  .workItem-wrapper {
-    position: relative;
-    overflow: hidden;
+  .detail-wrapper {
     box-sizing: border-box;
-    // width: 95%;
-    height: 300rpx;
-    // padding: 6px;
-    border-radius: 0px 10px 10px 0px;
-    background-color: whitesmoke;
-    border-bottom: 2px dashed gainsboro;
-    // box-shadow:  6px 6px 12px 12px #1e1e1e;
-    box-shadow: 0px 0px 15px #1e1e1e;
-    margin: 0px 4px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    padding: 40rpx 0;
+    background-color: #f0f0f0;
 
-    &-left {
-      background-color: seagreen;
-      width: 6px;
-      height: 300rpx;
-    }
+    &-lining {
+      width: 90%;
+      margin: 0 auto;
 
-    &-right {
-      margin: 0px 15px;
-
-      .title {
-        height: 60rpx;
-        font-size: 43rpx;
-        font-weight: bold;
-        margin: 5px 0px;
-        overflow: hidden;
-        // text-overflow: ellipsis;
-        // white-space: nowrap;
+      &-time {
+        font-size: 28rpx;
+        color: #938e8e;
       }
 
-      .desc {
-        color: gray;
+      &-title {
+        font-size: 50rpx;
+        font-weight: 700;
+        margin-top: 10rpx;
+      }
+
+      &-desc {
+        width: 95%;
+        margin-top: 10rpx;
+
         font-size: 30rpx;
-        width: 80%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        line-height: 36rpx;
       }
 
-      .image {
-        position: absolute;
-        // top: 75px;
-        // right: -10px;
-        top: 150rpx;
-        right: -40rpx;
-        width: 100px;
-        height: 100px;
+      &-urls {
+        display: flex;
+        justify-content: space-between;
+        flex-flow: wrap;
+        align-items: center;
+        width: 100%;
+        margin-top: 10px;
+
+        &-item {
+          width: 30%;
+
+          image {
+            width: 100%;
+            height: 100px;
+            border-radius: 10rpx;
+          }
+        }
       }
-    }
 
-    &-top {
-      margin-top: 5px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      &-tag {
+        display: flex;
+        align-items: center;
+        flex-flow: wrap;
 
-      &-icon {
-        padding-right: 10px;
       }
     }
   }
