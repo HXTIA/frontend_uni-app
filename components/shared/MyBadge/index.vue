@@ -22,7 +22,7 @@
 		}
 	})
 	
-	const typeColor = ()=> {
+	const typeColor = (()=> {
 		
 		if(props.isread == "true"){
 			background.type="success";
@@ -30,9 +30,8 @@
 			background.type="danger";
 		}
 	 
-	}
+	})()
 	
-	typeColor();
 	
 	
 </script>
