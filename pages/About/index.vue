@@ -3,7 +3,7 @@
     <view class="aboutPages-wrapper-header">
       关于我们
     </view>
-    <view class="aboutPages-wrapper-logo">
+    <view class="aboutPages-wrapper-logo" :style="bgImage">
     </view>
     <view class="aboutPages-wrapper-title">
       作业板
@@ -29,6 +29,16 @@
   import {
     edition
   } from "@/data/publicOptions.js"
+  import {
+    reactive
+  } from "vue"
+  import {
+    preloadImageList
+  } from "@/utils/lazyLoad/index.js"
+
+  let bgImage = reactive({
+    backgroundImage: "url('../../static/HXTIA_logo.png')"
+  })
 </script>
 
 <style lang="scss" scoped>
@@ -50,7 +60,8 @@
     &-logo {
       width: 80%;
       height: 45%;
-      background: url("https://axure-file.lanhuapp.com/a165925e-434b-479f-a9b0-ed136649f420__6215a13351e11c7d65b4aad4e24a519b.png") no-repeat center center;
+      background-position: center center;
+      background-repeat: no-repeat;
       background-size: 100%;
       margin-bottom: 30rpx;
     }

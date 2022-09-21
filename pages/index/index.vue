@@ -18,8 +18,7 @@
 
   const {
     data,
-    http,
-    dropDownOptions
+    dropDownOptions,
   } = mod
 </script>
 

@@ -32,35 +32,10 @@ const handleSubscribeMessage = (flag) => {
       })
     }
     // 取消订阅
-
-    // 用户自行打开取消订阅的吗，面板
-    // 当关闭之后调用获取设置的API
-    // 如果订阅状态为false -> 已关闭
-    uni.openSetting({
-      success() {
-        // 获取配置
-        uni.getSetting({
-          withSubscriptions: true,
-          success(ops) {
-            const {
-              subscriptionsSetting
-            } = ops
-            if (!subscriptionsSetting.mainSwitch) {
-              setStorage(uni, "SubscribeMessage", false)
-
-              reslove(true);
-              return uni.showToast({
-                title: "取消订阅成功！"
-              })
-            }
-
-            reslove(false)
-            return uni.showToast({
-              title: "取消失败再试试！"
-            })
-          }
-        })
-      }
+    uni.showToast({
+      title: "功能开发中...",
+      icon: "error",
+      duration: 2000
     })
   })
 }

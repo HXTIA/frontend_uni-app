@@ -24,7 +24,7 @@
               <MyDate :ddl="data.ddl"></MyDate>
               <!-- https://s1.ax1x.com/2022/09/17/xpMRZ6.png -->
               <!-- https://s1.ax1x.com/2022/09/17/xpSLyd.png -->
-              <img src="https://s1.ax1x.com/2022/09/17/xpMRZ6.png" alt="截止" class="image">
+              <img src="../../static/indexPage/done.png" alt="截止" class="image">
             </view>
           </fui-col>
         </fui-row>

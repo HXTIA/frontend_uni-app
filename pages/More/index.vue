@@ -23,4 +23,14 @@
 </script>
 
 <style lang="scss" scoped>
+  .morePages-wrapper {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    padding: 20rpx;
+    // align-items: center;
+
+  }
 </style>

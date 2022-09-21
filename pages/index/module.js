@@ -2,17 +2,17 @@ import {
   data
 } from "./options.js"
 
-import {
-  reactive,
-} from "vue"
+// import {
+//   reactive,
+// } from "vue"
 
-import {
-  onLoad
-} from "@dcloudio/uni-app"
+// import {
+//   onLoad
+// } from "@dcloudio/uni-app"
 
-import {
-  http
-} from "@/request/http.js"
+// import {
+//   http
+// } from "@/request/http.js"
 
 import userStore from "@/stores/users/index.js"
 
@@ -22,9 +22,9 @@ import {
 
 export default {
   data,
-  reactive,
-  onLoad,
+  // reactive,
+  // onLoad,
   userStore,
-  http,
-  dropDownOptions
+  // http,
+  dropDownOptions,
 }

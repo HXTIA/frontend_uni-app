@@ -1,5 +1,5 @@
 <template>
-  <view class="suggestPages-wrapper">
+  <view class="suggestPages-wrapper" :style="bgImage">
     <view class="suggestPages-wrapper-mainArea">
       <view class="suggestPages-wrapper-mainArea-header">意见反馈</view>
       <view class="suggestPages-wrapper-mainArea-suggest">
@@ -39,16 +39,20 @@
 
 <script setup>
   import uploaderComponents from "@/components/shared/uploaderComponents/index.vue"
-  import {
+  import mod from "./module.js"
+  const {
+    submitMsg,
     uploadFile,
-    submitMsg
-  } from "./api/index.js"
-
-  import {
     ref,
-    watchEffect
-  } from "vue"
+    reactive,
+    preloadImageList
+  } = mod;
 
+  let bgImage = reactive({
+    backgroundImage: "url('../../static/SUGGEST_BGIMAGE.webp')"
+  })
+
+  // 提交输入的内容
   let suggest = ref("");
   let connectWay = ref();
   let isChecked = ref(true)
@@ -87,7 +91,7 @@
     padding: 20rpx;
     width: 100vw;
     height: 100vh;
-    background: url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fitbbs%2F1510%2F20%2Fc4%2F14177260_1445297071493.jpg&refer=http%3A%2F%2Fimg.pconline.com.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666004146&t=9e75f5957372f9d96395aa9e82d74921") no-repeat;
+    // background: url("http://tmp/rpg8143XShiNb1b578459384d8c4fa5dc7fc2b9ff983.jpeg") no-repeat;
     background-size: cover;
 
     &-mainArea {

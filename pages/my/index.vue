@@ -1,7 +1,7 @@
 <template>
   <view class="myPages-wrapper">
     <view class="myPages-wrapper-lining">
-      <view class="myPages-wrapper-lining-avatar">
+      <view class="myPages-wrapper-lining-avatar" :style="bgImage">
         <img :src="userInfo.avatarUrl">
         <view class="myPages-wrapper-lining-avatar-name">
           {{ nickName }}
@@ -24,7 +24,6 @@
     onLoad,
     getUserInfo,
     reactive,
-    userStore,
     itemOptions,
     router,
   } = mod
@@ -36,6 +35,13 @@
   let userInfo = reactive({
     nickName,
     avatarUrl
+  })
+
+  let bgImage = reactive({
+    // backgroundImage: `url(${preloadImageList.get("ABOUT_BGIMAGE")})`
+    // TODO: 由于之后可能会有组织 -> 那么每个组织的背景旗会不一致 -> 组织的信息由后端返回
+    // 组织的旗帜有可能会进行改变 -> 那么信息应该是动态变化的吧
+    backgroundImage: "url('../../static/HXLOGO.png')"
   })
 
   const setCountMessage = () => {
@@ -69,7 +75,7 @@
         height: 35%;
         background-color: green;
         border-radius: 40rpx 40rpx 0 0;
-        background: url("https://axure-file.lanhuapp.com/a165925e-434b-479f-a9b0-ed136649f420__6215a13351e11c7d65b4aad4e24a519b.png") center center;
+        background-position: center center;
         // background-size: cover;
         background-size: contain;
         // opacity: 0.6;

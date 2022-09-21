@@ -8,6 +8,17 @@ import {
   handleRequestRes
 } from "@/utils/shared/handleStatus.js"
 
+export const enumCode = {
+  SUCCESS: 0, // 成功
+  CREAETED: 201, // 创建成功
+  DELETEED: 204, // 删除成功
+  UNAUTHORIZED: 401, // 没有权限
+}
+
+export const URLS = {
+  UPLOAD_FILE: "",
+}
+
 export default class Request {
   constructor(instance, options) {
     this.instance = instance.request;
