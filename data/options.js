@@ -7,6 +7,6 @@ export const enumSlideBlockOptionsEnum = {
 export const todoSlideBlockRightOptions = [{
   text: enumSlideBlockOptionsEnum.FIRST_BUTTON,
   style: {
-    backgroundColor: '#55aa7f',
+    backgroundColor: '#55aa7f'
   }
 }]

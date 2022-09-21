@@ -1,8 +1,8 @@
 <template>
   <uni-swipe-action>
-    <uni-swipe-action-item :left-options="todoSlideBlockRightOptions" @click="clickSlide"
-      @change="swipeChange($event, data.id)">
-      <view class="workItem-wrapper" :class="[data.grade]">
+    <uni-swipe-action-item :left-options="todoSlideBlockRightOptions" @click="clickSlide" @change="changeSlide"
+      :show="isOpened">
+      <view class="workItem-wrapper" :class="[data.grade]" @touchstart="touchStart" @touchend="touchEnd">
         <fui-row margin-bottom="24rpx">
           <fui-col :span="1">
             <view class="workItem-wrapper-left"></view>
@@ -22,9 +22,7 @@
               </view>
               <view class="desc">{{ data.desc }}</view>
               <MyDate :ddl="data.ddl"></MyDate>
-              <!-- https://s1.ax1x.com/2022/09/17/xpMRZ6.png -->
-              <!-- https://s1.ax1x.com/2022/09/17/xpSLyd.png -->
-              <img src="../../static/indexPage/done.png" alt="截止" class="image">
+              <img src="../../static/indexPage/done.png" alt="" class="image" v-show="isDone">
             </view>
           </fui-col>
         </fui-row>
@@ -47,7 +45,8 @@
     todoSlideBlockRightOptions,
     enumSlideBlockOptionsEnum,
     checkSubscribe,
-    onHide
+    onHide,
+    onLoad
   } = mod
 
   const props = defineProps({
@@ -69,6 +68,22 @@
     }
   })
 
+  //自带分享功能
+  onLoad(() => {
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ["shareAppMessage", "shareTimeline"],
+    })
+  })
+
+  const onshareAppMessage = (res) => {
+    if (res.from == "butten") {
+      console.log(res.target);
+    }
+    return {
+      title: "title"
+    }
+  }
 
   const detail = (id) => {
     // 如果已经设置订阅就进行发起请求
@@ -82,15 +97,65 @@
     })
   }
 
+
+  //已完成点击事件
+  //二次滑动已完成事件
+  let isDone = ref(false);
+  let isOpened = ref("none");
+  let startPosition = 0;
+  let endPosition = 0;
+  let changeStatus = false;
   const clickSlide = (e) => {
     const {
       content
     } = e;
     if (content.text === enumSlideBlockOptionsEnum.FIRST_BUTTON) {
-      console.log("点击了完成");
+      // console.log("点击了完成");
       // TODO: 完成逻辑实现
+      isDone.value = true;
+
     }
   }
+  const changeSlide = (e) => {
+    isOpened.value = e;
+    // TODO: 完成逻辑实现
+    changeStatus = !changeStatus;
+    // console.log("滑动完成");
+  }
+  const touchStart = (e) => {
+
+    if (changeStatus) {
+      // console.log("点击开始");
+      startPosition = e.changedTouches[0].clientX;
+    }
+  }
+  const touchEnd = (e) => {
+    endPosition = e.changedTouches[0].clientX;
+
+    if (changeStatus) {
+      //移动距离超过100判定为二次滑动 -> 已完成
+      if (Math.abs(endPosition - startPosition) > 100) {
+        //判断为右滑
+        if (endPosition - startPosition > 0) {
+          const event = {
+            content: todoSlideBlockRightOptions[0],
+            index: 0,
+            position: "none",
+          };
+          clickSlide(event);
+          // console.log("结束", endPosition - startPosition);
+          isOpened.value = "none";
+        }
+        return;
+      } else {
+        return;
+      }
+      return;
+    }
+
+    // console.log("点击结束");
+  }
+
 
   const swipeChange = (e, index) => {
     console.log('当前状态：' + e + '，下标：' + index)
@@ -136,7 +201,7 @@
         height: 60rpx;
         font-size: 43rpx;
         font-weight: bold;
-        margin: 5px 0px;
+        margin: 8px 0px 5px 0px;
         overflow: hidden;
         // text-overflow: ellipsis;
         // white-space: nowrap;
