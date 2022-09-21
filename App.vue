@@ -7,11 +7,18 @@
     createInstance
   } from "./utils/shared/createUniInstance.js";
 
+  import {
+    lazyLoadImgs
+  } from "@/utils/lazyLoad/index.js"
+
   export default {
     onLaunch: function() {
       // 在这里检测是否登录
       checkLogin(uni)
       createInstance(uni);
+
+      // 预加载图片
+      lazyLoadImgs(uni);
     },
     onShow: function() {},
     onHide: function() {}

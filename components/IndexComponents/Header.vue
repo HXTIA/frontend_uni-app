@@ -6,6 +6,8 @@
         <input class="input" placeholder="请输入..." required="" type="text">
       </form>
     </view>
+    <uni-notice-bar class="header-wrapper-notice" backgroundColor="transparent" show-close show-icon scrollable
+      speed="50" text="科技创新魔法协会, 科技创新魔法协会, 科技创新魔法协会!!!" />
   </view>
 </template>
 
@@ -17,6 +19,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     box-sizing: border-box;
     width: 100%;
     height: 90rpx;
@@ -26,11 +29,12 @@
 
     &-main {
       width: 100%;
-      margin: 2px;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 5px 0px;
+      margin-top: 5px;
+      // margin: 5px 0px;
+      // box-shadow: 0px 5px 5px #bababa;
 
 
       &-form {
@@ -97,6 +101,10 @@
         }
 
       }
+    }
+
+    &-notice {
+      width: 100%;
     }
 
   }

@@ -18,7 +18,8 @@ import {
 } from "@/utils/shared/checkLogin.js"
 
 import {
-  onHide
+  onHide,
+  onLoad
 } from "@dcloudio/uni-app"
 
 import {
@@ -35,5 +36,6 @@ export default {
   // templateId,
   checkSubscribe,
   dropDownOptions,
-  onHide
+  onHide,
+  onLoad
 }

@@ -1,17 +1,9 @@
 {
   "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-    // {
-    //   "path": "pages/Suggest/index",
-    //   "style": {
-    //     // "navigationBarTitleText": "反馈",
-    //     "navigationBarTitleText": "",
-    //     "navigationStyle": "default"
-    //   }
-    // },
     {
       "path": "pages/Index/index",
       "style": {
-        "navigationBarTitleText": "首页",
+        "navigationBarTitleText": "作业通知",
         "navigationStyle": "default"
       }
     },

@@ -18,8 +18,7 @@
 
   const {
     data,
-    http,
-    dropDownOptions
+    dropDownOptions,
   } = mod
 </script>
 
@@ -30,14 +29,31 @@
     background-color: #e0e0e0;
 
 
+    //   <<<<<<< HEAD &-header {
+    //     position: fixed;
+    //     top: 0;
+    //     width: 100vw;
+    //     height: 70rpx;
+    //     z-index: 10000;
+    //   }
+
+    //   &-scroller {
+    //     display: flex;
+    //     flex-direction: column;
+    //     margin-top: 90rpx;
+    //   }
+    // }
+
+    // =======
     &-header {
-      // position: fixed;
-      // top: 0;
+      position: fixed;
+      z-index: 1000;
       width: 100%;
       height: 7%;
     }
 
     &-scroller {
+      padding-top: 90rpx;
       display: flex;
       flex-direction: column;
       // align-items: center;

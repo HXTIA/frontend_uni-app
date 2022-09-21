@@ -1,9 +1,6 @@
-export const enumCode = {
-  SUCCESS: 0, // 成功
-  CREAETED: 201, // 创建成功
-  DELETEED: 204, // 删除成功
-  UNAUTHORIZED: 401, // 没有权限
-}
+import {
+  enumCode
+} from "@/request/request.js"
 
 /**
  * 同步获取存储 

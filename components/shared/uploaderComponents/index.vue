@@ -3,6 +3,14 @@
     <view class="uploader-wrapper-header">
       {{ title }} ({{ urls.length }}/{{ count }})
     </view>
+    <view class="uploader-wrapper-addIcon" @click="addImg">
+      添加
+    </view>
+    <view class="uploader-wrapper-urls">
+      <view class="uploader-wrapper-urls-item" v-for="(item,index) in urls" :key="index">
+        <img :src="item" alt="">
+      </view>
+    </view>
   </view>
 </template>
 
@@ -13,9 +21,10 @@
     reactive
   } from "vue"
 
-  let urls = reactive([])
+  // 接受事件
+  const emits = defineEmits(["upload-image"])
 
-  defineProps({
+  const props = defineProps({
     title: {
       type: String,
       default: "空内容"
@@ -26,15 +35,55 @@
     }
   })
 
-  // 接受事件
-  defineEmits(["upload-image"])
+  let urls = reactive([])
+  const addImg = () => {
+    uni.chooseImage({
+      count: props.count,
+      success(ops) {
+        const paths = ops.tempFilePaths;
+        urls.length + paths.length <= 3 ? urls.push(...paths) : "";
+        emits("upload-image", paths)
+      },
+      fail(res) {
+        // 取消上传
+        console.log(res);
+      }
+    })
+  }
 </script>
 
 <style lang="scss" scoped>
   .uploader-wrapper {
+    box-sizing: border-box;
     display: flex;
+    flex-wrap: wrap;
+    // justify-content: flex-start;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     height: 100%;
-    background-color: yellow;
+    // padding: 20rpx;
+
+    &-header {}
+
+    &-urls {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      flex-flow: wrap;
+      align-items: center;
+      margin: 10rpx;
+
+      &-item {
+        width: 23%;
+
+        image {
+          width: 100%;
+          height: 120rpx;
+        }
+      }
+    }
+
+    &-addIcon {}
   }
 </style>

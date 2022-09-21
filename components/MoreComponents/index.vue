@@ -2,7 +2,7 @@
   <view class="moreItem-wrapper">
     <view class="moreItem-wrapper-title">{{ data.title }}</view>
     <view class="moreItem-wrapper-switch">
-      <switch checked="true" @change="changeStatus" :checked="data.isChecked" />
+      <switch @change="changeStatus" :checked="data.isChecked" />
     </view>
   </view>
 </template>
@@ -16,10 +16,8 @@
     data: {
       type: Object,
       default: {
-        title: "功能一",
-        handleFunction: () => {
-          console.log("默认");
-        },
+        title: "",
+        handleFunction: () => {},
         isChecked: false
       }
     }
@@ -39,5 +37,6 @@
     justify-content: space-between;
     width: 100%;
     height: 100%;
+    margin: 20rpx;
   }
 </style>
