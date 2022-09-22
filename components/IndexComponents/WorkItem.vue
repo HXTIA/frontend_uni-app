@@ -67,7 +67,7 @@
       default: []
     }
   })
-
+  
   //自带分享功能
   onLoad(() => {
     wx.showShareMenu({

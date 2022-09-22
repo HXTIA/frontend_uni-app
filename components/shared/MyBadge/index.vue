@@ -8,7 +8,6 @@
 <script setup>
 	import { defineProps , reactive } from "vue"
 	
-	
 	const background = reactive({ type: "danger" })
 
 	const props = defineProps({

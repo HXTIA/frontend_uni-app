@@ -20,7 +20,13 @@ Controller.handleSharePhoto = (id) => {
   // 进行作业的分享图处理
   // 如何处理 -> 跳转详情 
   // -> bitMap -> 绘图 -> saveFile
-
+  console.log('查看详情', id)
+  router(uni, {
+    url: "detail",
+    params: {
+      id
+    }
+  })
 }
 
 Controller.handleDetail = (id) => {

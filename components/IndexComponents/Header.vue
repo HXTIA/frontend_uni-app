@@ -104,7 +104,7 @@
     }
 
     &-notice {
-      width: 100%;
+      width: 60%;
     }
 
   }
