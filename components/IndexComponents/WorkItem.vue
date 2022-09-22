@@ -68,22 +68,6 @@
     }
   })
 
-  //自带分享功能
-  onLoad(() => {
-    wx.showShareMenu({
-      withShareTicket: true,
-      menus: ["shareAppMessage", "shareTimeline"],
-    })
-  })
-
-  const onshareAppMessage = (res) => {
-    if (res.from == "butten") {
-      console.log(res.target);
-    }
-    return {
-      title: "title"
-    }
-  }
 
   const detail = (id) => {
     // 如果已经设置订阅就进行发起请求
@@ -224,7 +208,6 @@
         right: -40rpx;
         width: 100px;
         height: 100px;
-
       }
 
     }

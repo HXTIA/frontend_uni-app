@@ -3,6 +3,7 @@
     <view class="moreItem-wrapper-title">{{ data.title }}</view>
     <view class="moreItem-wrapper-switch">
       <switch @change="changeStatus" :checked="data.isChecked" />
+      <button open-type="share">121212</button>
     </view>
   </view>
 </template>

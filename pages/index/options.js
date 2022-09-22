@@ -74,24 +74,19 @@ export const data = [{
 
 import Controller from "./Controller/index.js"
 
+
 export const dropDownOptions = [{
     title: '置顶',
     index: 0,
     handleFunction: Controller.handleSticky
   }, {
-    title: '生成分享图',
-    index: 1,
-    handleFunction: Controller.handleSharePhoto
-  }, {
     title: '查看详情',
-    index: 2,
+    index: 1,
     handleFunction: Controller.handleDetail
   },
   {
     title: '设置提醒',
-    index: 3,
-    handleFunction: (id) => {
-      console.log('设置提醒', id)
-    }
+    index: 2,
+    handleFunction: Controller.handleRemind
   }
 ]

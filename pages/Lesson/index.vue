@@ -1,5 +1,6 @@
 <template>
-  lesson页面
+  <view class="lesson-wrapper">
+  </view>
 </template>
 
 <script setup>

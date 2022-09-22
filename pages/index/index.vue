@@ -14,12 +14,20 @@
 <script setup>
   import IndexHeaderCom from "@/components/IndexComponents/Header.vue"
   import IndexWorkItemCom from "@/components/IndexComponents/WorkItem.vue"
-  import mod from "./module.js"
 
+  import mod from "./module.js"
   const {
-    data,
     dropDownOptions,
+    reactive,
+    requestData,
+    onLoad
   } = mod
+
+  let data = reactive([]);
+  onLoad(async () => {
+    const res = await requestData();
+    data.push(...res)
+  })
 </script>
 
 <style lang="scss" scoped>
@@ -28,23 +36,6 @@
     height: auto;
     background-color: #e0e0e0;
 
-
-    //   <<<<<<< HEAD &-header {
-    //     position: fixed;
-    //     top: 0;
-    //     width: 100vw;
-    //     height: 70rpx;
-    //     z-index: 10000;
-    //   }
-
-    //   &-scroller {
-    //     display: flex;
-    //     flex-direction: column;
-    //     margin-top: 90rpx;
-    //   }
-    // }
-
-    // =======
     &-header {
       position: fixed;
       z-index: 1000;

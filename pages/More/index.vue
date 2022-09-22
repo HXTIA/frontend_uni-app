@@ -31,6 +31,5 @@
     height: 100vh;
     padding: 20rpx;
     // align-items: center;
-
   }
 </style>

@@ -19,6 +19,21 @@
 
       // 预加载图片
       lazyLoadImgs(uni);
+
+      // 分享
+      uni.showShareMenu({
+        withShareTicket: true,
+        menus: ["shareAppMessage", "shareTimeline"],
+      })
+
+      const onshareAppMessage = (res) => {
+        if (res.from == "butten") {
+          console.log(res.target);
+        }
+        return {
+          title: "title"
+        }
+      }
     },
     onShow: function() {},
     onHide: function() {}

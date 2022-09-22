@@ -11,9 +11,12 @@ import {
   requestData
 } from "./api/index.js"
 
+import Controller from "./Controller/index.js"
+
 export default {
   onLoad,
   reactive,
   defineProps,
-  requestData
+  requestData,
+  Controller
 }
