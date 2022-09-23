@@ -11,6 +11,10 @@
     lazyLoadImgs
   } from "@/utils/lazyLoad/index.js"
 
+  import {
+    timeFormat
+  } from "./utils/format/time.js"
+
   export default {
     onLaunch: function() {
       // 在这里检测是否登录

@@ -3,16 +3,16 @@ import {
   uni
 } from "@/utils/shared/createUniInstance.js"
 
+import dataStore from "@/stores/data/index.js"
+const store = dataStore();
+
 const Controller = {};
 // 处理置顶
 Controller.handleSticky = (id) => {
   // TODO: params -> 该作业编号
   // 如何操作请求来的数据
-  // 置顶如何实现 -> 依靠后端
-
-
-
-
+  // 置顶如何实现 -> 依靠后端 -> 向后端发送请求传递id
+  // store.getData[0].
 }
 
 Controller.handleDetail = (id) => {

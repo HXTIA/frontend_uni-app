@@ -84,19 +84,7 @@
         "pagePath": "pages/Index/index",
         "iconPath": "static/bottom/homepage-no.png",
         "selectedIconPath": "static/bottom/homepage.png"
-        // "iconfont": {
-        // 	"text": "\ue641",
-        // 	"selectedText": "\ue644",
-        // 	"fontSize": "30px",
-        // 	"color": "blue"
-        // }
       },
-      // {
-      //   "text": "代办",
-      //   "pagePath": "pages/Todo/index",
-      //   "iconPath": "static/bottom/my-no.png",
-      //   "selectedIconPath": "static/bottom/my.png"
-      // },
       {
         "text": "我的",
         "pagePath": "pages/my/index",

@@ -37,7 +37,7 @@
 </template>
 
 <script setup>
-  import uploaderComponents from "@/components/shared/uploaderComponents/index.vue"
+  import uploaderComponents from "@/components/shared/Uploader/index.vue"
   import mod from "./module.js"
   const {
     submitMsg,

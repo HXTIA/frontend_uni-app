@@ -19,6 +19,7 @@ export const lazyLoadImgs = (uni) => {
           success(ops) {
             const url = ops.path;
             preloadImageList.set(key, url);
+            resolve();
           }
         })
       }),

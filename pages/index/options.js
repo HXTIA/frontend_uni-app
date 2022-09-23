@@ -1,74 +1,74 @@
 export const data = [{
     id: 1,
-    time: "2022-09-05 13:34",
+    time: Date.now("2022-09-23 07:10"),
     title: "数据库概论论论论-456班",
     desc: "这是一段简短的描述，这是一段简短的描述，这是一段简短的描述",
     tag: ["作业二"],
-    ddl: "2022-09-06 13:34",
-    grade: "danger"
+    ddl: Date.now(),
+    flag: 0
   },
   {
     id: 2,
-    time: "2022-09-05 13:34:22",
+    time: Date.now(),
     title: "数据库概论",
     desc: "这是一段简短的描述",
     tag: ["作业二"],
-    ddl: "2022-09-06 13:34:22",
-    grade: "danger"
+    ddl: Date.now(),
+    flag: 1
   },
   {
     id: 3,
-    time: "2022-09-05 13:34:22",
+    time: Date.now(),
     title: "数据库概论",
     desc: "这是一段简短的描述",
     tag: ["作业二"],
-    ddl: "2022-09-06 13:34:22",
-    grade: "normal"
+    ddl: Date.now(),
+    flag: 1
   },
   {
     id: 4,
-    time: "2022-09-05 13:34:22",
+    time: Date.now(),
     title: "数据库概论",
     desc: "这是一段简短的描述",
     tag: ["作业二"],
-    ddl: "2022-09-06 13:34:22",
-    grade: "normal"
+    ddl: Date.now(),
+    flag: 1
   },
   {
     id: 5,
-    time: "2022-09-05 13:34:22",
+    time: Date.now(),
     title: "数据库概论",
     desc: "这是一段简短的描述",
     tag: ["作业二"],
-    ddl: "2022-09-06 13:34:22",
-    grade: "normal"
+    ddl: Date.now(),
+    flag: 2
   },
   {
     id: 6,
-    time: "2022-09-05 13:34:22",
+    time: Date.now(),
     title: "数据库概论",
     desc: "这是一段简短的描述",
     tag: ["作业二"],
-    ddl: "2022-09-06 13:34:22",
-    grade: "normal"
+    ddl: Date.now(),
+    flag: 0
   },
   {
     id: 7,
-    time: "2022-09-05 13:34:22",
+    time: Date.now(),
     title: "数据库概论",
     desc: "这是一段简短的描述",
     tag: ["作业二"],
-    ddl: "2022-09-06 13:34:22",
-    grade: "normal"
+    ddl: Date.now(),
+    flag: 0
   },
   {
     id: 8,
-    time: "2022-09-05 13:34:22",
+    time: Date.now(),
     title: "数据库概论",
     desc: "这是一段简短的描述",
     tag: ["作业二"],
-    ddl: "2022-09-06 13:34:22",
-    grade: "normal"
+    ddl: Date.now(),
+    flag: 0
   }
 ]
 

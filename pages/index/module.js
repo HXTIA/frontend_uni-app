@@ -18,5 +18,5 @@ export default {
   reactive,
   dropDownOptions,
   requestData,
-  onLoad
+  onLoad,
 }

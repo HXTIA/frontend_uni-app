@@ -10,9 +10,12 @@
     handleLogin
   } from "./api/index.js"
 
+  import {
+    getStorage
+  } from "@/utils/shared/handleStatus.js"
+
   onLoad(async () => {
     const res = await handleLogin(uni);
-
     if (!res) {
       return uni.showModal({
         title: 'WARNING！',
@@ -33,9 +36,17 @@
         }
       });
     }
+    let pages = getCurrentPages(); // 当前页面
+    const whiteList = ["pages/Index/index"];
     uni.navigateBack({
-      delta: 1
-    })
+      success: function(ops) {
+        pages.map((value) => {
+          if (whiteList.includes(value.route)) {
+            value.onLoad();
+          }
+        })
+      }
+    });
   })
 </script>
 
