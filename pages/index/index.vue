@@ -26,12 +26,21 @@
     reactive,
     requestData,
     onLoad,
+    getStorage
   } = mod
 
   let data = reactive([]);
   onLoad(async (ops) => {
     // 做法： 不合理: 还未登录 -> 那么没有token -> 请求一定失败 
     // 如果是onLoad那么一定会只加载一次 -> 解决方法： 登陆后重定向到首页
+    const isGuide = getStorage(uni, "isGuide") || false;
+    const token = getStorage(uni, "token") || undefined;
+    if (!isGuide && token) {
+      uni.navigateTo({
+        url: "/pages/Guide/index"
+      })
+    }
+
     const res = await requestData(uni);
     data.push(...res);
   })

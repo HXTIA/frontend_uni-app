@@ -14,9 +14,14 @@ import {
   onLoad
 } from "@dcloudio/uni-app"
 
+import {
+  getStorage
+} from "@/utils/shared/handleStatus.js"
+
 export default {
   reactive,
   dropDownOptions,
   requestData,
   onLoad,
+  getStorage
 }

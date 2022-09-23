@@ -1,5 +1,6 @@
 <template>
-
+  <view class="login-wrapper">
+  </view>
 </template>
 
 <script setup>

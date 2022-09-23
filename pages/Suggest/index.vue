@@ -19,7 +19,7 @@
       </view>
     </view>
     <view class="suggestPages-wrapper-checkbox">
-      <fui-checkbox-group name="checkbox" v-model="isChecked">
+      <fui-checkbox-group>
         <view class="fui-list__item">
           <fui-label>
             <view class="fui-align__center">
