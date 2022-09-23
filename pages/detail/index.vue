@@ -8,7 +8,8 @@
     reactive,
     defineProps,
     requestData,
-    Controller
+    Controller,
+    timeFormat
   } = mod
   // 预览图片
   const previewImg = (url) => {
@@ -30,43 +31,43 @@
     }
     const res = await requestData(uni, {}, true);
     Object.assign(data, res);
+    console.log(data);
   })
-
-  // 埋点： 截屏分享
-  // let context = uni.createCanvasContext('canvasOne')
-  // const savePhoto = () => {
-  //   const img = data.urls[3];
-  //   Controller.handleShareSavePhoto(uni, context, img, ["我是第一行", "我是第二个", "我是第三个"])
-  // }
 </script>
 
 <template>
   <view class="detail-wrapper">
-    <view class="detail-wrapper-lining">
-      <view class="detail-wrapper-lining-time">
-        发布于: {{ data.time }}
-      </view>
-      <header class="detail-wrapper-lining-title">
-        {{ data.title }}
-      </header>
-      <main class="detail-wrapper-lining-desc">
-        {{ data.desc }}
-      </main>
-      <view class="detail-wrapper-lining-urls">
-        <view v-for="item in data.urls" :key="item" class="detail-wrapper-lining-urls-item">
-          <image :src="item" @click="previewImg(item)" mode="widthFix"></image>
+    <!-- 缺省页 -->
+    <fui-empty isFixed src="/static/indexPage/empty.png" title="资源请求中..." descr="请耐心等待"
+      v-if="!Object.keys(data).length">
+    </fui-empty>
+    <!-- 内容主体 -->
+    <fui-animation :duration="500" :animationType="['zoom-out']" :show="Boolean(Object.keys(data).length)">
+      <view class="detail-wrapper-lining">
+        <view class="detail-wrapper-lining-time">
+          发布于: {{ timeFormat(data.time) }}
+        </view>
+        <header class="detail-wrapper-lining-title">
+          {{ data.title }}
+        </header>
+        <main class="detail-wrapper-lining-desc">
+          {{ data.desc }}
+        </main>
+        <view class="detail-wrapper-lining-urls">
+          <view v-for="(item,index) in data.urls" :key="index" class="detail-wrapper-lining-urls-item">
+            <image :src="item" @click="previewImg(item)" mode="widthFix"></image>
+          </view>
+        </view>
+        <view class="detail-wrapper-lining-tag">
+          <MyTag v-for="item in data.tag" :key="item" :title="item"></MyTag>
+        </view>
+        <MyDate :ddl="data.ddl"></MyDate>
+        <view class="detail-wrapper-lining-btns">
+          <fui-button openType="share" width="250rpx" class="detail-wrapper-lining-sharedPhoto">分享给好友
+          </fui-button>
         </view>
       </view>
-      <view class="detail-wrapper-lining-tag">
-        <MyTag v-for="item in data.tag" :key="item" :title="item"></MyTag>
-      </view>
-      <MyDate :ddl="data.ddl"></MyDate>
-      <view class="detail-wrapper-lining-btns">
-        <fui-button openType="share" width="250rpx" class="detail-wrapper-lining-sharedPhoto">分享给好友
-        </fui-button>
-      </view>
-    </view>
-    <!-- <canvas canvas-id="canvasOne" class="canvas-one" style="width:{{width}}px;height:{{height}}px"></canvas> -->
+    </fui-animation>
   </view>
 </template>
 

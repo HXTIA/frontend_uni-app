@@ -242,8 +242,6 @@
       align-items: center;
 
       &-dropdown {
-        display: flex;
-        justify-content: flex-end;
         position: absolute;
         z-index: 100;
         width: 100px;

@@ -39,10 +39,9 @@
   })
 
   let isShow = inject("flag");
-  console.log(isShow);
+
   // 开关
   const tabDropDown = () => {
-    console.log("我去你的");
     isShow.value = !isShow.value
   }
 

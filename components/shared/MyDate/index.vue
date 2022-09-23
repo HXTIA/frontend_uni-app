@@ -15,7 +15,7 @@
   const props = defineProps({
     ddl: {
       type: Number,
-      default: "无"
+      default: 1
     }
   })
 </script>
