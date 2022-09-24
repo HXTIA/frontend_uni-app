@@ -2,6 +2,10 @@ import {
   reactive,
 } from "vue"
 
+import {ref} from "vue"
+
+import userStore from "@/stores/users/index.js"
+
 import {
   requestData
 } from "./api/index.js"
@@ -35,9 +39,14 @@ export default {
   dropDownOptions,
   requestData,
   onLoad,
+<<<<<<< HEAD
   onShow,
   getStorage,
   handleInit,
   watchStore,
   store
+=======
+  getStorage,
+  ref
+>>>>>>> ba94031e3b9f845b11b8c9eeb41645267fd7f092
 }

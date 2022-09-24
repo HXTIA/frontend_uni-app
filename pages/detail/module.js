@@ -4,7 +4,8 @@ import {
 
 import {
   reactive,
-  defineProps
+  defineProps,
+  ref
 } from "vue"
 
 import {
@@ -22,6 +23,7 @@ export default {
   reactive,
   defineProps,
   requestData,
+  ref,
   Controller,
   timeFormat
 }

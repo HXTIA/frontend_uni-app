@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <uni-swipe-action>
     <uni-swipe-action-item :left-options="todoSlideBlockRightOptions" @click="clickSlide" @change="changeSlide"
       :show="isOpened">
@@ -55,18 +56,73 @@
     onLoad,
     timeFormat
   } = mod
+=======
+	<uni-swipe-action>
+		<uni-swipe-action-item :left-options="todoSlideBlockRightOptions" @click="clickSlide" @change="changeSlide"
+			:show="isOpened">
+			<view class="workItem-wrapper" :class="[data.grade]" @touchstart="touchStart" @touchend="touchEnd">
+				<fui-row margin-bottom="24rpx">
+					<fui-col :span="1">
+						<view class="workItem-wrapper-left"></view>
+					</fui-col>
+					<fui-col :span="23">
+						<view class="workItem-wrapper-top">
+							<MyBadge v-for="item in data.tag" :key="item" :txt="item" isread="true"></MyBadge>
+							<view class="workItem-wrapper-top-dropdown">
+								<DropDownCom :data="dropDownOptions" :id="data.id">
+									<fui-icon name="more-fill" class="workItem-wrapper-top-icon"></fui-icon>
+								</DropDownCom>
+							</view>
+						</view>
+						<view class="workItem-wrapper-right" @click="detail(data.id)">
+							<view class="title">
+								<h1>{{ data.title }}</h1>
+							</view>
+							<view class="desc">{{ data.desc }}</view>
+							<MyDate :ddl="data.ddl"></MyDate>
+							<fui-animation :animationType="['zoom-out']" :show="isDone" :styles="{position: 'absoluted'}">
+								<img :src="image" class="image" />
+							</fui-animation>
+						</view>
+					</fui-col>
+				</fui-row>
+			</view>
+		</uni-swipe-action-item>
+	</uni-swipe-action>
+</template>
 
-  const props = defineProps({
-    data: {
-      type: Object,
-      default: {}
-    },
-    dropDownOptions: {
-      type: Array,
-      default: []
-    }
-  })
+<script setup>
+	import MyDate from "@/components/shared/MyDate/index.vue"
+	import MyBadge from "@/components/shared/MyBadge/index.vue"
+	import DropDownCom from "@/components/shared/DropDown/index.vue"
 
+	import mod from "./module.js"
+	const {
+		router,
+		defineProps,
+		ref,
+		provide,
+		todoSlideBlockRightOptions,
+		enumSlideBlockOptionsEnum,
+		checkSubscribe,
+		onHide,
+		onLoad,
+		timeFormat
+	} = mod
+>>>>>>> ba94031e3b9f845b11b8c9eeb41645267fd7f092
+
+	const props = defineProps({
+		data: {
+			type: Object,
+			default: {}
+		},
+		dropDownOptions: {
+			type: Array,
+			default: []
+		}
+	})
+
+<<<<<<< HEAD
   watch(props.data, () => {
     isDone.value = false;
     // 监听到数据变化 -> 定时器让动画显现: 缓兵之计
@@ -92,33 +148,54 @@
     const advance = 8 * 60 * 60 * 1000;
     // 如果是ddl且未完成的情况下 赋予ddl
     // 如果是ddl但是已完成给予已完成
+=======
+	// 图片切换 0: -> 未读未完成 1: -> 已读未完成 2: -> 已读已完成
+	const BASEPATH = "../../static/indexPage/";
+	const ICON_LIST = ["ddl.png", "done.png"];
 
-    if (props.data.flag == 2) {
-      isDone.value = true;
-      return BASEPATH + ICON_LIST[1];
-    }
-    if (residue <= advance) {
-      switch (props.data.flag) {
-        case 0:
-        case 1:
-          isDone.value = true;
-          return BASEPATH + ICON_LIST[0];
-      }
-    }
-  }
+	// 根据flag内容动态渲染是否已完成的图标
+	// 需要考虑的东西：-> 如果是ddl那么显示图标，否则即为未完成不显示，已完成是默认显示的
 
-  const detail = (id) => {
-    // 如果已经设置订阅就进行发起请求
-    checkSubscribe(uni)
-    // 跳转路由
-    router(uni, {
-      url: "detail",
-      params: {
-        id,
-      },
-    })
-  }
+	let image = ref();
+	// 处理image的图标
+	// 图片切换 0: -> 未读未完成 1: -> 已读未完成 2: -> 已读已完成 
+	function handleFlag() {
+		// 发布时间和ddl
+		const time = props.data.time;
+		const ddl = props.data.ddl;
+		const residue = ddl - time;
+		const advance = 8 * 60 * 60 * 1000;
+		// 如果是ddl且未完成的情况下 赋予ddl
+		// 如果是ddl但是已完成给予已完成
+>>>>>>> ba94031e3b9f845b11b8c9eeb41645267fd7f092
 
+		if (props.data.flag == 2) {
+			isDone.value = true;
+			return BASEPATH + ICON_LIST[1];
+		}
+		if (residue <= advance) {
+			switch (props.data.flag) {
+				case 0:
+				case 1:
+					isDone.value = true;
+					return BASEPATH + ICON_LIST[0];
+			}
+		}
+	}
+
+	const detail = (id) => {
+		// 如果已经设置订阅就进行发起请求
+		checkSubscribe(uni)
+		// 跳转路由
+		router(uni, {
+			url: "detail",
+			params: {
+				id,
+			},
+		})
+	}
+
+<<<<<<< HEAD
   const clickSlide = (e) => {
     const {
       content
@@ -134,112 +211,136 @@
       }, 500)
     }
   }
+=======
+	const clickSlide = (e) => {
+		const {
+			content
+		} = e;
+		if (content.text === enumSlideBlockOptionsEnum.FIRST_BUTTON) {
+			// console.log("点击了完成");
+			// TODO: 完成逻辑实现
+			isDone.value = true;
+			image.value = BASEPATH + ICON_LIST[1]
+		}
+	}
+>>>>>>> ba94031e3b9f845b11b8c9eeb41645267fd7f092
 
 
-  //已完成点击事件
-  //二次滑动已完成事件
-  let isDone = ref(false);
-  let isOpened = ref("none");
-  let startPosition = 0;
-  let endPosition = 0;
-  let changeStatus = false;
-  const changeSlide = (e) => {
-    isOpened.value = e;
-    // TODO: 完成逻辑实现
-    changeStatus = !changeStatus;
-    // console.log("滑动完成");
-  }
-  const touchStart = (e) => {
+	//已完成点击事件
+	//二次滑动已完成事件
+	let isDone = ref(false);
+	let isOpened = ref("none");
+	let startPosition = 0;
+	let endPosition = 0;
+	let changeStatus = false;
+	const changeSlide = (e) => {
+		isOpened.value = e;
+		// TODO: 完成逻辑实现
+		changeStatus = !changeStatus;
+		// console.log("滑动完成");
+	}
+	const touchStart = (e) => {
 
-    if (changeStatus) {
-      // console.log("点击开始");
-      startPosition = e.changedTouches[0].clientX;
-    }
-  }
-  const touchEnd = (e) => {
-    endPosition = e.changedTouches[0].clientX;
+		if (changeStatus) {
+			// console.log("点击开始");
+			startPosition = e.changedTouches[0].clientX;
+		}
+	}
+	const touchEnd = (e) => {
+		endPosition = e.changedTouches[0].clientX;
 
-    if (changeStatus) {
-      //移动距离超过100判定为二次滑动 -> 已完成
-      if (Math.abs(endPosition - startPosition) > 100) {
-        //判断为右滑
-        if (endPosition - startPosition > 0) {
-          const event = {
-            content: todoSlideBlockRightOptions[0],
-            index: 0,
-            position: "none",
-          };
-          clickSlide(event);
-          isOpened.value = "none";
-        }
-        return;
-      } else {
-        return;
-      }
-      return;
-    }
-  }
+		if (changeStatus) {
+			//移动距离超过100判定为二次滑动 -> 已完成
+			if (Math.abs(endPosition - startPosition) > 100) {
+				//判断为右滑
+				if (endPosition - startPosition > 0) {
+					const event = {
+						content: todoSlideBlockRightOptions[0],
+						index: 0,
+						position: "none",
+					};
+					clickSlide(event);
+					// console.log("结束", endPosition - startPosition);
+					isOpened.value = "none";
+				}
+				return;
+			} else {
+				return;
+			}
+			return;
+		}
 
-  // 控制三个点的开闭
-  let flag = ref(false);
-  provide("flag", flag)
+		// console.log("点击结束");
+	}
 
-  // 处理三个点闭合的善后
-  onHide(() => {
-    if (flag.value) {
-      flag.value = false
-    }
-  })
+	//已完成动画
+	// const mode = ref(['zoom-out']);
+	// const styles = ref({
+	// 	position: 'absolute',
+	// 	top: 10,
+	// });
 
-  // 由于变量存在暂时性死区
-  // 所以声明提至最前方 -> image的赋值放在后面
-  // 或者用钩子函数
-  image.value = handleFlag()
+	// 控制三个点的开闭
+	let flag = ref(false);
+	provide("flag", flag)
+
+	// 处理三个点闭合的善后
+	onHide(() => {
+		if (flag.value) {
+			flag.value = false
+		}
+	})
+
+	// 由于变量存在暂时性死区
+	// 所以声明提至最前方 -> image的赋值放在后面
+	// 或者用钩子函数
+	image.value = handleFlag()
 </script>
 
 <style lang="scss" scoped>
-  .workItem-wrapper {
-    position: relative;
-    overflow: hidden;
-    box-sizing: border-box;
-    // width: 95%;
-    height: 300rpx;
-    // padding: 6px;
-    border-radius: 0px 10px 10px 0px;
-    background-color: whitesmoke;
-    border-bottom: 2px dashed gainsboro;
-    // box-shadow:  6px 6px 12px 12px #1e1e1e;
-    box-shadow: 0px 0px 15px #1e1e1e;
-    margin: 0px 4px 0px 0px;
+	.workItem-wrapper {
+		position: relative;
+		overflow: hidden;
+		box-sizing: border-box;
+		// width: 95%;
+		height: 300rpx;
+		// padding: 6px;
+		border-radius: 0px 10px 10px 0px;
+		background-color: whitesmoke;
+		border-bottom: 2px dashed gainsboro;
+		// box-shadow:  6px 6px 12px 12px #1e1e1e;
+		box-shadow: 0px 0px 15px #1e1e1e;
+		margin: 0px 4px 0px 0px;
 
-    &-left {
-      background-color: seagreen;
-      width: 6px;
-      height: 300rpx;
-    }
+		&-left {
+			background-color: seagreen;
+			width: 6px;
+			height: 300rpx;
+		}
 
-    &-right {
-      margin: 0px 15px;
+		&-right {
+			margin: 0px 15px;
 
-      .title {
-        height: 60rpx;
-        font-size: 43rpx;
-        font-weight: bold;
-        margin: 8px 0px 5px 0px;
-        overflow: hidden;
-        // text-overflow: ellipsis;
-        // white-space: nowrap;
-      }
+			.title {
+				height: 60rpx;
+				font-size: 43rpx;
+				font-weight: bold;
+				margin: 8px 0px 5px 0px;
+				overflow: hidden;
+				// text-overflow: ellipsis;
+				// white-space: nowrap;
+			}
 
-      .desc {
-        color: gray;
-        font-size: 30rpx;
-        width: 80%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
+			.desc {
+				color: gray;
+				font-size: 30rpx;
+				width: 80%;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
 
+<<<<<<< HEAD
       .image {
         position: absolute;
         bottom: 0;
@@ -248,21 +349,33 @@
         height: 100px;
         transform: translate(40%, 40%);
       }
+=======
+			.image {
+				position: absolute;
+				bottom: -50rpx;
+				right: 30rpx;
+				width: 200rpx;
+				height: 200rpx;
+				// top: 150rpx;
+				// right: -20rpx;
+				transform: translate(40%, 40%);
+			}
+>>>>>>> ba94031e3b9f845b11b8c9eeb41645267fd7f092
 
-    }
+		}
 
-    &-top {
-      margin-top: 5px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+		&-top {
+			margin-top: 5px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 
-      &-dropdown {
-        position: absolute;
-        z-index: 100;
-        width: 100px;
-        right: 10rpx;
-      }
-    }
-  }
+			&-dropdown {
+				position: absolute;
+				z-index: 100;
+				width: 100px;
+				right: 10rpx;
+			}
+		}
+	}
 </style>
