@@ -42,7 +42,7 @@
       v-if="!Object.keys(data).length">
     </fui-empty>
     <!-- 内容主体 -->
-    <fui-animation :duration="500" :animationType="['zoom-out']" :show="Boolean(Object.keys(data).length)">
+    <fui-animation :duration="500" :animationType="['zoom-in']" :show="Boolean(Object.keys(data).length)">
       <view class="detail-wrapper-lining">
         <view class="detail-wrapper-lining-time">
           发布于: {{ timeFormat(data.time) }}

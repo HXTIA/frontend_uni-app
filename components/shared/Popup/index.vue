@@ -1,10 +1,12 @@
 <template>
-  <fui-bottom-popup :show="show" @close="closePopup">
+  <fui-top-popup :show="show" @close="closePopup">
     <view class="fui-custom__wrap">
-      <image src="../../../static/SUGGEST_bgIMAGE.webp" mode="widthFix"></image>
-      {{ content }}
+      <image :src="data.img" mode="widthFix" v-if="data.img"></image>
+      <view class="content" v-if="data.content">
+        {{ data.content }}
+      </view>
     </view>
-  </fui-bottom-popup>
+  </fui-top-popup>
 </template>
 
 <script setup>
@@ -19,9 +21,9 @@
   let show = ref(true)
 
   const props = defineProps({
-    content: {
-      type: String,
-      default: ""
+    data: {
+      type: Object,
+      default: {}
     },
     flag: {
       type: String,
@@ -33,7 +35,6 @@
 
   const showPopup = (type) => {
     show.value = true;
-    console.log(type);
   }
   const closePopup = (type) => {
     show.value = false

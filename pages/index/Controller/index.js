@@ -15,14 +15,34 @@ Controller.handleSticky = (id) => {
   // store.getData[0].
 }
 
-Controller.handleDetail = (id) => {
-  // TODO: params -> 该作业编号
-  // 如何实现 -> 调用路由(path?id=1) -> 通过id进行查询
-  console.log('查看详情', id)
-  router(uni, {
-    url: "detail",
-    params: {
-      id
+// Controller.handleDetail = (id) => {
+//   // TODO: params -> 该作业编号
+//   // 如何实现 -> 调用路由(path?id=1) -> 通过id进行查询
+//   console.log('查看详情', id)
+//   router(uni, {
+//     url: "detail",
+//     params: {
+//       id
+//     }
+//   })
+// }
+
+Controller.handleCancelDone = (id) => {
+  // TODO: 需要取消已完成
+  // 要向后端发送请求 -> 同时将pinia的数据进行修改
+  store.getData.map((value) => {
+    // 对应的数据
+    if (value.id === id && value.flag === 2) {
+      const time = value.time;
+      const ddl = value.ddl;
+      const residue = ddl - time;
+      const advance = 8 * 60 * 60 * 1000;
+
+      if (residue <= advance) {
+        // ddl -> 已读未完成 但是为ddl
+        value.flag = 1;
+      }
+      return 0;
     }
   })
 }

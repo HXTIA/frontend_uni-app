@@ -23,7 +23,7 @@ export const guideData = [{
   },
   {
     img: "../../static/HXLOGO.png",
-    desc: "我们是天津理工大学华信软件学院科技创新协会",
+    desc: "这里是天津理工大学华信软件学院科技创新协会",
     flag: true
   }
 ]

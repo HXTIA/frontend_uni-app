@@ -14,7 +14,7 @@ const store = userStore();
 
 export const handleLogin = async (uni) => {
   try {
-    const res = await login(uni)
+    const res = await login(uni);
 
     // 取消登录或授权
     if (!res) {

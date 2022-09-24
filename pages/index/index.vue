@@ -8,7 +8,8 @@
       <IndexWorkItemCom v-for="(item,index) in data" :key="index" :data="item" :dropDownOptions="dropDownOptions">
       </IndexWorkItemCom>
       <!-- 缺省页 -->
-      <fui-empty isFixed src="/static/indexPage/empty.png" title="资源请求中..." descr="请耐心等待" v-if="!data.length">
+      <fui-empty isFixed :src="`/static/indexPage/${icon.icon}`" :title="icon.title" :descr="icon.desc"
+        v-if="!data.length">
       </fui-empty>
     </view>
     <!-- 没有更多了 -->
@@ -26,23 +27,45 @@
     reactive,
     requestData,
     onLoad,
-    getStorage
+    onShow,
+    getStorage,
+    handleInit,
+    watchStore,
+    store
   } = mod
 
-  let data = reactive([]);
-  onLoad(async (ops) => {
-    // 做法： 不合理: 还未登录 -> 那么没有token -> 请求一定失败 
-    // 如果是onLoad那么一定会只加载一次 -> 解决方法： 登陆后重定向到首页
-    const isGuide = getStorage(uni, "isGuide") || false;
-    const token = getStorage(uni, "token") || undefined;
-    if (!isGuide && token) {
-      uni.navigateTo({
-        url: "/pages/Guide/index"
-      })
-    }
+  const emptyIcon = {
+    request: "request.png",
+    empty: "empty.png"
+  }
+  let icon = reactive({
+    icon: emptyIcon.request,
+    title: "资源请求中...",
+    desc: "请耐心等待"
+  })
 
+  let data = reactive([]);
+  onShow(async (ops) => {
+    // 数据如果已经存在 -> 意味着已经登陆 && 组织存在 && 引导页观看完毕
+    const isExist = store.getData.length;
+    if (isExist) return;
+
+    // 处理初始化工作 -> 欢迎页 / 是否有组织
+    const initRes = handleInit(uni);
+
+    if (!initRes) return;
     const res = await requestData(uni);
+    if (!res.length) {
+      // 没数据 -> 同时改变缺省页
+      icon.icon = emptyIcon.empty;
+      icon.title = "没有更多数据啦!";
+      icon.desc = "暂时没有作业或者检查组织信息是否正确";
+    }
     data.push(...res);
+  })
+
+  watchStore(store, "flag", () => {
+    data.splice(0, data.length, ...store.getData);
   })
 </script>
 

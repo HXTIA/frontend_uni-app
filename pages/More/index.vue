@@ -1,8 +1,8 @@
 <template>
   <view class="morePages-wrapper">
     <!-- 引导 -->
-    <PopupCom v-for="(item,index) in tipOptions.reverse()" :key="item" flag="isSettingTip" :content="item"
-      v-if="!isShowTips"></PopupCom>
+    <PopupCom v-for="(item,index) in tipOptions.reverse()" :key="item" flag="isSettingTip" :data="item" v-if="!isShow">
+    </PopupCom>
     <moreItemComponent v-for="(item,index) in data" :key="index" :data="item"></moreItemComponent>
   </view>
 </template>
@@ -22,9 +22,11 @@
   } from "./options/index.js"
 
   let data = returnData(uni);
+  let isShow = isShowTips(uni)
 
   onShow(() => {
-    data = returnData(uni)
+    data = returnData(uni);
+    isShow = isShowTips(uni);
   })
 </script>
 

@@ -22,7 +22,9 @@
               </view>
               <view class="desc">{{ data.desc }}</view>
               <MyDate :ddl="data.ddl"></MyDate>
-              <img :src="image" class="image" v-if="isDone">
+              <fui-animation :animationType="['zoom-out']" :show="isDone" :styles="{position: 'absoluted'}">
+                <img :src="image" class="image" />
+              </fui-animation>
             </view>
           </fui-col>
         </fui-row>
@@ -35,8 +37,12 @@
   import MyDate from "@/components/shared/MyDate/index.vue"
   import MyBadge from "@/components/shared/MyBadge/index.vue"
   import DropDownCom from "@/components/shared/DropDown/index.vue"
-
+  import dataStore from "@/stores/data/index.js"
+  const store = dataStore();
   import mod from "./module.js"
+  import {
+    watch
+  } from "vue"
   const {
     router,
     defineProps,
@@ -61,16 +67,23 @@
     }
   })
 
+  watch(props.data, () => {
+    isDone.value = false;
+    // 监听到数据变化 -> 定时器让动画显现: 缓兵之计
+    setTimeout(() => {
+      image.value = handleFlag();
+      isDone.value = true;
+    }, 500)
+  })
+
   // 图片切换 0: -> 未读未完成 1: -> 已读未完成 2: -> 已读已完成
   const BASEPATH = "../../static/indexPage/";
   const ICON_LIST = ["ddl.png", "done.png"];
 
   // 根据flag内容动态渲染是否已完成的图标
   // 需要考虑的东西：-> 如果是ddl那么显示图标，否则即为未完成不显示，已完成是默认显示的
-
   let image = ref();
-  // 处理image的图标
-  // 图片切换 0: -> 未读未完成 1: -> 已读未完成 2: -> 已读已完成 
+
   function handleFlag() {
     // 发布时间和ddl
     const time = props.data.time;
@@ -111,10 +124,14 @@
       content
     } = e;
     if (content.text === enumSlideBlockOptionsEnum.FIRST_BUTTON) {
-      // console.log("点击了完成");
       // TODO: 完成逻辑实现
-      isDone.value = true;
-      image.value = BASEPATH + ICON_LIST[1]
+      isDone.value = false;
+      // 定时器让动画显现: 缓兵之计
+      setTimeout(() => {
+        image.value = BASEPATH + ICON_LIST[1];
+        props.data.flag = 2;
+        isDone.value = true;
+      }, 500)
     }
   }
 
@@ -225,12 +242,11 @@
 
       .image {
         position: absolute;
-        // top: 75px;
-        // right: -10px;
-        top: 150rpx;
-        right: -40rpx;
+        bottom: 0;
+        right: 0;
         width: 100px;
         height: 100px;
+        transform: translate(40%, 40%);
       }
 
     }

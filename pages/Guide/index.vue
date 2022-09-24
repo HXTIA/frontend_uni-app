@@ -125,10 +125,11 @@
     setStorage
   } from "@/utils/shared/handleStatus.js"
 
+  setStorage(uni, "isGuide", true);
+
   const back = () => {
-    setStorage(uni, "isGuide", true);
-    uni.navigateBack({
-      delta: 1
+    uni.reLaunch({
+      url: "/pages/Index/index"
     })
   }
 </script>
@@ -138,16 +139,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: absolute;
-    z-index: 10000;
     width: 100vw;
     height: 100vh;
-    padding: 30rpx;
+    padding: 20rpx;
     background-color: #fff;
 
     swiper {
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
 
       .swiper-item {
         display: flex;

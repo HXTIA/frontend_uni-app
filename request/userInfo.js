@@ -12,8 +12,8 @@ export const login = async (uni) => {
         const {
           code
         } = res;
-        res["code"] = code
-        const userInfo = await getUserInfoProfile(uni)
+        res["code"] = code;
+        const userInfo = await getUserInfoProfile(uni);
         if (!userInfo) {
           reslove(false);
           return false;
@@ -33,6 +33,7 @@ export const getUserInfoProfile = async (uni) => {
     uni.showModal({
       title: 'WARNING！',
       content: '宝~，授权微信登录后才能正常使用小程序功能',
+      showCancel: false,
       async success(res) {
         //如果用户点击了确定按钮
         if (res.confirm) {
@@ -51,13 +52,6 @@ export const getUserInfoProfile = async (uni) => {
               reslove(false)
             }
           });
-        } else if (res.cancel) {
-          //如果用户点击了取消按钮
-          uni.showToast({
-            title: '您拒绝了请求,不能正常使用小程序',
-            duration: 1000
-          });
-          reslove(false)
         }
       }
     });

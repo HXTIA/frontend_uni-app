@@ -2,8 +2,7 @@
   <view class="moreItem-wrapper">
     <view class="moreItem-wrapper-title">{{ data.title }}</view>
     <view class="moreItem-wrapper-switch">
-      <switch @change="changeStatus" :checked="data.isChecked" />
-      <button open-type="share">121212</button>
+      <switch @change="changeStatus" :checked="data.isChecked" :disabled="data.isChecked" />
     </view>
   </view>
 </template>

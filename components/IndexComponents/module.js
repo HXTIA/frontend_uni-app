@@ -37,5 +37,5 @@ export default {
   dropDownOptions,
   onHide,
   onLoad,
-  timeFormat
+  timeFormat,
 }

@@ -5,7 +5,7 @@ export const data = [{
     desc: "这是一段简短的描述，这是一段简短的描述，这是一段简短的描述",
     tag: ["作业二"],
     ddl: Date.now(),
-    flag: 0
+    flag: 2
   },
   {
     id: 2,
@@ -14,7 +14,7 @@ export const data = [{
     desc: "这是一段简短的描述",
     tag: ["作业二"],
     ddl: Date.now(),
-    flag: 1
+    flag: 2
   },
   {
     id: 3,
@@ -80,9 +80,9 @@ export const dropDownOptions = [{
     index: 0,
     handleFunction: Controller.handleSticky
   }, {
-    title: '查看详情',
+    title: '取消已完成',
     index: 1,
-    handleFunction: Controller.handleDetail
+    handleFunction: Controller.handleCancelDone
   },
   {
     title: '设置提醒',
