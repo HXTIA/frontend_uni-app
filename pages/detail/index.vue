@@ -2,16 +2,17 @@
 	import mod from "./module.js"
 	import MyDate from "@/components/shared/MyDate/index.vue"
 	import MyTag from "@/components/shared/MyTag/index.vue"
+	import MyCanvas from "@/components/shared/SharePoster/index.vue"
 	const {
 		onLoad,
 		reactive,
 		defineProps,
-		requestData
+		requestData,
+		ref
 	} = mod
-	import {ref} from "vue"
-	import MyCanvas from "@/components/PosterComponents/MyCanvas.vue"
-	const myCanvasRef = ref();
 	
+	
+	const myCanvasRef = ref();
 	//绘制海报
 	function createPoster() {
 		// 配置项
@@ -34,6 +35,16 @@
 				left: 'center',
 				top: 280
 			},
+			//内容
+			{
+				type: 'text',
+				content: data.desc,
+				color: '#707070',
+				fontSize: 20,
+				left: 60,
+				top: 320,
+				maxLine:10
+			},
 			// 长按扫码
 			{
 				type: 'text',
@@ -54,14 +65,14 @@
 			// 	height: 50
 			// },
 			// 小程序码
-			{
-				type: 'image',
-				url: 'https://s1.ax1x.com/2022/09/17/xpMRZ6.png',
-				left: 'center',
-				top: 310,
-				width: 180,
-				height: 180
-			},
+			// {
+			// 	type: 'image',
+			// 	url: 'https://s1.ax1x.com/2022/09/17/xpMRZ6.png',
+			// 	left: 'center',
+			// 	top: 310,
+			// 	width: 180,
+			// 	height: 180
+			// },
 			// 头像
 			{
 				type: 'image',
@@ -73,7 +84,7 @@
 				height: 50
 			}
 		]
-		// 调用myCanvas的onDraw方法，绘制并保存
+		//绘制并保存
 		myCanvasRef.value.onDraw(options, url => {
 			console.log(url)
 		})

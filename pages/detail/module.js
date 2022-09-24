@@ -4,7 +4,8 @@ import {
 
 import {
   reactive,
-  defineProps
+  defineProps,
+  ref
 } from "vue"
 
 import {
@@ -15,5 +16,6 @@ export default {
   onLoad,
   reactive,
   defineProps,
-  requestData
+  requestData,
+  ref
 }

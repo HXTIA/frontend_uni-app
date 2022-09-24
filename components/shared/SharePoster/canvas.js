@@ -1,27 +1,28 @@
-/** @生成海报 **/
+/** 生成海报 **/
 export function createPoster(canvasInfo, options, callback) {
 	uni.showLoading({
 		title: '海报生成中…',
 		mask: true
 	})
-	const myCanvas = uni.createCanvasContext(canvasInfo.id, this)
-	var index = 0
+	//创建canvas绘图上下文
+	const myCanvas = uni.createCanvasContext(canvasInfo.id, this);
+	let index = 0;
 	drawCanvas(myCanvas, canvasInfo, options, index, () => {
 		myCanvas.draw(true, () => {
-			// 延迟，等canvas画完
+			// 延迟,等canvas画完
 			const timer = setTimeout(() => {
-				savePoster.call(this, canvasInfo.id, callback)
-				clearTimeout(timer)
-			}, 1000)
+				savePoster.call(this, canvasInfo.id, callback);
+				clearTimeout(timer);
+			}, 500);
 		})
 	})
 }
 
 // 绘制中
-async function drawCanvas(myCanvas, canvasInfo, options, index, drawComplete) {
-	let item = options[index]
+const drawCanvas = async (myCanvas, canvasInfo, options, index, drawComplete) => {
+	let item = options[index];
 	// 最大行数：maxLine  字体大小：fontSize  行高：lineHeight
-	//    类型    颜色  left  right  top  bottom   宽      高     圆角    图片  文本内容
+	// 类型 颜色 左 有 上 下  宽 高 圆角 图片 文本内容
 	let {
 		type,
 		color,
@@ -36,13 +37,13 @@ async function drawCanvas(myCanvas, canvasInfo, options, index, drawComplete) {
 		content,
 		fontSize
 	} = item
-	radius = radius || 0
+	radius = radius || 0;
 	const {
 		width: canvasWidth,
 		height: canvasHeight
 	} = canvasInfo
 	switch (type) {
-		/** @文本 **/
+		/** 文本 **/
 		case 'text':
 			if (!content) break
 			// 根据字体大小计算出宽度
@@ -61,12 +62,12 @@ async function drawCanvas(myCanvas, canvasInfo, options, index, drawComplete) {
 				item.top = canvasHeight - bottom - fontSize
 			}
 
-			drawText(myCanvas, item)
+			drawText(myCanvas, item);
 			break
-			/** @图片 **/
+			/** 图片 **/
 		case 'image':
 			if (!url) break
-			var imageTempPath = await getImageTempPath(url)
+			let imageTempPath = await getImageTempPath(url)
 			// left位置
 			if (right !== undefined) {
 				left = canvasWidth - right - width
@@ -103,7 +104,7 @@ async function drawCanvas(myCanvas, canvasInfo, options, index, drawComplete) {
 			myCanvas.restore()
 
 			break
-			/** @盒子 **/
+			/** 盒子 **/
 		case 'block':
 			// left位置
 			if (right !== undefined) {
@@ -134,7 +135,7 @@ async function drawCanvas(myCanvas, canvasInfo, options, index, drawComplete) {
 			myCanvas.fill()
 			myCanvas.closePath()
 			break
-			/** @边框 **/
+			/** 边框 **/
 		case 'border':
 			// left位置
 			if (right !== undefined) {
@@ -163,34 +164,54 @@ async function drawCanvas(myCanvas, canvasInfo, options, index, drawComplete) {
 	}
 }
 
-// 下载并保存
+// 下载并预览保存
 function savePoster(canvasId, callback) {
-	uni.showLoading({
-		title: '保存中…',
-		mask: true
-	})
+	uni.hideLoading();
 	uni.canvasToTempFilePath({
 			canvasId,
-			success(res) {
+			async success(res) {
 				callback && callback(res.tempFilePath)
-				uni.saveImageToPhotosAlbum({
-					filePath: res.tempFilePath,
-					success() {
-						uni.showToast({
-							icon: 'success',
-							title: '保存成功！'
-						})
-					},
-					fail() {
-						uni.showToast({
-							icon: 'none',
-							title: '保存失败，请稍后再试~'
-						})
-					},
-					complete() {
-						uni.hideLoading()
+				const strpreview = res.tempFilePath;
+				const arrpreview = [res.tempFilePath];
+				await uni.previewImage({
+					urls: arrpreview
+				});
+				uni.showModal({
+					title: '提示',
+					content: '是否保存到手机相册？',
+					success: function(res) {
+						if (res.confirm) {
+							uni.showLoading({
+								title: '保存中…',
+								mask: true
+							})
+							uni.saveImageToPhotosAlbum({
+								filePath: strpreview,
+								success() {
+									uni.showToast({
+										icon: 'success',
+										title: '保存成功！'
+									});
+								},
+								fail() {
+									uni.showToast({
+										icon: 'none',
+										title: '保存失败，请稍后再试~'
+									})
+								},
+								complete() {
+									uni.hideLoading()
+								}
+							})
+						} else if (res.cancel) {
+							return uni.showToast({
+								icon: 'none',
+								title: '已取消'
+							});
+						}
 					}
-				})
+				});
+
 			},
 			fail(res) {
 				console.log('图片保存失败：', res.errMsg)
@@ -204,8 +225,98 @@ function savePoster(canvasId, callback) {
 	)
 }
 
-// 绘制文字（带换行超出省略…功能）
+
+/**
+ * @description 绘制文本自动换行,兼容中英文数字
+ * @param obj = {
+ *   text:''//绘制文本
+ *   x,y, // 文本开始位置
+ *   fontSize,color,
+ *   bold:Boolen, //是否粗体
+ *   indent:Number, //首行缩进字数
+ *   maxWidth:Number,// 文本绘制范围
+ *   maxHeight:Number, // 文本绘制范围
+ *   lineHeight:Number, // 行高
+ *   vertical:'center'//全部文本在垂直方向居中方式，默认:'top'
+ * }
+ */
 function drawText(ctx, item) {
+	let {
+		content,
+		left,
+		top,
+		maxLine,
+		fontSize,
+		color,
+		bold,
+		indent,
+		maxWidth,
+		maxHeight,
+		lineHeight,
+		vertical
+	} = item
+	// 默认值
+	let x = left || 10
+	let y = top || 10
+	maxWidth = maxWidth || 340
+	maxHeight = maxHeight || 440
+	bold = bold || false
+	indent = indent || 0
+	lineHeight = lineHeight || 24
+	vertical = vertical || 'top'
+	ctx.save()
+	ctx.setTextAlign('left')
+	ctx.setTextBaseline('normal')
+	ctx.setFillStyle(color)
+	if (bold) {
+		ctx.font = 'normal bold ' + Math.round(fontSize) + 'px sans-serif'
+	} else {
+		ctx.setFontSize(fontSize)
+	}
+	let textArr = content.split('')
+	let rowArr = [] // 每行文本数组
+	let rowText = '' // 当前行文本
+	let rowWid = 0 // 当前行宽度
+	let lastText = content // 最后一行文本
+	for (let i = 0; i < textArr.length; i++) {
+		let oMaxWidth = maxWidth
+		if (rowArr.length === 0 && indent) {
+			oMaxWidth = maxWidth - indent * fontSize
+		}
+		rowText = rowText + textArr[i]
+		rowWid = parseInt(ctx.measureText(rowText + '').width)
+		if (rowWid >= oMaxWidth) {
+			rowArr.push(rowText)
+			lastText = lastText.substr(rowText.length)
+			// 重置参数
+			rowText = ''
+			rowWid = 0
+		}
+	}
+	if (lastText) rowArr.push(lastText)
+	let rows = rowArr.length // 行数
+	let bY = y
+	if (rowArr.length > maxLine) {
+		let rowCut = rowArr.slice(0, maxLine-1)
+		let group = [rowArr[maxLine]+'...'] //超出的用...表示
+		rowArr = [...rowCut,...group]
+	}
+	if (vertical === 'center' && maxHeight > rows * lineHeight) {
+		bY = y + Math.ceil((maxHeight - rows * lineHeight) / 2)
+	}
+	for (let i = 0; i < rowArr.length; i++) {
+		let cY = bY + i * lineHeight
+		if (i === 0 && indent) { // 首行缩进
+			ctx.fillText(rowArr[i], x + indent * fontSize, cY)
+		} else {
+			ctx.fillText(rowArr[i], x, cY)
+		}
+	}
+	ctx.restore()
+}
+
+// 已废弃
+function drawText2(ctx, item) {
 	let {
 		content,
 		width,
@@ -231,7 +342,7 @@ function drawText(ctx, item) {
 		if (ctx.measureText(temp).width < width) {
 			temp += strArr[i]
 		} else {
-			i-- //这里添加了i-- 是为了防止字符丢失，效果图中有对比
+			i-- //这里添加了i-- 是为了防止字符丢失
 			row.push(temp)
 			temp = ''
 		}

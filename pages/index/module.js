@@ -2,6 +2,8 @@ import {
   data
 } from "./options.js"
 
+import {ref} from "vue"
+
 // import {
 //   reactive,
 // } from "vue"
