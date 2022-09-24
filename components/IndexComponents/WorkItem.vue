@@ -22,9 +22,9 @@
 							</view>
 							<view class="desc">{{ data.desc }}</view>
 							<MyDate :ddl="data.ddl"></MyDate>
-							<fui-animation :duration="280" :animationType="mode" :show="isDone"  class="images">
-								<img src="../../static/indexPage/done.png" alt="" class="image">
-							</fui-animation>`
+							<fui-animation :animationType="['zoom-out']" :show="isDone" :styles="{position: 'absoluted'}">
+								<img :src="image" class="image" />
+							</fui-animation>
 						</view>
 					</fui-col>
 				</fui-row>
@@ -37,8 +37,8 @@
 	import MyDate from "@/components/shared/MyDate/index.vue"
 	import MyBadge from "@/components/shared/MyBadge/index.vue"
 	import DropDownCom from "@/components/shared/DropDown/index.vue"
-	import mod from "./module.js"
 
+	import mod from "./module.js"
 	const {
 		router,
 		defineProps,
@@ -48,21 +48,14 @@
 		enumSlideBlockOptionsEnum,
 		checkSubscribe,
 		onHide,
-		onLoad
+		onLoad,
+		timeFormat
 	} = mod
 
 	const props = defineProps({
 		data: {
 			type: Object,
-			default: {
-				id: 1,
-				time: "2022-09-05 13:34",
-				title: "数据库概论-456班",
-				desc: "这是一段简短的描述，这是一段简短的描述",
-				tag: ["作业二"],
-				ddl: "2022-09-06 13:34",
-				grade: "danger"
-			}
+			default: {}
 		},
 		dropDownOptions: {
 			type: Array,
@@ -70,20 +63,36 @@
 		}
 	})
 
-	//自带分享功能
-	onLoad(() => {
-		wx.showShareMenu({
-			withShareTicket: true,
-			menus: ["shareAppMessage", "shareTimeline"],
-		})
-	})
+	// 图片切换 0: -> 未读未完成 1: -> 已读未完成 2: -> 已读已完成
+	const BASEPATH = "../../static/indexPage/";
+	const ICON_LIST = ["ddl.png", "done.png"];
 
-	const onshareAppMessage = (res) => {
-		if (res.from == "butten") {
-			console.log(res.target);
+	// 根据flag内容动态渲染是否已完成的图标
+	// 需要考虑的东西：-> 如果是ddl那么显示图标，否则即为未完成不显示，已完成是默认显示的
+
+	let image = ref();
+	// 处理image的图标
+	// 图片切换 0: -> 未读未完成 1: -> 已读未完成 2: -> 已读已完成 
+	function handleFlag() {
+		// 发布时间和ddl
+		const time = props.data.time;
+		const ddl = props.data.ddl;
+		const residue = ddl - time;
+		const advance = 8 * 60 * 60 * 1000;
+		// 如果是ddl且未完成的情况下 赋予ddl
+		// 如果是ddl但是已完成给予已完成
+
+		if (props.data.flag == 2) {
+			isDone.value = true;
+			return BASEPATH + ICON_LIST[1];
 		}
-		return {
-			title: "title"
+		if (residue <= advance) {
+			switch (props.data.flag) {
+				case 0:
+				case 1:
+					isDone.value = true;
+					return BASEPATH + ICON_LIST[0];
+			}
 		}
 	}
 
@@ -99,14 +108,6 @@
 		})
 	}
 
-
-	//已完成点击事件
-	//二次滑动已完成事件
-	let isDone = ref(false);
-	let isOpened = ref("none");
-	let startPosition = 0;
-	let endPosition = 0;
-	let changeStatus = false;
 	const clickSlide = (e) => {
 		const {
 			content
@@ -115,9 +116,18 @@
 			// console.log("点击了完成");
 			// TODO: 完成逻辑实现
 			isDone.value = true;
-
+			image.value = BASEPATH + ICON_LIST[1]
 		}
 	}
+
+
+	//已完成点击事件
+	//二次滑动已完成事件
+	let isDone = ref(false);
+	let isOpened = ref("none");
+	let startPosition = 0;
+	let endPosition = 0;
+	let changeStatus = false;
 	const changeSlide = (e) => {
 		isOpened.value = e;
 		// TODO: 完成逻辑实现
@@ -159,15 +169,11 @@
 	}
 
 	//已完成动画
-	const mode = ref(['zoom-out']);
+	// const mode = ref(['zoom-out']);
 	// const styles = ref({
 	// 	position: 'absolute',
 	// 	top: 10,
 	// });
-
-	const swipeChange = (e, index) => {
-		console.log('当前状态：' + e + '，下标：' + index)
-	}
 
 	// 控制三个点的开闭
 	let flag = ref(false);
@@ -179,6 +185,11 @@
 			flag.value = false
 		}
 	})
+
+	// 由于变量存在暂时性死区
+	// 所以声明提至最前方 -> image的赋值放在后面
+	// 或者用钩子函数
+	image.value = handleFlag()
 </script>
 
 <style lang="scss" scoped>
@@ -226,13 +237,13 @@
 
 			.image {
 				position: absolute;
-				// // top: 75px;
-				// // right: -10px;
-				top: 150rpx;
-				right: -20rpx;
-				width: 100px;
-				height: 100px;
-
+				bottom: -50rpx;
+				right: 30rpx;
+				width: 200rpx;
+				height: 200rpx;
+				// top: 150rpx;
+				// right: -20rpx;
+				transform: translate(40%, 40%);
 			}
 
 		}

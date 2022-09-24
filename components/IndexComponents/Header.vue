@@ -7,7 +7,7 @@
       </form>
     </view>
     <uni-notice-bar class="header-wrapper-notice" backgroundColor="transparent" show-close show-icon scrollable
-      speed="50" text="科技创新魔法协会, 科技创新魔法协会, 科技创新魔法协会!!!" />
+      :speed="50" text="科技创新魔法协会, 科技创新魔法协会, 科技创新魔法协会!!!" />
   </view>
 </template>
 

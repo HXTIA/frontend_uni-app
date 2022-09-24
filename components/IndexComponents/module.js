@@ -9,10 +9,6 @@ import {
   enumSlideBlockOptionsEnum
 } from "@/data/options.js"
 
-// import {
-//   templateId
-// } from "@/data/publicOptions.js"
-
 import {
   checkSubscribe
 } from "@/utils/shared/checkLogin.js"
@@ -26,6 +22,10 @@ import {
   dropDownOptions
 } from "@/pages/Index/options.js"
 
+import {
+  timeFormat
+} from "@/utils/format/time.js"
+
 export default {
   router,
   defineProps,
@@ -33,9 +33,9 @@ export default {
   provide,
   todoSlideBlockRightOptions,
   enumSlideBlockOptionsEnum,
-  // templateId,
   checkSubscribe,
   dropDownOptions,
   onHide,
-  onLoad
+  onLoad,
+  timeFormat
 }

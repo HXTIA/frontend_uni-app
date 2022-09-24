@@ -7,6 +7,10 @@ import {
   templateId
 } from "@/data/publicOptions.js"
 
+import {
+  uni
+} from "@/utils/shared/createUniInstance.js"
+
 // 处理订阅作业函数
 const handleSubscribeMessage = (flag) => {
   return new Promise((reslove) => {
@@ -41,7 +45,7 @@ const handleSubscribeMessage = (flag) => {
 }
 
 
-// 导出数据
+// 导出功能数据
 export const returnData = (instance) => {
   let uni = instance;
   return [{
@@ -50,3 +54,8 @@ export const returnData = (instance) => {
     isChecked: getStorage(uni, "SubscribeMessage") || false
   }]
 }
+
+// 导出提示数据
+export const tipOptions = ["这是第一段", "这是第二段", "这是第三段"];
+
+export const isShowTips = getStorage(uni, "isSettingTip") || false;

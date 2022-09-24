@@ -1,32 +1,32 @@
 import {
-  data
-} from "./options.js"
+  reactive,
+} from "vue"
 
 import {ref} from "vue"
 
-// import {
-//   reactive,
-// } from "vue"
-
-// import {
-//   onLoad
-// } from "@dcloudio/uni-app"
-
-// import {
-//   http
-// } from "@/request/http.js"
-
 import userStore from "@/stores/users/index.js"
+
+import {
+  requestData
+} from "./api/index.js"
 
 import {
   dropDownOptions
 } from "./options.js"
 
+import {
+  onLoad
+} from "@dcloudio/uni-app"
+
+import {
+  getStorage
+} from "@/utils/shared/handleStatus.js"
+
 export default {
-  data,
-  // reactive,
-  // onLoad,
-  userStore,
-  // http,
+  reactive,
   dropDownOptions,
+  requestData,
+  onLoad,
+  getStorage,
+  ref
 }

@@ -4,22 +4,46 @@
       <IndexHeaderCom></IndexHeaderCom>
     </view>
     <view class="indexPage-wrapper-scroller">
+      <!-- 主体 -->
       <IndexWorkItemCom v-for="(item,index) in data" :key="index" :data="item" :dropDownOptions="dropDownOptions">
       </IndexWorkItemCom>
+      <!-- 缺省页 -->
+      <fui-empty isFixed src="/static/indexPage/empty.png" title="资源请求中..." descr="请耐心等待" v-if="!data.length">
+      </fui-empty>
     </view>
-    <fui-divider text="没有更多了" backgroundColor="#e0e0e0" color="#000000" height="50"></fui-divider>
+    <!-- 没有更多了 -->
+    <!-- <fui-divider text="没有更多了" backgroundColor="#e0e0e0" color="#000000" height="50"></fui-divider> -->
   </view>
 </template>
 
 <script setup>
   import IndexHeaderCom from "@/components/IndexComponents/Header.vue"
   import IndexWorkItemCom from "@/components/IndexComponents/WorkItem.vue"
-  import mod from "./module.js"
 
+  import mod from "./module.js"
   const {
-    data,
     dropDownOptions,
+    reactive,
+    requestData,
+    onLoad,
+    getStorage
   } = mod
+
+  let data = reactive([]);
+  onLoad(async (ops) => {
+    // 做法： 不合理: 还未登录 -> 那么没有token -> 请求一定失败 
+    // 如果是onLoad那么一定会只加载一次 -> 解决方法： 登陆后重定向到首页
+    const isGuide = getStorage(uni, "isGuide") || false;
+    const token = getStorage(uni, "token") || undefined;
+    if (!isGuide && token) {
+      uni.navigateTo({
+        url: "/pages/Guide/index"
+      })
+    }
+
+    const res = await requestData(uni);
+    data.push(...res);
+  })
 </script>
 
 <style lang="scss" scoped>
@@ -28,23 +52,6 @@
     height: auto;
     background-color: #e0e0e0;
 
-
-    //   <<<<<<< HEAD &-header {
-    //     position: fixed;
-    //     top: 0;
-    //     width: 100vw;
-    //     height: 70rpx;
-    //     z-index: 10000;
-    //   }
-
-    //   &-scroller {
-    //     display: flex;
-    //     flex-direction: column;
-    //     margin-top: 90rpx;
-    //   }
-    // }
-
-    // =======
     &-header {
       position: fixed;
       z-index: 1000;
@@ -56,7 +63,6 @@
       padding-top: 90rpx;
       display: flex;
       flex-direction: column;
-      // align-items: center;
     }
   }
 </style>

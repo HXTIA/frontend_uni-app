@@ -1,11 +1,15 @@
 <template>
   <view class="morePages-wrapper">
+    <!-- 引导 -->
+    <PopupCom v-for="(item,index) in tipOptions.reverse()" :key="item" flag="isSettingTip" :content="item"
+      v-if="!isShowTips"></PopupCom>
     <moreItemComponent v-for="(item,index) in data" :key="index" :data="item"></moreItemComponent>
   </view>
 </template>
 
 <script setup>
   import moreItemComponent from "@/components/MoreComponents/index.vue"
+  import PopupCom from "@/components/shared/Popup/index.vue"
 
   import {
     onShow
@@ -13,6 +17,8 @@
 
   import {
     returnData,
+    tipOptions,
+    isShowTips
   } from "./options/index.js"
 
   let data = returnData(uni);
@@ -31,6 +37,5 @@
     height: 100vh;
     padding: 20rpx;
     // align-items: center;
-
   }
 </style>

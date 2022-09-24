@@ -19,8 +19,7 @@
       </view>
     </view>
     <view class="suggestPages-wrapper-checkbox">
-      <!-- <fui-checkbox :value="isChecked"></fui-checkbox> -->
-      <fui-checkbox-group name="checkbox" v-model="isChecked">
+      <fui-checkbox-group>
         <view class="fui-list__item">
           <fui-label>
             <view class="fui-align__center">
@@ -38,7 +37,7 @@
 </template>
 
 <script setup>
-  import uploaderComponents from "@/components/shared/uploaderComponents/index.vue"
+  import uploaderComponents from "@/components/shared/Uploader/index.vue"
   import mod from "./module.js"
   const {
     submitMsg,
@@ -48,8 +47,9 @@
     preloadImageList
   } = mod;
 
+  // 引入图片
   let bgImage = reactive({
-    backgroundImage: "url('../../static/SUGGEST_BGIMAGE.webp')"
+    backgroundImage: `url(${preloadImageList.get("SUGGEST_BGIMAGE")})`
   })
 
   // 提交输入的内容
@@ -91,7 +91,6 @@
     padding: 20rpx;
     width: 100vw;
     height: 100vh;
-    // background: url("http://tmp/rpg8143XShiNb1b578459384d8c4fa5dc7fc2b9ff983.jpeg") no-repeat;
     background-size: cover;
 
     &-mainArea {

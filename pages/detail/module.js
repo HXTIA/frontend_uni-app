@@ -12,10 +12,18 @@ import {
   requestData
 } from "./api/index.js"
 
+import {
+  timeFormat
+} from "@/utils/format/time.js"
+
+import Controller from "./Controller/index.js"
+
 export default {
   onLoad,
   reactive,
   defineProps,
   requestData,
-  ref
+  ref,
+  Controller,
+  timeFormat
 }
