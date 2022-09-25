@@ -4,16 +4,26 @@ import {
 
 import {
   reactive,
-  defineProps
+  defineProps,
+  ref
 } from "vue"
 
 import {
   requestData
 } from "./api/index.js"
 
+import {
+  timeFormat
+} from "@/utils/format/time.js"
+
+import Controller from "./Controller/index.js"
+
 export default {
   onLoad,
   reactive,
   defineProps,
-  requestData
+  requestData,
+  ref,
+  Controller,
+  timeFormat
 }

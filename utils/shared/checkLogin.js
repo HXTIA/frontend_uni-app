@@ -23,7 +23,7 @@ export const checkLogin = async (uni) => {
   const token = getStorage(uni, "token");
   if (!token) {
     console.log("还没登录");
-    return uni.navigateTo({
+    return uni.reLaunch({
       url: "/pages/login/index"
     })
   }

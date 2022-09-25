@@ -41,12 +41,27 @@ const handleSubscribeMessage = (flag) => {
 }
 
 
-// 导出数据
+// 导出功能数据
 export const returnData = (instance) => {
   let uni = instance;
   return [{
     title: "订阅作业提醒",
     handleFunction: handleSubscribeMessage,
-    isChecked: getStorage(uni, "SubscribeMessage") || false
+    isChecked: getStorage(uni, "SubscribeMessage") || false,
+    canCancel: false
   }]
 }
+
+// 导出提示数据
+// export const tipOptions = ["这是第一段", "这是第二段", "这是第三段"];
+
+export const tipOptions = [{
+    content: "Tips: 勾选不再询问并允许，就能收到推送啦！",
+    img: "../../../static/moreTips/subMessage.jpg"
+  },
+  {
+    content: "Tips: 收到推送啦！",
+  }
+]
+
+export const isShowTips = (uni) => getStorage(uni, "isSettingTip") || false;

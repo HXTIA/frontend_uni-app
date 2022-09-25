@@ -17,7 +17,6 @@
 
 <script setup>
   import mySettingItem from "@/components/MyComponents/settingItem.vue"
-
   import mod from "./module.js"
   const {
     onShow,
@@ -37,11 +36,13 @@
     avatarUrl
   })
 
+
+
   let bgImage = reactive({
     // backgroundImage: `url(${preloadImageList.get("ABOUT_BGIMAGE")})`
     // TODO: 由于之后可能会有组织 -> 那么每个组织的背景旗会不一致 -> 组织的信息由后端返回
     // 组织的旗帜有可能会进行改变 -> 那么信息应该是动态变化的吧
-    backgroundImage: "url('../../static/HXLOGO.png')"
+    backgroundImage: `url("https://axure-file.lanhuapp.com/a165925e-434b-479f-a9b0-ed136649f420__6215a13351e11c7d65b4aad4e24a519b.png")`
   })
 
   const setCountMessage = () => {

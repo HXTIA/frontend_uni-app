@@ -3,8 +3,7 @@
     <view class="aboutPages-wrapper-header">
       关于我们
     </view>
-    <view class="aboutPages-wrapper-logo" :style="bgImage">
-    </view>
+    <image src="../../static/HXLOGO.png" mode="aspectFit"></image>
     <view class="aboutPages-wrapper-title">
       作业板
     </view>
@@ -35,10 +34,6 @@
   import {
     preloadImageList
   } from "@/utils/lazyLoad/index.js"
-
-  let bgImage = reactive({
-    backgroundImage: "url('../../static/HXTIA_logo.png')"
-  })
 </script>
 
 <style lang="scss" scoped>
@@ -55,15 +50,6 @@
       font-size: 40rpx;
       font-weight: 600;
       margin-bottom: 80rpx;
-    }
-
-    &-logo {
-      width: 80%;
-      height: 45%;
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: 100%;
-      margin-bottom: 30rpx;
     }
 
     &-title {

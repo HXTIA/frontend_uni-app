@@ -1,15 +1,21 @@
 <template>
   <view class="date">
     <view class="date-icon t-icon t-icon-dingshi"></view>
-    <view class="data-ddl">截止日期:{{ ddl }}</view>
+    <view class="data-ddl">截止日期:{{ timeFormat(ddl) }}</view>
   </view>
 </template>
 
 <script setup>
+  import {
+    defineProps
+  } from "vue"
+  import {
+    timeFormat
+  } from "@/utils/format/time.js"
   const props = defineProps({
     ddl: {
-      type: String,
-      default: "无"
+      type: Number,
+      default: 1
     }
   })
 </script>

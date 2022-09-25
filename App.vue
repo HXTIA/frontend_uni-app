@@ -11,6 +11,10 @@
     lazyLoadImgs
   } from "@/utils/lazyLoad/index.js"
 
+  import {
+    timeFormat
+  } from "./utils/format/time.js"
+
   export default {
     onLaunch: function() {
       // 在这里检测是否登录
@@ -19,6 +23,21 @@
 
       // 预加载图片
       lazyLoadImgs(uni);
+
+      // 分享
+      uni.showShareMenu({
+        withShareTicket: true,
+        menus: ["shareAppMessage", "shareTimeline"],
+      })
+
+      const onshareAppMessage = (res) => {
+        if (res.from == "butten") {
+          console.log(res.target);
+        }
+        return {
+          title: "title"
+        }
+      }
     },
     onShow: function() {},
     onHide: function() {}

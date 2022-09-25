@@ -1,5 +1,12 @@
 {
   "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    // {
+    //   "path": "pages/detail/index",
+    //   "style": {
+    //     "navigationBarTitleText": "详细",
+    //     "navigationStyle": "default"
+    //   }
+    // },
     {
       "path": "pages/Index/index",
       "style": {
@@ -59,7 +66,6 @@
     {
       "path": "pages/About/index",
       "style": {
-        // "navigationBarTitleText": "关于我们",
         "navigationBarTitleText": "",
         "navigationStyle": "default"
       }
@@ -67,6 +73,13 @@
     {
       "path": "pages/Count/index",
       "style": {
+        "navigationStyle": "default"
+      }
+    },
+    {
+      "path": "pages/Guide/index",
+      "style": {
+        "navigationBarTitleText": "",
         "navigationStyle": "default"
       }
     }
@@ -77,19 +90,7 @@
         "pagePath": "pages/Index/index",
         "iconPath": "static/bottom/homepage-no.png",
         "selectedIconPath": "static/bottom/homepage.png"
-        // "iconfont": {
-        // 	"text": "\ue641",
-        // 	"selectedText": "\ue644",
-        // 	"fontSize": "30px",
-        // 	"color": "blue"
-        // }
       },
-      // {
-      //   "text": "代办",
-      //   "pagePath": "pages/Todo/index",
-      //   "iconPath": "static/bottom/my-no.png",
-      //   "selectedIconPath": "static/bottom/my.png"
-      // },
       {
         "text": "我的",
         "pagePath": "pages/my/index",
