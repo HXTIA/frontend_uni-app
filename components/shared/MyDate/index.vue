@@ -53,10 +53,10 @@
 		@mixin sparkles($k) {
 			$shadow-list: ();
 			$n-groups: 9;
-			$group-base-angle: 360deg/$n-groups;
+			$group-base-angle: 40deg;
 			$group-distr-r: (1 + $k*.25)*$bubble-r;
 			$n-sparkles: 2;
-			$sparkle-base-angle: 360deg/$n-sparkles;
+			$sparkle-base-angle: 180deg; 
 			$sparkle-off-angle: 60deg; // offset angle from radius
 			$spread-r: -$k*$sparkle-r;
 
