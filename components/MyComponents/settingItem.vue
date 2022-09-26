@@ -31,7 +31,8 @@
 		<view class="settingItem-wrapper-main">
 			<span class="settingItem-wrapper-main-icon" :class="data.icon"></span>
 			<span class="settingItem-wrapper-main-title">{{ data.title }}</span>
-			<span class="settingItem-wrapper-main-rightPoint">></span>
+			<!-- <span class="settingItem-wrapper-main-rightPoint">></span> -->
+			<uni-icons type="forward" size="15" class="settingItem-wrapper-main-rightPoint"></uni-icons>
 		</view>
 	</view>
 </template>
@@ -49,16 +50,21 @@
 			align-items: center;
 
 			&-icon {
-				width: 50rpx;
-				height: 50rpx;
-				margin-right: 5px;
+				width: 60rpx;
+				height: 60rpx;
+				margin-right: 10px;
 			}
 
 			&-title {
-				font-size: 24px;
+				font-size: 35rpx;
+				font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+				color: #2d2d2d;
 			}
 
-			&-rightPoint {}
+			&-rightPoint {
+				position: relative;
+				left: 55%;
+			}
 		}
 	}
 

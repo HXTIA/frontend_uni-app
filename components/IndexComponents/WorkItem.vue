@@ -1,7 +1,7 @@
 <template>
   <uni-swipe-action>
     <uni-swipe-action-item :left-options="todoSlideBlockRightOptions" @click="clickSlide" @change="changeSlide"
-      :show="isOpened">
+      :show="isOpened" :disabled="isOK">
       <view class="workItem-wrapper" :class="[data.grade]" @touchstart="touchStart" @touchend="touchEnd">
         <fui-row margin-bottom="24rpx">
           <fui-col :span="1">
@@ -21,7 +21,7 @@
                 <h1>{{ data.title }}</h1>
               </view>
               <view class="desc">{{ data.desc }}</view>
-              <MyDate :ddl="data.ddl"></MyDate>
+              <MyDate :ddl="data.ddl" :isDone="isOK" ></MyDate>
               <fui-animation :animationType="['zoom-out']" :show="isDone" :styles="{position: 'absoluted'}">
                 <img :src="image" class="image" />
               </fui-animation>
@@ -73,7 +73,7 @@
     setTimeout(() => {
       image.value = handleFlag();
       isDone.value = true;
-    }, 500)
+    }, 300)
   })
 
   // 图片切换 0: -> 未读未完成 1: -> 已读未完成 2: -> 已读已完成
@@ -94,6 +94,7 @@
     // 如果是ddl但是已完成给予已完成
     if (props.data.flag == 2) {
       isDone.value = true;
+	  isOK.value = true;
       return BASEPATH + ICON_LIST[1];
     }
     if (residue <= advance) {
@@ -101,6 +102,7 @@
         case 0:
         case 1:
           isDone.value = true;
+		  isOK.value = false;
           return BASEPATH + ICON_LIST[0];
       }
     }
@@ -130,14 +132,16 @@
         image.value = BASEPATH + ICON_LIST[1];
         props.data.flag = 2;
         isDone.value = true;
-      }, 500)
+		isOK.value = true;
+      }, 0)
     }
   }
 
   //已完成点击事件
   //二次滑动已完成事件
-  let isDone = ref(false);
-  let isOpened = ref("none");
+  let isOK = ref(false);//是否已完成
+  let isDone = ref(false);//是否显示印章
+  let isOpened = ref("none");//滑动动画
   let startPosition = 0;
   let endPosition = 0;
   let changeStatus = false;
