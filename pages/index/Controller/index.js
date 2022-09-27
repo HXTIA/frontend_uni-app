@@ -11,23 +11,19 @@ const Controller = {};
 Controller.handleSticky = (id) => {
   // TODO: params -> 该作业编号
   // 如何操作请求来的数据
-
-  // Controller.handleSharePhoto = (id) => {
-  //   // TODO: params -> 该作业编号
-  //   // 进行作业的分享图处理
-  //   // 如何处理 -> 跳转详情 
-  //   // -> bitMap -> 绘图 -> saveFile
-  //   console.log('查看详情', id)
-  //   router(uni, {
-  //     url: "detail",
-  //     params: {
-  //       id
-  //     }
-  //   })
-
   // 置顶如何实现 -> 依靠后端 -> 向后端发送请求传递id
-  // store.getData[0].
 
+  // 界面载入置顶
+  store.getData.map((value, i) => {
+    if (value.id === id) {
+      // 同步当前index
+      store.setId(id);
+      const res = store.data.splice(i, 1);
+      store.data.unshift(...res);
+      value.isTips = true;
+      return;
+    }
+  })
 }
 
 // Controller.handleDetail = (id) => {
@@ -47,7 +43,9 @@ Controller.handleCancelDone = (id) => {
   // 要向后端发送请求 -> 同时将pinia的数据进行修改
   store.getData.map((value) => {
     // 对应的数据
+    console.log(id);
     if (value.id === id && value.flag === 2) {
+      console.log(id, value.id);
       const time = value.time;
       const ddl = value.ddl;
       const residue = ddl - time;

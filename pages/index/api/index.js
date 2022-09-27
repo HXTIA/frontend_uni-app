@@ -29,10 +29,14 @@ export const requestData = async (uni) => {
     return [];
   }
 
+  // 发起请求
   const res = await new Promise((reslove) => {
     setTimeout(() => {
       reslove(data)
     }, 2000)
   })
-  return store.setData(res);
+
+  // 存储状态
+  store.setData(res);
+  return store.getData
 }

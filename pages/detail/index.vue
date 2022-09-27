@@ -3,7 +3,7 @@
   import MyDate from "@/components/shared/MyDate/index.vue"
   import MyTag from "@/components/shared/MyTag/index.vue"
   import MyCanvas from "@/components/shared/SharePoster/index.vue"
-
+  import MyCard from "@/components/shared/MyCard/index.vue"
   const {
     onLoad,
     reactive,
@@ -13,6 +13,7 @@
     timeFormat,
     ref
   } = mod
+
   // 预览图片
   const previewImg = (url) => {
     uni.previewImage({
@@ -21,6 +22,8 @@
   }
 
   let data = reactive({})
+  //一张或没有图片时展示卡片
+  let showCard = ref(false);
   onLoad(async (options) => {
     const {
       id,
@@ -33,8 +36,14 @@
     }
     const res = await requestData(uni, {}, true);
     Object.assign(data, res);
-    console.log(data);
+
+    if (data.urls.length < 2) {
+      showCard.value = true;
+    } else {
+      showCard.value = false;
+    }
   })
+
 
 
   const myCanvasRef = ref();
@@ -130,14 +139,15 @@
     <header class="detail-wrapper-title">
       {{ data.title }}
     </header>
-    <main class="detail-wrapper-desc">
+    <main v-if="!showCard" class="detail-wrapper-desc">
       {{ data.desc }}
     </main>
-    <view class="detail-wrapper-urls">
+    <view v-if="!showCard" class="detail-wrapper-urls">
       <view v-for="(item,index) in data.urls" :key="index" class="detail-wrapper-urls-item">
         <image :src="item" @click="previewImg(item)" mode="widthFix"></image>
       </view>
     </view>
+    <MyCard v-if="showCard" :content="data.desc" :url="data.urls[0]"> </MyCard>
     <view class="detail-wrapper-tag">
       <MyTag v-for="item in data.tag" :key="item" :title="item"></MyTag>
     </view>

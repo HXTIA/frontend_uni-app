@@ -1,6 +1,5 @@
 import App from './App'
 import stores from "./stores"
-import plugin from "@/plugin/index.js"
 import "./uni.scss"
 
 // #ifndef VUE3
@@ -21,7 +20,6 @@ import {
 export function createApp() {
   const app = createSSRApp(App)
   app.use(stores);
-  plugin(app, {});
   return {
     app
   }
