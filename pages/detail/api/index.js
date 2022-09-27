@@ -19,7 +19,7 @@ export const requestData = async (uni, options, flag) => {
   return await new Promise((reslove) => {
     setTimeout(() => {
       reslove(data)
-    }, 3000)
+    }, 0)
   })
   // return await http(uni, options, flag)
 }

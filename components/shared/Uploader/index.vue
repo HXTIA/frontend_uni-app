@@ -9,6 +9,7 @@
     <view class="uploader-wrapper-urls">
       <view class="uploader-wrapper-urls-item" v-for="(item,index) in urls" :key="index">
         <img :src="item" alt="">
+        <view @click="deletePhoto(item)">X</view>
       </view>
     </view>
   </view>
@@ -42,13 +43,19 @@
       success(ops) {
         const paths = ops.tempFilePaths;
         urls.length + paths.length <= 3 ? urls.push(...paths) : "";
-        emits("upload-image", paths)
+        emits("upload-image", urls)
       },
       fail(res) {
         // 取消上传
         console.log(res);
       }
     })
+  }
+
+  const deletePhoto = (url) => {
+    const index = urls.findIndex((value) => value === url);
+    urls.splice(index, 1);
+    emits("upload-image", urls);
   }
 </script>
 
@@ -75,12 +82,20 @@
       margin: 10rpx;
 
       &-item {
+        position: relative;
         width: 23%;
 
         image {
           width: 100%;
           height: 120rpx;
         }
+
+        view {
+          position: absolute;
+          top: 0;
+          right: 0;
+        }
+
       }
     }
 

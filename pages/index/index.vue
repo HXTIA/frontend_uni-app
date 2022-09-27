@@ -65,7 +65,12 @@
   })
 
   watchStore(store, "flag", () => {
-    data.splice(0, data.length, ...store.getData);
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].id === store.id) {
+        const target = store.getData.find((value) => value.id === store.id);
+        data.splice(i, 1, target);
+      }
+    }
   })
 </script>
 

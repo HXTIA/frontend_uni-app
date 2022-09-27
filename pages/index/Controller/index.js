@@ -53,6 +53,8 @@ Controller.handleCancelDone = (id) => {
       const residue = ddl - time;
       const advance = 8 * 60 * 60 * 1000;
 
+      // 记录当前操作的id
+      store.setId(id);
       if (residue <= advance) {
         // ddl -> 已读未完成 但是为ddl
         value.flag = 1;

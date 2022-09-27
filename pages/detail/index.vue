@@ -123,33 +123,33 @@
       v-if="!Object.keys(data).length">
     </fui-empty>
     <!-- 内容主体 -->
-    <fui-animation :duration="500" :animationType="['fade']" :show="Boolean(Object.keys(data).length)">
-      <view class="detail-wrapper-lining">
-        <view class="detail-wrapper-lining-time">
-          发布于: {{ timeFormat(data.time) }}
-        </view>
-        <header class="detail-wrapper-lining-title">
-          {{ data.title }}
-        </header>
-        <main class="detail-wrapper-lining-desc">
-          {{ data.desc }}
-        </main>
-        <view class="detail-wrapper-lining-urls">
-          <view v-for="(item,index) in data.urls" :key="index" class="detail-wrapper-lining-urls-item">
-            <image :src="item" @click="previewImg(item)" mode="widthFix"></image>
-          </view>
-        </view>
-        <view class="detail-wrapper-lining-tag">
-          <MyTag v-for="item in data.tag" :key="item" :title="item"></MyTag>
-        </view>
-        <MyDate :ddl="data.ddl"></MyDate>
-        <MyCanvas ref="myCanvasRef" :width="470" :height="690" />
-        <fui-button height="66rpx" radius="96rpx" type="purple" :margin="['20rpx','0rpx','0rpx','0rpx']"
-          @click="createPoster">生成海报</fui-button>
-        <fui-button openType="share" height="66rpx" radius="96rpx" type="purple"
-          :margin="['20rpx','0rpx','0rpx','0rpx']">分享给好友</fui-button>
+    <!-- <fui-animation :duration="500" :animationType="['fade']" :show="Boolean(Object.keys(data).length)"> -->
+    <view class="detail-wrapper-time">
+      发布于: {{ timeFormat(data.time) }}
+    </view>
+    <header class="detail-wrapper-title">
+      {{ data.title }}
+    </header>
+    <main class="detail-wrapper-desc">
+      {{ data.desc }}
+    </main>
+    <view class="detail-wrapper-urls">
+      <view v-for="(item,index) in data.urls" :key="index" class="detail-wrapper-urls-item">
+        <image :src="item" @click="previewImg(item)" mode="widthFix"></image>
       </view>
-    </fui-animation>
+    </view>
+    <view class="detail-wrapper-tag">
+      <MyTag v-for="item in data.tag" :key="item" :title="item"></MyTag>
+    </view>
+    <MyDate :ddl="data.ddl"></MyDate>
+    <MyCanvas ref="myCanvasRef" :width="470" :height="690" />
+    <fui-button height="66rpx" radius="96rpx" type="purple" :margin="['20rpx','0rpx','0rpx','0rpx']"
+      @click="createPoster">生成海报
+    </fui-button>
+    <fui-button openType="share" height="66rpx" radius="96rpx" type="purple" :margin="['20rpx','0rpx','0rpx','0rpx']">
+      分享给好友
+    </fui-button>
+    <!-- </fui-animation> -->
   </view>
 </template>
 
@@ -161,71 +161,66 @@
     width: 100vw;
     height: auto;
     min-height: 100vh;
-    padding: 40rpx 0;
+    padding: 20rpx;
     background-color: #f0f0f0;
 
-    &-lining {
-      width: 90%;
-      margin: 0 auto;
+    &-time {
+      font-size: 28rpx;
+      color: #938e8e;
+    }
 
-      &-time {
-        font-size: 28rpx;
-        color: #938e8e;
-      }
+    &-title {
+      font-size: 50rpx;
+      font-weight: 700;
+      margin-top: 10rpx;
+    }
 
-      &-title {
-        font-size: 50rpx;
-        font-weight: 700;
-        margin-top: 10rpx;
-      }
+    &-desc {
+      width: 95%;
+      margin-top: 10rpx;
 
-      &-desc {
-        width: 95%;
-        margin-top: 10rpx;
+      font-size: 30rpx;
+      line-height: 36rpx;
+    }
 
-        font-size: 30rpx;
-        line-height: 36rpx;
-      }
+    &-urls {
+      display: flex;
+      justify-content: space-between;
+      flex-flow: wrap;
+      align-items: center;
+      width: 100%;
+      margin-top: 10px;
 
-      &-urls {
-        display: flex;
-        justify-content: space-between;
-        flex-flow: wrap;
-        align-items: center;
-        width: 100%;
-        margin-top: 10px;
+      &-item {
+        width: 30%;
 
-        &-item {
-          width: 30%;
-
-          image {
-            width: 100%;
-            height: 100px;
-            border-radius: 10rpx;
-          }
+        image {
+          width: 100%;
+          height: 100px;
+          border-radius: 10rpx;
         }
       }
+    }
 
-      image {
-        width: 100%;
-        // height: 100px;
-        border-radius: 10rpx;
-      }
+    image {
+      width: 100%;
+      // height: 100px;
+      border-radius: 10rpx;
+    }
 
-      &-tag {
-        display: flex;
-        align-items: center;
-        flex-flow: wrap;
-      }
+    &-tag {
+      display: flex;
+      align-items: center;
+      flex-flow: wrap;
+    }
 
-      &-ddl {
-        margin: 20rpx;
-      }
+    &-ddl {
+      margin: 20rpx;
+    }
 
-      &-btns {
-        display: flex;
-        justify-content: space-around;
-      }
+    &-btns {
+      display: flex;
+      justify-content: space-around;
     }
 
   }

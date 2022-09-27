@@ -1,7 +1,8 @@
 export default {
   state() {
     return {
-      data: []
+      data: [],
+      id: 0
     }
   },
   getters: {

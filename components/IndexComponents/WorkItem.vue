@@ -130,7 +130,7 @@
         image.value = BASEPATH + ICON_LIST[1];
         props.data.flag = 2;
         isDone.value = true;
-      }, 500)
+      }, 0)
     }
   }
 
