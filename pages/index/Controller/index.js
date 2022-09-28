@@ -16,11 +16,35 @@ Controller.handleSticky = (id) => {
   // 界面载入置顶
   store.getData.map((value, i) => {
     if (value.id === id) {
+      // 考虑同时具有取消置顶 -> 那么不能写死，根据传入的id进行判断当前的数据是否为已置顶
+      if (value.isTips) {
+        // 已置顶 -> 取消置顶
+        // 取消置顶需要对其进行时间进行排序 -> 不能切换所有的时间顺序
 
-      const res = store.data.splice(i, 1);
-      store.data.unshift(...res);
-      value.isTips = true;
-      return;
+        // 取消置顶
+        value.isTips = false;
+
+        // const target = store.getData.splice(i, 1);
+
+        // store.setData(target);
+
+        // 筛选出所有未置顶的元素 -> 对他们进行排序
+        // const res = store.getData.filter((value) => !value.isTips)
+
+        // res.sort((a, b) => a - b);
+
+        // 找出未排序第一个元素在原数据中的位置 -> 替换数据时候依靠此进行排序
+        // const index = store.getData.findIndex((value) => value.id === res[0].id);
+
+
+
+      } else {
+        // 未置顶 -> 前往置顶
+        const res = store.data.splice(i, 1);
+        store.data.unshift(...res);
+        value.isTips = true;
+        return;
+      }
     }
   })
 }

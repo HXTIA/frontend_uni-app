@@ -29,12 +29,6 @@ export const requestData = async (uni) => {
     return [];
   }
 
-  // 发起请求
-  // const res = await new Promise((reslove) => {
-  //   setTimeout(() => {
-  //     reslove(data)
-  //   }, 2000)
-  // })
   const res = await http(uni, {
     method: "GET",
     url: "http://127.0.0.1:3000/api/data"

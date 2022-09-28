@@ -9,7 +9,7 @@
           </fui-col>
           <fui-col :span="23">
             <view class="workItem-wrapper-top">
-              <MyBadge v-for="item in data.tag" :key="item" :txt="item" isread="true"></MyBadge>
+              <MyBadge v-for="item in data.tag" :key="item" :txt="item" :isread="Boolean(data.flag)"></MyBadge>
               <view class="workItem-wrapper-top-dropdown">
                 <DropDownCom :data="dropDownOptions" :id="data.id">
                   <fui-icon name="more-fill" class="workItem-wrapper-top-icon"></fui-icon>
@@ -66,14 +66,23 @@
     }
   })
 
+  let option = props.dropDownOptions.map((value) => Object.assign({}, value))
+
   // 未完成不应该有取消已完成的功能 -> 计算属性处理
   let dropDownOptions = computed(() => {
     // 根据副作用 -> 每次依赖的数据flag变化会自动更新(图标)
     image.value = handleFlag();
+    let res = option.filter((value) => value)
+
+    // 切换图标
     if (props.data.flag !== 2) {
-      return props.dropDownOptions.filter((value) => value.index !== 1)
+      // 如果状态不是完成那么不应该存在取消已完成功能
+      res = option.filter((value) => value.index !== 1)
     }
-    return props.dropDownOptions
+    // 切换文字
+    res[0].title = props.data.isTips ? '取消已置顶' : '置顶'
+
+    return res;
   })
 
   // 图片切换 0: -> 未读未完成 1: -> 已读未完成 2: -> 已读已完成

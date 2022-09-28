@@ -132,34 +132,35 @@
       v-if="!Object.keys(data).length">
     </fui-empty>
     <!-- 内容主体 -->
-    <fui-animation class="detail-wrapper-animation" :duration="0" :animationType="['fade']"
-      :show="Boolean(Object.keys(data).length)">
-      <view class="detail-wrapper-time">
-        发布于: {{ timeFormat(data.time) }}
-      </view>
-      <header class="detail-wrapper-title">
-        {{ data.title }}
-      </header>
-      <main v-if="!showCard" class="detail-wrapper-desc">
-        {{ data.desc }}
-      </main>
-      <view class="detail-wrapper-urls">
-        <view v-for="(item,index) in data.urls" :key="index" class="detail-wrapper-urls-item">
-          <image :src="item" @click="previewImg(item)" mode="widthFix"></image>
+    <fui-animation :duration="0" :animationType="['zoom-in']" :show="Boolean(Object.keys(data).length)">
+      <view class="detail-wrapper">
+        <view class="detail-wrapper-time">
+          发布于: {{ timeFormat(data.time) }}
+        </view>
+        <header class="detail-wrapper-title">
+          {{ data.title }}
+        </header>
+        <main class="detail-wrapper-desc">
+          {{ data.desc }}
+        </main>
+        <view class="detail-wrapper-urls">
+          <view v-for="(item,index) in data.urls" :key="index" class="detail-wrapper-urls-item">
+            <image :src="item" @click="previewImg(item)" mode="widthFix"></image>
+          </view>
+        </view>
+        <view class="detail-wrapper-tag">
+          <MyTag v-for="item in data.tag" :key="item" :title="item"></MyTag>
+        </view>
+        <MyDate :ddl="data.ddl"></MyDate>
+        <view class="detail-wrapper-btns">
+          <fui-button height="66rpx" radius="96rpx" type="purple" :margin="['20rpx','0rpx','0rpx','0rpx']"
+            @click="createPoster">生成海报
+          </fui-button>
+          <fui-button openType="share" height="66rpx" radius="96rpx" type="purple"
+            :margin="['20rpx','0rpx','0rpx','0rpx']">分享给好友
+          </fui-button>
         </view>
       </view>
-      <!-- <MyCard v-if="showCard" :content="data.desc" :url="data.urls[0]"> </MyCard> -->
-      <view class="detail-wrapper-tag">
-        <MyTag v-for="item in data.tag" :key="item" :title="item"></MyTag>
-      </view>
-      <MyDate :ddl="data.ddl"></MyDate>
-      <MyCanvas ref="myCanvasRef" :width="470" :height="690" />
-      <fui-button height="66rpx" radius="96rpx" type="purple" :margin="['20rpx','0rpx','0rpx','0rpx']"
-        @click="createPoster">生成海报
-      </fui-button>
-      <fui-button openType="share" height="66rpx" radius="96rpx" type="purple" :margin="['20rpx','0rpx','0rpx','0rpx']">
-        分享给好友
-      </fui-button>
     </fui-animation>
   </view>
 </template>
@@ -169,11 +170,13 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     width: 100vw;
     height: auto;
     min-height: 100vh;
     padding: 20rpx;
     background-color: #f0f0f0;
+
 
     &-time {
       font-size: 28rpx;
@@ -207,16 +210,10 @@
 
         image {
           width: 100%;
-          height: 100px;
+          // height: 100px;
           border-radius: 10rpx;
         }
       }
-    }
-
-    image {
-      width: 100%;
-      // height: 100px;
-      border-radius: 10rpx;
     }
 
     &-tag {
@@ -225,19 +222,10 @@
       flex-flow: wrap;
     }
 
-    &-ddl {
-      margin: 20rpx;
-    }
-
     &-btns {
       display: flex;
-      justify-content: space-around;
+      flex-direction: column;
+
     }
-
-  }
-
-  .detail-wrapper-animation {
-    display: flex;
-    flex-direction: column;
   }
 </style>
