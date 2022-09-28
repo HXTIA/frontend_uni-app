@@ -67,8 +67,10 @@
 
     &-item {
       position: absolute;
-      width: 100%;
-      padding: 20rpx 10rpx;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      // padding: 10rpx 5rpx;
       border-radius: 8rpx;
       right: 30px;
       top: 20rpx;

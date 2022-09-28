@@ -30,13 +30,19 @@ export const requestData = async (uni) => {
   }
 
   // 发起请求
-  const res = await new Promise((reslove) => {
-    setTimeout(() => {
-      reslove(data)
-    }, 2000)
-  })
+  // const res = await new Promise((reslove) => {
+  //   setTimeout(() => {
+  //     reslove(data)
+  //   }, 2000)
+  // })
+  const res = await http(uni, {
+    method: "GET",
+    url: "http://127.0.0.1:3000/api/data"
+  }, true);
+
+  if (!res.data.length) return []
 
   // 存储状态
-  store.setData(res);
+  store.setData(res.data);
   return store.getData
 }

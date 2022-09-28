@@ -37,24 +37,23 @@
   import MyDate from "@/components/shared/MyDate/index.vue"
   import MyBadge from "@/components/shared/MyBadge/index.vue"
   import DropDownCom from "@/components/shared/DropDown/index.vue"
-  import dataStore from "@/stores/data/index.js"
-  const store = dataStore();
   import mod from "./module.js"
-  import {
-    watch
-  } from "vue"
+
   const {
     router,
     defineProps,
     ref,
     provide,
+    computed,
     todoSlideBlockRightOptions,
     enumSlideBlockOptionsEnum,
     checkSubscribe,
     onHide,
     onLoad,
-    timeFormat
+    timeFormat,
+    dataStore
   } = mod
+  const store = dataStore();
 
   const props = defineProps({
     data: {
@@ -67,13 +66,14 @@
     }
   })
 
-  watch(props.data, () => {
-    isDone.value = false;
-    // 监听到数据变化 -> 定时器让动画显现: 缓兵之计
-    setTimeout(() => {
-      image.value = handleFlag();
-      isDone.value = true;
-    }, 500)
+  // 未完成不应该有取消已完成的功能 -> 计算属性处理
+  let dropDownOptions = computed(() => {
+    // 根据副作用 -> 每次依赖的数据flag变化会自动更新(图标)
+    image.value = handleFlag();
+    if (props.data.flag !== 2) {
+      return props.dropDownOptions.filter((value) => value.index !== 1)
+    }
+    return props.dropDownOptions
   })
 
   // 图片切换 0: -> 未读未完成 1: -> 已读未完成 2: -> 已读已完成
@@ -129,11 +129,10 @@
       isDone.value = false;
       // 定时器让动画显现: 缓兵之计
       setTimeout(() => {
-        image.value = BASEPATH + ICON_LIST[1];
         props.data.flag = 2;
         isDone.value = true;
         isOK.value = true;
-      }, 0)
+      }, 500)
     }
   }
 
@@ -181,16 +180,8 @@
       }
       return;
     }
-
-    // console.log("点击结束");
   }
 
-  //已完成动画
-  // const mode = ref(['zoom-out']);
-  // const styles = ref({
-  // 	position: 'absolute',
-  // 	top: 10,
-  // });
 
   // 控制三个点的开闭
   let flag = ref(false);
@@ -202,11 +193,6 @@
       flag.value = false
     }
   })
-
-  // 由于变量存在暂时性死区
-  // 所以声明提至最前方 -> image的赋值放在后面
-  // 或者用钩子函数
-  image.value = handleFlag()
 </script>
 
 <style lang="scss" scoped>

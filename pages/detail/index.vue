@@ -34,16 +34,16 @@
         delta: 1
       })
     }
-    const res = await requestData(uni, {}, true);
+
+    const res = await requestData(uni, id);
     Object.assign(data, res);
 
-    if (data.urls.length < 2) {
-      showCard.value = true;
-    } else {
-      showCard.value = false;
-    }
+    // if (data.urls.length < 2) {
+    //   showCard.value = true;
+    // } else {
+    //   showCard.value = false;
+    // }
   })
-
 
 
   const myCanvasRef = ref();
@@ -132,34 +132,35 @@
       v-if="!Object.keys(data).length">
     </fui-empty>
     <!-- 内容主体 -->
-    <!-- <fui-animation :duration="500" :animationType="['fade']" :show="Boolean(Object.keys(data).length)"> -->
-    <view class="detail-wrapper-time">
-      发布于: {{ timeFormat(data.time) }}
-    </view>
-    <header class="detail-wrapper-title">
-      {{ data.title }}
-    </header>
-    <main v-if="!showCard" class="detail-wrapper-desc">
-      {{ data.desc }}
-    </main>
-    <view v-if="!showCard" class="detail-wrapper-urls">
-      <view v-for="(item,index) in data.urls" :key="index" class="detail-wrapper-urls-item">
-        <image :src="item" @click="previewImg(item)" mode="widthFix"></image>
+    <fui-animation class="detail-wrapper-animation" :duration="0" :animationType="['fade']"
+      :show="Boolean(Object.keys(data).length)">
+      <view class="detail-wrapper-time">
+        发布于: {{ timeFormat(data.time) }}
       </view>
-    </view>
-    <MyCard v-if="showCard" :content="data.desc" :url="data.urls[0]"> </MyCard>
-    <view class="detail-wrapper-tag">
-      <MyTag v-for="item in data.tag" :key="item" :title="item"></MyTag>
-    </view>
-    <MyDate :ddl="data.ddl"></MyDate>
-    <MyCanvas ref="myCanvasRef" :width="470" :height="690" />
-    <fui-button height="66rpx" radius="96rpx" type="purple" :margin="['20rpx','0rpx','0rpx','0rpx']"
-      @click="createPoster">生成海报
-    </fui-button>
-    <fui-button openType="share" height="66rpx" radius="96rpx" type="purple" :margin="['20rpx','0rpx','0rpx','0rpx']">
-      分享给好友
-    </fui-button>
-    <!-- </fui-animation> -->
+      <header class="detail-wrapper-title">
+        {{ data.title }}
+      </header>
+      <main v-if="!showCard" class="detail-wrapper-desc">
+        {{ data.desc }}
+      </main>
+      <view class="detail-wrapper-urls">
+        <view v-for="(item,index) in data.urls" :key="index" class="detail-wrapper-urls-item">
+          <image :src="item" @click="previewImg(item)" mode="widthFix"></image>
+        </view>
+      </view>
+      <!-- <MyCard v-if="showCard" :content="data.desc" :url="data.urls[0]"> </MyCard> -->
+      <view class="detail-wrapper-tag">
+        <MyTag v-for="item in data.tag" :key="item" :title="item"></MyTag>
+      </view>
+      <MyDate :ddl="data.ddl"></MyDate>
+      <MyCanvas ref="myCanvasRef" :width="470" :height="690" />
+      <fui-button height="66rpx" radius="96rpx" type="purple" :margin="['20rpx','0rpx','0rpx','0rpx']"
+        @click="createPoster">生成海报
+      </fui-button>
+      <fui-button openType="share" height="66rpx" radius="96rpx" type="purple" :margin="['20rpx','0rpx','0rpx','0rpx']">
+        分享给好友
+      </fui-button>
+    </fui-animation>
   </view>
 </template>
 
@@ -233,5 +234,10 @@
       justify-content: space-around;
     }
 
+  }
+
+  .detail-wrapper-animation {
+    display: flex;
+    flex-direction: column;
   }
 </style>

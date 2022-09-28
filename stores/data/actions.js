@@ -1,10 +1,10 @@
 export default {
   actions: {
     setData(data) {
-      this.data.push(...data)
+      this.data.push(...data);
     },
-    setId(id) {
-      this.id = id;
+    clearData() {
+      this.data.splice(0, this.data.length);
     }
   }
 }

@@ -38,7 +38,7 @@ export const handleRequestRes = (uni, res) => {
   } = res;
 
   // 没权限，重定向至登陆页面
-  if (status !== enumCode.UNAUTHORIZED) {
+  if (status === enumCode.UNAUTHORIZED) {
     // redirectTo
     uni.navigateTo({
       url: "/pages/login/index"
