@@ -66,6 +66,7 @@
     }
   })
 
+  // 深拷贝处理props传值
   let option = props.dropDownOptions.map((value) => Object.assign({}, value))
 
   // 未完成不应该有取消已完成的功能 -> 计算属性处理
@@ -106,6 +107,8 @@
       isOK.value = true;
       return BASEPATH + ICON_LIST[1];
     }
+
+    // ddl赋给ddl
     if (residue <= advance) {
       switch (props.data.flag) {
         case 0:
@@ -114,6 +117,9 @@
           isOK.value = false;
           return BASEPATH + ICON_LIST[0];
       }
+    } else {
+      // 非ddl -> 就让可滑动就行
+      isOK.value = false;
     }
   }
 

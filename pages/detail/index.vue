@@ -152,6 +152,7 @@
           <MyTag v-for="item in data.tag" :key="item" :title="item"></MyTag>
         </view>
         <MyDate :ddl="data.ddl"></MyDate>
+        <MyCanvas ref="myCanvasRef" :width="470" :height="690" />
         <view class="detail-wrapper-btns">
           <fui-button height="66rpx" radius="96rpx" type="purple" :margin="['20rpx','0rpx','0rpx','0rpx']"
             @click="createPoster">生成海报

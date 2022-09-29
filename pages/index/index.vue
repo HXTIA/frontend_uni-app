@@ -39,6 +39,7 @@
     request: "request.png",
     empty: "empty.png"
   }
+
   let icon = reactive({
     icon: emptyIcon.request,
     title: "资源请求中...",

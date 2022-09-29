@@ -3,48 +3,76 @@ import {
   uni
 } from "@/utils/shared/createUniInstance.js"
 
+import {
+  createInstance
+} from "@/utils/shared/createUniInstance.js"
+
+import {
+  http
+} from "@/request/http.js"
+
 import dataStore from "@/stores/data/index.js"
 const store = dataStore();
 
 const Controller = {};
+
 // 处理置顶
 Controller.handleSticky = (id) => {
   // TODO: params -> 该作业编号
   // 如何操作请求来的数据
   // 置顶如何实现 -> 依靠后端 -> 向后端发送请求传递id
 
-  // 界面载入置顶
-  store.getData.map((value, i) => {
+  let isTips;
+  store.getData.map(async (value, i) => {
     if (value.id === id) {
+
       // 考虑同时具有取消置顶 -> 那么不能写死，根据传入的id进行判断当前的数据是否为已置顶
       if (value.isTips) {
         // 已置顶 -> 取消置顶
-        // 取消置顶需要对其进行时间进行排序 -> 不能切换所有的时间顺序
+        isTips = 0;
 
         // 取消置顶
         value.isTips = false;
 
-        // const target = store.getData.splice(i, 1);
+        // 从原数据中删除
+        store.getData.splice(i, 1);
 
-        // store.setData(target);
+        // 转换为异步
+        setTimeout(() => store.setData([value]), 0);
 
         // 筛选出所有未置顶的元素 -> 对他们进行排序
-        // const res = store.getData.filter((value) => !value.isTips)
+        // 此处有个疑问: 为什么同步的数据拿不到 -> 转换异步操作可以取到最新值
+        setTimeout(() => {
+          // 拿到除置顶外的所有数据
+          const res = store.getData.filter((value) => !value.isTips)
+          const index = store.getData.findIndex((value) => !value.isTips)
 
-        // res.sort((a, b) => a - b);
+          // 对剩余数组进行排序
+          res.sort((a, b) => a.time - b.time);
 
-        // 找出未排序第一个元素在原数据中的位置 -> 替换数据时候依靠此进行排序
-        // const index = store.getData.findIndex((value) => value.id === res[0].id);
-
-
+          // 待替换的数组的长度
+          const length = store.getData.length - index;
+          // 替换数组
+          store.getData.splice(index, length, ...res)
+        }, 0)
 
       } else {
         // 未置顶 -> 前往置顶
+        isTips = 1;
+
         const res = store.data.splice(i, 1);
         store.data.unshift(...res);
         value.isTips = true;
-        return;
       }
+      // 无论是置顶还是取消置顶，都是要发起请求
+      // try {
+      //   const res = await http(createInstance, {}, true);
+      //   return;
+      // } catch (e) {
+      //   //TODO handle the exception
+      //   console.log(e);
+      return
+      // }
     }
   })
 }
@@ -64,9 +92,11 @@ Controller.handleCancelDone = (id) => {
 
       if (residue <= advance) {
         // ddl -> 已读未完成 但是为ddl
-        value.flag = 1;
+        return value.flag = 1;
       }
-      return 0;
+
+      // 非ddl 默认返回1
+      return value.flag = 1;
     }
   })
 }

@@ -21,7 +21,7 @@
   const store = dataStore();
 
   // 先缓存下全部的信息
-  let cacheData;
+  let cacheData = [];
 
   // 搜索的字符串
   let str = ref('');
@@ -34,14 +34,13 @@
     }
   })
 
-  let count = 0
-  watch(store.getData, () => {
-    if (count++ < 1) {
-      cacheData = JSON.parse(JSON.stringify(store.getData));
+  const search = () => {
+    // 初次搜索的时候 -> 缓存所有数据
+    if (!cacheData.length) {
+      cacheData.push(...JSON.parse(JSON.stringify(store.getData)));
     }
-  })
 
-  const search = async () => {
+    // 正则匹配
     const reg = new RegExp(str.value);
     const filters = cacheData.filter((value) => reg.test(value.title));
     store.clearData();
