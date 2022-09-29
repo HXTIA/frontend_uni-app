@@ -38,7 +38,6 @@
   import MyBadge from "@/components/shared/MyBadge/index.vue"
   import DropDownCom from "@/components/shared/DropDown/index.vue"
   import mod from "./module.js"
-
   const {
     router,
     defineProps,
@@ -82,7 +81,6 @@
     }
     // 切换文字
     res[0].title = props.data.isTips ? '取消已置顶' : '置顶'
-
     return res;
   })
 
@@ -124,8 +122,6 @@
   }
 
   const detail = (id) => {
-    // 如果已经设置订阅就进行发起请求
-    checkSubscribe(uni)
     // 跳转路由
     router(uni, {
       url: "detail",
@@ -197,10 +193,9 @@
     }
   }
 
-
   // 控制三个点的开闭
   let flag = ref(false);
-  provide("flag", flag)
+  provide("flag", flag);
 
   // 处理三个点闭合的善后
   onHide(() => {
@@ -215,13 +210,10 @@
     position: relative;
     overflow: hidden;
     box-sizing: border-box;
-    // width: 95%;
     height: 300rpx;
-    // padding: 6px;
     border-radius: 0px 10px 10px 0px;
     background-color: whitesmoke;
     border-bottom: 2px dashed gainsboro;
-    // box-shadow:  6px 6px 12px 12px #1e1e1e;
     box-shadow: 0px 0px 15px #1e1e1e;
     margin: 0px 4px 0px 0px;
 
@@ -240,8 +232,6 @@
         font-weight: bold;
         margin: 8px 0px 5px 0px;
         overflow: hidden;
-        // text-overflow: ellipsis;
-        // white-space: nowrap;
       }
 
       .desc {
@@ -259,15 +249,7 @@
         right: 30rpx;
         width: 200rpx;
         height: 200rpx;
-        // top: 150rpx;
-        // right: -20rpx;
         transform: translate(40%, 40%);
-
-        // bottom: 0;
-        // right: 0;
-        // width: 100px;
-        // height: 100px;
-        // transform: translate(40%, 40%);
       }
 
     }

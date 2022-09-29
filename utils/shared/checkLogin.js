@@ -57,10 +57,5 @@ export const checkSubscribe = async (uni) => {
   } = await uni.getSetting({
     withSubscriptions: true
   })
-
-  // if (!subscriptionsSetting.mainSwitch) {
-  //   // 代表已经同意订阅
-  //   console.log("未授权");
-  // }
   console.log(subscriptionsSetting);
 }

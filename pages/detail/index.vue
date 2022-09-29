@@ -37,12 +37,6 @@
 
     const res = await requestData(uni, id);
     Object.assign(data, res);
-
-    // if (data.urls.length < 2) {
-    //   showCard.value = true;
-    // } else {
-    //   showCard.value = false;
-    // }
   })
 
 
