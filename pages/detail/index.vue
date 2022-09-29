@@ -37,15 +37,15 @@
 		const res = await requestData(uni, {}, true);
 		Object.assign(data, res);
 		console.log(data);
-		
-		if(data.urls.length<2){
+
+		if (data.urls.length < 2) {
 			showCard.value = true;
-		}else{
+		} else {
 			showCard.value = false;
 		}
-		
+
 	})
-	
+
 
 
 	const myCanvasRef = ref();
@@ -150,7 +150,7 @@
 						<image :src="item" @click="previewImg(item)" mode="widthFix"></image>
 					</view>
 				</view>
-				<MyCard v-if="showCard" :content="data.desc" :url="data.urls[0]" > </MyCard>
+				<MyCard v-if="showCard" :content="data.desc" :url="data.urls[0]"> </MyCard>
 				<view class="detail-wrapper-lining-tag">
 					<MyTag v-for="item in data.tag" :key="item" :title="item"></MyTag>
 				</view>
@@ -175,6 +175,8 @@
 		min-height: 100vh;
 		padding: 40rpx 0;
 		background-color: #f0f0f0;
+		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+		
 
 		&-lining {
 			width: 90%;
@@ -186,9 +188,14 @@
 			}
 
 			&-title {
-				font-size: 50rpx;
-				font-weight: 700;
-				margin-top: 10rpx;
+				font-size: 42rpx;
+				font-weight: bold;
+				// margin-top: 10rpx;
+				margin-bottom: 30rpx;
+				padding-bottom: 10rpx;
+				border-bottom: 1px solid white;
+				border-image-slice: 1;
+				border-image-source: linear-gradient(to left,rgba(209, 208, 207, 0),  rgba(209, 208, 208, 0.4) ,rgba(184, 183, 183, 0.8));
 			}
 
 			&-desc {

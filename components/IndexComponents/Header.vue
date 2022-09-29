@@ -5,6 +5,12 @@
 				<view class="sousuo t-icon t-icon-sousuo"></view>
 				<input class="input" placeholder="请输入..." required="" type="text">
 			</form>
+			<view class="header-wrapper-main-select" @click="showPopup">筛选</view>
+			<fui-bottom-popup :show="showSelect" @close="closePopup">
+				<view class="header-wrapper-main-custom">
+					这是自定义内容区
+				</view>
+			</fui-bottom-popup>
 		</view>
 		<uni-notice-bar class="header-wrapper-notice" backgroundColor="transparent" show-close show-icon scrollable
 			:speed="50" text="科技创新魔法协会, 科技创新魔法协会, 科技创新魔法协会!!!" />
@@ -12,6 +18,18 @@
 </template>
 
 <script setup>
+	import {
+	  ref
+	} from "vue"
+	
+	let showSelect = ref(false);
+	
+	const closePopup = (type) => {
+		showSelect.value = false;
+	}
+	const showPopup = (type) => {
+		showSelect.value = true;
+	}
 </script>
 
 <style lang="scss" scoped>
@@ -24,22 +42,39 @@
 		width: 100%;
 		height: 90rpx;
 		// background-color:#bababa;
-		background-color: #ececec;
+		background-color: #f2f6fa;
 		border-top: 1px solid #535353;
 
 		&-main {
 			width: 100%;
 			display: flex;
-			justify-content: center;
+			justify-content: space-around;
 			align-items: center;
 			margin-top: 5px;
+			margin-left: 10rpx;
 			// margin: 5px 0px;
 			// box-shadow: 0px 5px 5px #bababa;
 
 
+			&-select {
+				margin-right: 15rpx;
+				color: #728acc;
+				opacity: 0.6;
+				font-size: 26rpx;
+				font-weight: bold;
+			}
+
+			&-custom {
+				width: 100%;
+				height: 520rpx;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
 			&-form {
 				--timing: 0.3s;
-				--width-of-input: 700rpx;
+				--width-of-input: 85%;
 				--height-of-input: 70rpx;
 				--border-height: 2rpx;
 				--input-bg: #fff;
@@ -54,22 +89,24 @@
 				border-radius: var(--border-radius);
 				transition: border-radius 0.5s ease;
 				background: var(--input-bg, #fff);
+				box-shadow: 0px 0px 3px #dfe6ec;
 
 				.sousuo {
 					position: absolute;
-					right: 20rpx;
-					top: 12rpx;
-					width: 30rpx;
-					height: 30rpx;
+					left: 25rpx;
+					top: 8rpx;
+					width: 40rpx;
+					height: 40rpx;
 					margin-top: 3px;
+					opacity: 0.8;
 				}
 
 				.input {
 					font-size: 12px;
 					background-color: transparent;
-					width: var(--width-of-input);
+					width: 160%;
 					height: 100%;
-					padding-left: 10px;
+					padding-left: 35px;
 					border: none;
 					// &:focus-within {
 					// 	outline: none;

@@ -218,10 +218,10 @@
     height: 300rpx;
     // padding: 6px;
     border-radius: 0px 10px 10px 0px;
-    background-color: whitesmoke;
+    background-color: #fdfdfd;
     border-bottom: 2px dashed gainsboro;
     // box-shadow:  6px 6px 12px 12px #1e1e1e;
-    box-shadow: 0px 0px 15px #1e1e1e;
+    box-shadow: 0px 0px 15px #484848;
     margin: 0px 4px 0px 0px;
 
     &-left {
