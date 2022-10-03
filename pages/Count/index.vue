@@ -45,7 +45,18 @@
     uni.chooseImage({
       count: 1,
       success(ops) {
-        url.value = ops.tempFilePaths[0];
+        // url.value = ops.tempFilePaths[0];
+        uni.uploadFile({
+          url: "https://119.29.157.231:8888/wx​/users​/uploadAvatar",
+          filePath: ops.tempFilePaths[0],
+          name: 'avatarFile',
+          header: {
+            'Token': getStorage(uni, 'token')
+          },
+          complete(ops) {
+            console.log(ops);
+          }
+        })
       }
     })
   }
