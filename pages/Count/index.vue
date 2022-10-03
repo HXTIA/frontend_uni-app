@@ -30,6 +30,9 @@
     reactive,
     ref
   } from "vue";
+  import {
+    http
+  } from '@/request/http.js'
 
   const {
     nickName,
@@ -42,7 +45,18 @@
     uni.chooseImage({
       count: 1,
       success(ops) {
-        url.value = ops.tempFilePaths[0]
+        // url.value = ops.tempFilePaths[0];
+        uni.uploadFile({
+          url: "https://119.29.157.231:8888/wx​/users​/uploadAvatar",
+          filePath: ops.tempFilePaths[0],
+          name: 'avatarFile',
+          header: {
+            'Token': getStorage(uni, 'token')
+          },
+          complete(ops) {
+            console.log(ops);
+          }
+        })
       }
     })
   }
@@ -50,6 +64,18 @@
   // 保存信息 -> 发起请求
   const saveCount = () => {
     console.log("保存请求");
+    uni.uploadFile({
+      url: "http://119.29.157.231:8888/wx​/users​/uploadAvatar",
+      name: 'avatarFile',
+      filePath: url.value,
+      formData: {
+        avatarUrl: getStorage(uni, 'userInfo').avatarUrl,
+        id: getStorage(uni, 'userInfo').id
+      },
+      complete(ops) {
+        console.log(ops);
+      }
+    })
   }
 
   setStorage(uni, "organization", 1)

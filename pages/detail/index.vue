@@ -33,9 +33,11 @@
 				delta: 1
 			})
 		}
-		const res = await requestData(uni, {}, true);
+		// const res = await requestData(uni, {}, true);
+		// Object.assign(data, res);
+		const res = await requestData(uni, id);
 		Object.assign(data, res);
-		console.log(data);
+		// console.log(data);
 
 		if (data.urls.length < 1) {
 			showCard.value = true;
@@ -43,7 +45,9 @@
 			showCard.value = false;
 		}
 
+
 	})
+
 
 	const myCanvasRef = ref();
 	//绘制海报
