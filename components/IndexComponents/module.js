@@ -2,8 +2,10 @@ import router from "@/router/index.js"
 import {
   defineProps,
   ref,
-  provide
+  provide,
+  computed
 } from "vue"
+
 import {
   todoSlideBlockRightOptions,
   enumSlideBlockOptionsEnum
@@ -26,16 +28,19 @@ import {
   timeFormat
 } from "@/utils/format/time.js"
 
+import dataStore from "@/stores/data/index.js"
+
 export default {
   router,
   defineProps,
   ref,
   provide,
+  computed,
   todoSlideBlockRightOptions,
   enumSlideBlockOptionsEnum,
   checkSubscribe,
-  dropDownOptions,
   onHide,
   onLoad,
   timeFormat,
+  dataStore
 }

@@ -12,14 +12,15 @@
 	import {
 		timeFormat
 	} from "@/utils/format/time.js"
+	import utils from '@/node_modules/firstui-uni/firstui/fui-utils';
 	const props = defineProps({
 		ddl: {
 			type: Number,
 			default: 1
 		},
-		isDone:{
-			type:Boolean,
-			default:false
+		isDone: {
+			type: Boolean,
+			default: false
 		}
 	})
 </script>
@@ -44,7 +45,7 @@
 			font-weight: bold;
 			font-size: 30rpx;
 		}
-		
+
 		//npm install -g sass-migrator
 		//sass-migrator division node_modules/mathsass/dist/functions/_sin.scss
 		$bubble-d: 120rpx;
@@ -56,11 +57,11 @@
 			$shadow-list: ();
 			$n-groups: 9;
 			// $group-base-angle: math.div(360deg, $n-groups);
-			$group-base-angle:40deg;
+			$group-base-angle: 40deg;
 			$group-distr-r: (1 + $k*.25)*$bubble-r;
 			$n-sparkles: 2;
 			// $sparkle-base-angle: math.div(360deg, $n-sparkles);
-			$sparkle-base-angle:180deg;
+			$sparkle-base-angle: 180deg;
 			$sparkle-off-angle: 60deg; // offset angle from radius
 			$spread-r: -$k*$sparkle-r;
 
@@ -109,7 +110,8 @@
 
 		// }
 
-		&-boom{
+		&-boom {
+
 			&:before,
 			&:after {
 				position: absolute;
@@ -118,20 +120,21 @@
 				border-radius: 50%;
 				content: '';
 			}
-			
+
 			&:after {
 				margin: -$sparkle-r;
 				width: $sparkle-d;
 				height: $sparkle-d;
 				@include sparkles(1);
 			}
+
 			&:after {
 				animation: sparkles 500ms ease-in-out;
 			}
 		}
-			
 
-		
+
+
 
 		@keyframes sparkles {
 

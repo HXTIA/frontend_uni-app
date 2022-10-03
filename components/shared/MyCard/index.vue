@@ -1,5 +1,5 @@
 <template>
-	<fui-card>
+	<fui-card >
 		<image class="card-cover" :src="url" mode="widthFix"></image>
 		<view class="card-content">
 			{{content}}
@@ -18,19 +18,23 @@
 		},
 		url: {
 			type: String,
-			default: 'https://s1.ax1x.com/2022/09/26/xV1iuV.png'
+			default: 'https://i.imgtg.com/2022/09/29/mir8p.png'
 		}
 	})
 </script>
 
 <style lang="scss" scoped>
 	.card-cover {
-		width: 100%;
-		height: 385rpx;
+		width: 30%;
+		margin: 10px auto;
+		// height: 385rpx;
 		display: block;
+		color: aliceblue;
 	}
 
 	.card-content {
+		background-color: #222222;
+		color: aliceblue;
 		width: 100%;
 		padding: 32rpx;
 		box-sizing: border-box;

@@ -36,7 +36,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 200rpx;
     padding: 10rpx;
 
     &-title {

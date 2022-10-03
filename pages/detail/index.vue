@@ -20,7 +20,6 @@
 			urls: [url],
 		});
 	}
-
 	let data = reactive({})
 	//一张或没有图片时展示卡片
 	let showCard = ref(false);
@@ -38,15 +37,13 @@
 		Object.assign(data, res);
 		console.log(data);
 
-		if (data.urls.length < 2) {
+		if (data.urls.length < 1) {
 			showCard.value = true;
 		} else {
 			showCard.value = false;
 		}
 
 	})
-
-
 
 	const myCanvasRef = ref();
 	//绘制海报
@@ -134,32 +131,36 @@
 			v-if="!Object.keys(data).length">
 		</fui-empty>
 		<!-- 内容主体 -->
-		<fui-animation :duration="500" :animationType="['fade']" :show="Boolean(Object.keys(data).length)">
-			<view class="detail-wrapper-lining">
-				<view class="detail-wrapper-lining-time">
+		<fui-animation :duration="0" :animationType="['zoom-in']" :show="Boolean(Object.keys(data).length)">
+			<view class="detail-wrapper">
+				<view class="detail-wrapper-time">
 					发布于: {{ timeFormat(data.time) }}
 				</view>
-				<header class="detail-wrapper-lining-title">
+				<header class="detail-wrapper-title">
 					{{ data.title }}
 				</header>
-				<main v-if="!showCard" class="detail-wrapper-lining-desc">
+				<main v-show="!showCard" class="detail-wrapper-desc">
 					{{ data.desc }}
 				</main>
-				<view v-if="!showCard" class="detail-wrapper-lining-urls">
-					<view v-for="(item,index) in data.urls" :key="index" class="detail-wrapper-lining-urls-item">
+				<view v-show="!showCard" class="detail-wrapper-urls">
+					<view v-for="(item,index) in data.urls" :key="index" class="detail-wrapper-urls-item">
 						<image :src="item" @click="previewImg(item)" mode="widthFix"></image>
 					</view>
 				</view>
 				<MyCard v-if="showCard" :content="data.desc" :url="data.urls[0]"> </MyCard>
-				<view class="detail-wrapper-lining-tag">
+				<view class="detail-wrapper-tag">
 					<MyTag v-for="item in data.tag" :key="item" :title="item"></MyTag>
 				</view>
 				<MyDate :ddl="data.ddl"></MyDate>
 				<MyCanvas ref="myCanvasRef" :width="470" :height="690" />
-				<fui-button height="66rpx" radius="96rpx" type="purple" :margin="['20rpx','0rpx','0rpx','0rpx']"
-					@click="createPoster">生成海报</fui-button>
-				<fui-button openType="share" height="66rpx" radius="96rpx" type="purple"
-					:margin="['20rpx','0rpx','0rpx','0rpx']">分享给好友</fui-button>
+				<view class="detail-wrapper-btns">
+					<fui-button height="66rpx" radius="96rpx" type="purple" :margin="['20rpx','0rpx','0rpx','0rpx']"
+						@click="createPoster">生成海报
+					</fui-button>
+					<fui-button openType="share" height="66rpx" radius="96rpx" type="purple"
+						:margin="['20rpx','0rpx','0rpx','0rpx']">分享给好友
+					</fui-button>
+				</view>
 			</view>
 		</fui-animation>
 	</view>
@@ -170,82 +171,67 @@
 		box-sizing: border-box;
 		display: flex;
 		flex-direction: column;
+		justify-content: flex-start;
 		width: 100vw;
 		height: auto;
 		min-height: 100vh;
-		padding: 40rpx 0;
+		padding: 20rpx;
 		background-color: #f0f0f0;
 		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-		
 
-		&-lining {
-			width: 90%;
-			margin: 0 auto;
 
-			&-time {
-				font-size: 28rpx;
-				color: #938e8e;
-			}
+		&-time {
+			font-size: 28rpx;
+			color: #938e8e;
+		}
 
-			&-title {
-				font-size: 42rpx;
-				font-weight: bold;
-				// margin-top: 10rpx;
-				margin-bottom: 30rpx;
-				padding-bottom: 10rpx;
-				border-bottom: 1px solid white;
-				border-image-slice: 1;
-				border-image-source: linear-gradient(to left,rgba(209, 208, 207, 0),  rgba(209, 208, 208, 0.4) ,rgba(184, 183, 183, 0.8));
-			}
+		&-title {
+			font-size: 42rpx;
+			font-weight: bold;
+			// margin-top: 10rpx;
+			margin-bottom: 30rpx;
+			padding-bottom: 10rpx;
+			border-bottom: 1px solid white;
+			border-image-slice: 1;
+			border-image-source: linear-gradient(to left, rgba(209, 208, 207, 0), rgba(209, 208, 208, 0.4), rgba(184, 183, 183, 0.8));
+		}
 
-			&-desc {
-				width: 95%;
-				margin-top: 10rpx;
+		&-desc {
+			width: 95%;
+			margin-top: 10rpx;
+			font-size: 30rpx;
+			line-height: 36rpx;
+		}
 
-				font-size: 30rpx;
-				line-height: 36rpx;
-			}
+		&-urls {
+			display: flex;
+			justify-content: space-between;
+			flex-flow: wrap;
+			align-items: center;
+			width: 100%;
+			margin-top: 10px;
 
-			&-urls {
-				display: flex;
-				justify-content: space-between;
-				flex-flow: wrap;
-				align-items: center;
-				width: 100%;
-				margin-top: 10px;
+			&-item {
+				width: 30%;
 
-				&-item {
-					width: 30%;
-
-					image {
-						width: 100%;
-						height: 100px;
-						border-radius: 10rpx;
-					}
+				image {
+					width: 100%;
+					// height: 100px;
+					border-radius: 10rpx;
 				}
-			}
-
-			image {
-				width: 100%;
-				// height: 100px;
-				border-radius: 10rpx;
-			}
-
-			&-tag {
-				display: flex;
-				align-items: center;
-				flex-flow: wrap;
-			}
-
-			&-ddl {
-				margin: 20rpx;
-			}
-
-			&-btns {
-				display: flex;
-				justify-content: space-around;
 			}
 		}
 
+		&-tag {
+			display: flex;
+			align-items: center;
+			flex-flow: wrap;
+		}
+
+		&-btns {
+			display: flex;
+			flex-direction: column;
+
+		}
 	}
 </style>

@@ -59,7 +59,7 @@
 
   let imageList = [];
   const uploadImage = (url) => {
-    imageList.push(...url);
+    imageList = url;
   }
 
   // 处理提交任务
@@ -99,6 +99,7 @@
       height: auto;
       flex-direction: column;
       align-items: center;
+      opacity: 0.9;
 
       &-header {
         font-size: 40rpx;

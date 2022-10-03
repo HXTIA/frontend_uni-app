@@ -5,7 +5,7 @@
     </view>
     <view class="indexPage-wrapper-scroller">
       <!-- 主体 -->
-      <IndexWorkItemCom v-for="(item,index) in data" :key="index" :data="item" :dropDownOptions="dropDownOptions">
+      <IndexWorkItemCom v-for="item in data" :key="item.id" :data="item" :dropDownOptions="dropDownOptions">
       </IndexWorkItemCom>
       <!-- 缺省页 -->
       <fui-empty isFixed :src="`/static/indexPage/${icon.icon}`" :title="icon.title" :descr="icon.desc"
@@ -13,7 +13,7 @@
       </fui-empty>
     </view>
     <!-- 没有更多了 -->
-    <!-- <fui-divider text="没有更多了" backgroundColor="#e0e0e0" color="#000000" height="50"></fui-divider> -->
+    <!-- <fui-divider text="没有更多了" backgroundColor="#e0e0e0" color="#000000" height="50" v-if="data.length"></fui-divider> -->
   </view>
 </template>
 
@@ -25,6 +25,7 @@
   const {
     dropDownOptions,
     reactive,
+    computed,
     requestData,
     onLoad,
     onShow,
@@ -38,13 +39,18 @@
     request: "request.png",
     empty: "empty.png"
   }
+
   let icon = reactive({
     icon: emptyIcon.request,
     title: "资源请求中...",
     desc: "请耐心等待"
   })
 
-  let data = reactive([]);
+  // 不做监听做计算属性
+  let data = computed(() => {
+    return store.getData
+  })
+
   onShow(async (ops) => {
     // 数据如果已经存在 -> 意味着已经登陆 && 组织存在 && 引导页观看完毕
     const isExist = store.getData.length;
@@ -61,11 +67,6 @@
       icon.title = "没有更多数据啦!";
       icon.desc = "暂时没有作业或者检查组织信息是否正确";
     }
-    data.push(...res);
-  })
-
-  watchStore(store, "flag", () => {
-    data.splice(0, data.length, ...store.getData);
   })
 </script>
 

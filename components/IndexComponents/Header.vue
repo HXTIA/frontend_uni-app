@@ -3,12 +3,30 @@
 		<view class="header-wrapper-main">
 			<form class="header-wrapper-main-form">
 				<view class="sousuo t-icon t-icon-sousuo"></view>
-				<input class="input" placeholder="请输入..." required="" type="text">
+				<input class="input" placeholder="请输入..." v-model="str" type="text" @confirm="search">
 			</form>
 			<view class="header-wrapper-main-select" @click="showPopup">筛选</view>
 			<fui-bottom-popup :show="showSelect" @close="closePopup">
 				<view class="header-wrapper-main-custom">
-					这是自定义内容区
+					<uni-section title="完成情况" type="line" padding>
+						<view class="example-body">
+							<uni-tag class="tag-view" :inverted="true" text="已完成" @click="searchDone(1)" :type="showSearchDone==1?'success':'default'" />
+							<uni-tag class="tag-view" :inverted="true" text="未完成" @click="searchDone(2)" :type="showSearchDone==2?'success':'default'" />
+							<uni-tag  class="tag-view" :inverted="true" text="未读" @click="searchDone(3)" :type="showSearchDone==3?'success':'default'" />
+						</view>
+					</uni-section>
+					<uni-section title="发布时间" type="line" padding>
+						<view class="example-body">
+							<uni-tag  class="tag-view" :inverted="true" text="今天" @click="searchTime(1)" :type="showSearchTime==1?'success':'default'"/>
+							<uni-tag  class="tag-view" :inverted="true" text="昨天" @click="searchTime(2)" :type="showSearchTime==2?'success':'default'"/>
+						</view>
+					</uni-section>
+					<uni-section title="显示全部" type="line" padding>
+						<view class="example-body">
+							<uni-tag  class="tag-view" :inverted="true" text="全部" @click="showAllItem" :type="showAll?'success':'default'" />
+						</view>
+					</uni-section>
+					
 				</view>
 			</fui-bottom-popup>
 		</view>
@@ -19,16 +37,118 @@
 
 <script setup>
 	import {
-	  ref
+		ref,
+		watch
 	} from "vue"
-	
+
 	let showSelect = ref(false);
-	
+
 	const closePopup = (type) => {
 		showSelect.value = false;
 	}
 	const showPopup = (type) => {
 		showSelect.value = true;
+	}
+
+
+	import dataStore from '@/stores/data/index.js'
+	const store = dataStore();
+
+	// 先缓存下全部的信息
+	let cacheData = [];
+
+	// 搜索的字符串
+	let str = ref('');
+
+	// 搜索字符串为空的时候缓存原数据
+	watch(str, () => {
+		if (!str.value.length) {
+			store.clearData();
+			store.setData(cacheData);
+		}
+	})
+	
+	const search = () => {
+		// 初次搜索的时候 -> 缓存所有数据
+		if (!cacheData.length) {
+			cacheData.push(...JSON.parse(JSON.stringify(store.getData)));
+		}
+		// 正则匹配
+		const reg = new RegExp(str.value);
+		const filters = cacheData.filter((value) => reg.test(value.title));
+		store.clearData();
+		store.setData(filters);
+	}
+	
+	let showSearchDone = ref(0);
+	let showSearchTime = ref(0);
+	let showAll = ref(false);
+	const searchDone = (status) =>{
+		if (!cacheData.length) {
+			cacheData.push(...JSON.parse(JSON.stringify(store.getData)));
+		}
+		if(showSearchDone.value == status){
+			showSearchDone.value = 0;
+			showAllItem();
+			return
+		}
+		showAll.value = false;
+		if(status == 1){
+			// 已完成
+			showSearchDone.value = status;
+			const filters = cacheData.filter((value) => value.flag === 2);
+			store.clearData();
+			store.setData(filters);
+		}else if(status == 2){
+			// 未完成
+			showSearchDone.value = status;
+			const filters = cacheData.filter((value) => value.flag != 2 );
+			store.clearData();
+			store.setData(filters);
+		}else{
+			// 未读
+			showSearchDone.value = status;
+			const filters = cacheData.filter((value) => value.flag == 0 );
+			store.clearData();
+			store.setData(filters);
+		}
+		
+	}
+	const searchTime = (status) =>{
+		if (!cacheData.length) {
+			cacheData.push(...JSON.parse(JSON.stringify(store.getData)));
+		}
+		if(showSearchTime.value == status){
+			showSearchTime.value = 0;
+			showAllItem();
+			return
+		}
+		if(status == 1){
+			showSearchTime.value = 1;
+			showAll.value = false;
+			const filters = cacheData.filter((value) => new Date(value.time).toDateString() === new Date().toDateString());
+			store.clearData();
+			store.setData(filters);
+		}else{
+			showSearchTime.value = 2;
+			showAll.value = false;
+			const nowDate = new Date();
+			const filters = cacheData.filter((value) => new Date(value.time).toDateString() === new Date(nowDate-86400000).toDateString());
+			store.clearData();
+			store.setData(filters);
+		}
+		
+	}
+	
+	const showAllItem = () =>{
+		showSearchDone.value = 0;
+		showSearchTime.value = 0;
+		showAll.value = true;
+		if (!cacheData.length) {
+			cacheData.push(...JSON.parse(JSON.stringify(store.getData)));
+		}
+		store.clearData();
+		store.setData(cacheData);
 	}
 </script>
 
@@ -67,9 +187,16 @@
 			&-custom {
 				width: 100%;
 				height: 520rpx;
-				display: flex;
-				align-items: center;
-				justify-content: center;
+				// display: flex;
+				// align-items: center;
+				// justify-content: left;
+				margin:20rpx 40rpx;
+				.tag-view{
+					margin-right: 10px;
+					&:hover{
+						color: green;
+					}
+				}
 			}
 
 			&-form {
@@ -106,7 +233,7 @@
 					background-color: transparent;
 					width: 160%;
 					height: 100%;
-					padding-left: 35px;
+					padding-left: 70rpx;
 					border: none;
 					// &:focus-within {
 					// 	outline: none;
