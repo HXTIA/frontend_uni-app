@@ -19,6 +19,7 @@ module.exports = {
       [
         'feat', // 新功能（feature）
         'fix', // 修补bug
+        'update', // 更新功能
         'docs', // 文档（documentation）
         'style', // 格式（不影响代码运行的变动）
         'refactor', // 重构（即不是新增功能，也不是修改bug的代码变动）

@@ -1,9 +1,6 @@
 import {
   reactive,
-} from "vue"
-
-import {
-  ref
+  computed
 } from "vue"
 
 import userStore from "@/stores/users/index.js"
@@ -38,6 +35,7 @@ const store = dataStore();
 
 export default {
   reactive,
+  computed,
   dropDownOptions,
   requestData,
   onLoad,

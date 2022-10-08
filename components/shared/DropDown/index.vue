@@ -58,7 +58,7 @@
     flex-direction: row;
     align-items: center;
     height: auto;
-
+	
     &-icon {
       position: absolute;
       right: 20rpx;
@@ -67,12 +67,17 @@
 
     &-item {
       position: absolute;
-      width: 100%;
-      padding: 20rpx 10rpx;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      // padding: 10rpx 5rpx;
       border-radius: 8rpx;
-      right: 30px;
-      top: 20rpx;
+      right: 70rpx;
+      top: 30rpx;
       background-color: white;
+	  border-radius: 10%;
+	  border: 1px solid #eaf2ff;
+	  box-shadow:  1px 1px 1px 1px #cddbfa;
     }
   }
 </style>

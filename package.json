@@ -1,7 +1,6 @@
 {
   "dependencies": {
     "@dcloudio/uni-app": "^3.0.0-alpha-3000020210521001",
-    "animate.css": "^4.1.1",
     "firstui-uni": "^1.6.1",
     "pinia": "^2.0.22",
     "scss": "^0.2.4"
@@ -11,6 +10,7 @@
     "@commitlint/config-conventional": "^17.1.0",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^8.0.1",
+    "mathsass": "^0.11.0",
     "validate-commit-msg": "^2.14.0"
   },
   "config": {

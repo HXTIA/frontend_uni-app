@@ -1,15 +1,15 @@
 <template>
   <uni-swipe-action>
     <uni-swipe-action-item :left-options="todoSlideBlockRightOptions" @click="clickSlide" @change="changeSlide"
-      :show="isOpened">
-      <view class="workItem-wrapper" :class="[data.grade]" @touchstart="touchStart" @touchend="touchEnd">
+      :show="isOpened" :disabled="isOK">
+      <view class="workItem-wrapper" :class="{isTips:data.isTips}" @touchstart="touchStart" @touchend="touchEnd">
         <fui-row margin-bottom="24rpx">
           <fui-col :span="1">
             <view class="workItem-wrapper-left"></view>
           </fui-col>
           <fui-col :span="23">
             <view class="workItem-wrapper-top">
-              <MyBadge v-for="item in data.tag" :key="item" :txt="item" isread="true"></MyBadge>
+              <MyBadge v-for="item in data.tag" :key="item" :txt="item" :isread="Boolean(data.flag)"></MyBadge>
               <view class="workItem-wrapper-top-dropdown">
                 <DropDownCom :data="dropDownOptions" :id="data.id">
                   <fui-icon name="more-fill" class="workItem-wrapper-top-icon"></fui-icon>
@@ -21,7 +21,7 @@
                 <h1>{{ data.title }}</h1>
               </view>
               <view class="desc">{{ data.desc }}</view>
-              <MyDate :ddl="data.ddl"></MyDate>
+              <MyDate :ddl="data.ddl" :isDone="isOK"></MyDate>
               <fui-animation :animationType="['zoom-out']" :show="isDone" :styles="{position: 'absoluted'}">
                 <img :src="image" class="image" />
               </fui-animation>
@@ -37,24 +37,22 @@
   import MyDate from "@/components/shared/MyDate/index.vue"
   import MyBadge from "@/components/shared/MyBadge/index.vue"
   import DropDownCom from "@/components/shared/DropDown/index.vue"
-  import dataStore from "@/stores/data/index.js"
-  const store = dataStore();
   import mod from "./module.js"
-  import {
-    watch
-  } from "vue"
   const {
     router,
     defineProps,
     ref,
     provide,
+    computed,
     todoSlideBlockRightOptions,
     enumSlideBlockOptionsEnum,
     checkSubscribe,
     onHide,
     onLoad,
-    timeFormat
+    timeFormat,
+    dataStore
   } = mod
+  const store = dataStore();
 
   const props = defineProps({
     data: {
@@ -67,13 +65,23 @@
     }
   })
 
-  watch(props.data, () => {
-    isDone.value = false;
-    // 监听到数据变化 -> 定时器让动画显现: 缓兵之计
-    setTimeout(() => {
-      image.value = handleFlag();
-      isDone.value = true;
-    }, 500)
+  // 深拷贝处理props传值
+  let option = props.dropDownOptions.map((value) => Object.assign({}, value))
+
+  // 未完成不应该有取消已完成的功能 -> 计算属性处理
+  let dropDownOptions = computed(() => {
+    // 根据副作用 -> 每次依赖的数据flag变化会自动更新(图标)
+    image.value = handleFlag();
+    let res = option.filter((value) => value)
+
+    // 切换图标
+    if (props.data.flag !== 2) {
+      // 如果状态不是完成那么不应该存在取消已完成功能
+      res = option.filter((value) => value.index !== 1)
+    }
+    // 切换文字
+    res[0].title = props.data.isTips ? '取消已置顶' : '置顶'
+    return res;
   })
 
   // 图片切换 0: -> 未读未完成 1: -> 已读未完成 2: -> 已读已完成
@@ -94,21 +102,26 @@
     // 如果是ddl但是已完成给予已完成
     if (props.data.flag == 2) {
       isDone.value = true;
+      isOK.value = true;
       return BASEPATH + ICON_LIST[1];
     }
+
+    // ddl赋给ddl
     if (residue <= advance) {
       switch (props.data.flag) {
         case 0:
         case 1:
           isDone.value = true;
+          isOK.value = false;
           return BASEPATH + ICON_LIST[0];
       }
+    } else {
+      // 非ddl -> 就让可滑动就行
+      isOK.value = false;
     }
   }
 
   const detail = (id) => {
-    // 如果已经设置订阅就进行发起请求
-    checkSubscribe(uni)
     // 跳转路由
     router(uni, {
       url: "detail",
@@ -127,17 +140,18 @@
       isDone.value = false;
       // 定时器让动画显现: 缓兵之计
       setTimeout(() => {
-        image.value = BASEPATH + ICON_LIST[1];
         props.data.flag = 2;
         isDone.value = true;
+        isOK.value = true;
       }, 500)
     }
   }
 
   //已完成点击事件
   //二次滑动已完成事件
-  let isDone = ref(false);
-  let isOpened = ref("none");
+  let isOK = ref(false); //是否已完成
+  let isDone = ref(false); //是否显示印章
+  let isOpened = ref("none"); //滑动动画
   let startPosition = 0;
   let endPosition = 0;
   let changeStatus = false;
@@ -177,20 +191,11 @@
       }
       return;
     }
-
-    // console.log("点击结束");
   }
-
-  //已完成动画
-  // const mode = ref(['zoom-out']);
-  // const styles = ref({
-  // 	position: 'absolute',
-  // 	top: 10,
-  // });
 
   // 控制三个点的开闭
   let flag = ref(false);
-  provide("flag", flag)
+  provide("flag", flag);
 
   // 处理三个点闭合的善后
   onHide(() => {
@@ -198,26 +203,20 @@
       flag.value = false
     }
   })
-
-  // 由于变量存在暂时性死区
-  // 所以声明提至最前方 -> image的赋值放在后面
-  // 或者用钩子函数
-  image.value = handleFlag()
 </script>
 
 <style lang="scss" scoped>
   .workItem-wrapper {
+	// font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     position: relative;
     overflow: hidden;
     box-sizing: border-box;
-    // width: 95%;
     height: 300rpx;
-    // padding: 6px;
     border-radius: 0px 10px 10px 0px;
-    background-color: whitesmoke;
+    background-color: #fdfdfd;
     border-bottom: 2px dashed gainsboro;
     // box-shadow:  6px 6px 12px 12px #1e1e1e;
-    box-shadow: 0px 0px 15px #1e1e1e;
+    box-shadow: 0px 0px 15px #484848;
     margin: 0px 4px 0px 0px;
 
     &-left {
@@ -230,18 +229,16 @@
       margin: 0px 15px;
 
       .title {
-        height: 60rpx;
-        font-size: 43rpx;
+        height: 55rpx;
+        font-size: 40rpx;
         font-weight: bold;
         margin: 8px 0px 5px 0px;
         overflow: hidden;
-        // text-overflow: ellipsis;
-        // white-space: nowrap;
       }
 
       .desc {
         color: gray;
-        font-size: 30rpx;
+        font-size: 28rpx;
         width: 80%;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -254,15 +251,7 @@
         right: 30rpx;
         width: 200rpx;
         height: 200rpx;
-        // top: 150rpx;
-        // right: -20rpx;
         transform: translate(40%, 40%);
-
-        // bottom: 0;
-        // right: 0;
-        // width: 100px;
-        // height: 100px;
-        // transform: translate(40%, 40%);
       }
 
     }
@@ -280,5 +269,9 @@
         right: 10rpx;
       }
     }
+  }
+
+  .isTips {
+    background-color: #cccccc;
   }
 </style>

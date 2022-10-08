@@ -53,8 +53,6 @@ export const returnData = (instance) => {
 }
 
 // 导出提示数据
-// export const tipOptions = ["这是第一段", "这是第二段", "这是第三段"];
-
 export const tipOptions = [{
     content: "Tips: 勾选不再询问并允许，就能收到推送啦！",
     img: "../../../static/moreTips/subMessage.jpg"

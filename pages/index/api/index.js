@@ -29,10 +29,14 @@ export const requestData = async (uni) => {
     return [];
   }
 
-  const res = await new Promise((reslove) => {
-    setTimeout(() => {
-      reslove(data)
-    }, 2000)
-  })
-  return store.setData(res);
+  const res = await http(uni, {
+    method: "GET",
+    url: "https://console-mock.apipost.cn/app/mock/project/f4b5eed3-856b-4b0a-9ad3-f26bca3ea207/workitem"
+  }, true);
+
+  if (!res.data.length) return []
+
+  // 存储状态
+  store.setData(res.data);
+  return store.getData
 }

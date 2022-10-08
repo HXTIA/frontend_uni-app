@@ -24,16 +24,6 @@
       })
     }
 
-    // uni.navigateBack({
-    //   success: function(ops) {
-    //     pages.map((value) => {
-    //       if (whiteList.includes(value.route)) {
-    //         value.onLoad();
-    //       }
-    //     })
-    //   }
-    // });
-
     // 登陆结束 -> 现在去重定向至首页
     uni.reLaunch({
       url: "/pages/Index/index"
