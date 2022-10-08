@@ -13,7 +13,7 @@
       </fui-empty>
     </view>
     <!-- 没有更多了 -->
-    <fui-divider text="没有更多了" backgroundColor="#e0e0e0" color="#000000" height="50" v-if="data.length"></fui-divider>
+    <!-- <fui-divider text="没有更多了" backgroundColor="#e0e0e0" color="#000000" height="50" v-if="data.length"></fui-divider> -->
   </view>
 </template>
 

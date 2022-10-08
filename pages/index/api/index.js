@@ -31,7 +31,7 @@ export const requestData = async (uni) => {
 
   const res = await http(uni, {
     method: "GET",
-    url: "http://127.0.0.1:3000/api/data"
+    url: "https://console-mock.apipost.cn/app/mock/project/f4b5eed3-856b-4b0a-9ad3-f26bca3ea207/workitem"
   }, true);
 
   if (!res.data.length) return []

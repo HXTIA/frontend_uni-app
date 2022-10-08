@@ -58,7 +58,7 @@
     flex-direction: row;
     align-items: center;
     height: auto;
-
+	
     &-icon {
       position: absolute;
       right: 20rpx;
@@ -75,6 +75,9 @@
       right: 70rpx;
       top: 30rpx;
       background-color: white;
+	  border-radius: 10%;
+	  border: 1px solid #eaf2ff;
+	  box-shadow:  1px 1px 1px 1px #cddbfa;
     }
   }
 </style>

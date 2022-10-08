@@ -28,7 +28,7 @@
 
   const typeColor = (() => {
 
-    if (props.isread == "true") {
+    if (props.isread) {
       background.type = "success";
     } else {
       background.type = "danger";

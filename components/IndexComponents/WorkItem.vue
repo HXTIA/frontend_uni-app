@@ -207,14 +207,16 @@
 
 <style lang="scss" scoped>
   .workItem-wrapper {
+	// font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     position: relative;
     overflow: hidden;
     box-sizing: border-box;
     height: 300rpx;
     border-radius: 0px 10px 10px 0px;
-    background-color: whitesmoke;
+    background-color: #fdfdfd;
     border-bottom: 2px dashed gainsboro;
-    box-shadow: 0px 0px 15px #1e1e1e;
+    // box-shadow:  6px 6px 12px 12px #1e1e1e;
+    box-shadow: 0px 0px 15px #484848;
     margin: 0px 4px 0px 0px;
 
     &-left {
@@ -227,8 +229,8 @@
       margin: 0px 15px;
 
       .title {
-        height: 60rpx;
-        font-size: 43rpx;
+        height: 55rpx;
+        font-size: 40rpx;
         font-weight: bold;
         margin: 8px 0px 5px 0px;
         overflow: hidden;
@@ -236,7 +238,7 @@
 
       .desc {
         color: gray;
-        font-size: 30rpx;
+        font-size: 28rpx;
         width: 80%;
         overflow: hidden;
         text-overflow: ellipsis;
