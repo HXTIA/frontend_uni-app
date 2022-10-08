@@ -216,7 +216,7 @@
     background-color: #fdfdfd;
     border-bottom: 2px dashed gainsboro;
     // box-shadow:  6px 6px 12px 12px #1e1e1e;
-    box-shadow: 0px 0px 15px #484848;
+    box-shadow: 0px 0px 15px #555555;
     margin: 0px 4px 0px 0px;
 
     &-left {

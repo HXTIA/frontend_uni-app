@@ -47,7 +47,7 @@
 
   const setCountMessage = () => {
     router(uni, {
-      url: "Count"
+      url: "Count/Initialization"
     })
   }
 </script>

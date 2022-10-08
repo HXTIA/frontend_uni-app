@@ -31,7 +31,7 @@
 			</fui-bottom-popup>
 		</view>
 		<uni-notice-bar class="header-wrapper-notice" backgroundColor="transparent" show-close show-icon scrollable
-			:speed="50" text="科技创新魔法协会, 科技创新魔法协会, 科技创新魔法协会!!!" />
+			:speed="50" text="科技创新魔法协会, 科技创新魔法协会, 科技创新魔法协会!!!" @click="tolucky" />
 	</view>
 </template>
 
@@ -40,6 +40,7 @@
 		ref,
 		watch
 	} from "vue"
+	import router from "@/router/index.js"
 
 	let showSelect = ref(false);
 
@@ -123,6 +124,7 @@
 			showAllItem();
 			return
 		}
+		//今天
 		if(status == 1){
 			showSearchTime.value = 1;
 			showAll.value = false;
@@ -130,6 +132,7 @@
 			store.clearData();
 			store.setData(filters);
 		}else{
+			//昨天
 			showSearchTime.value = 2;
 			showAll.value = false;
 			const nowDate = new Date();
@@ -139,7 +142,7 @@
 		}
 		
 	}
-	
+	//显示全部
 	const showAllItem = () =>{
 		showSearchDone.value = 0;
 		showSearchTime.value = 0;
@@ -149,6 +152,14 @@
 		}
 		store.clearData();
 		store.setData(cacheData);
+	}
+	
+	
+	//抽奖页面
+	const tolucky = ()=>{
+		router(uni, {
+		  url: "Lucky"
+		})
 	}
 </script>
 

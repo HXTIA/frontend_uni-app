@@ -76,13 +76,26 @@
         "navigationStyle": "default"
       }
     },
+	{
+	  "path": "pages/Count/Initialization/index",
+	  "style": {
+	    "navigationStyle": "default"
+	  }
+	},
     {
       "path": "pages/Guide/index",
       "style": {
         "navigationBarTitleText": "",
         "navigationStyle": "default"
       }
-    }
+    },
+	{
+	  "path": "pages/Lucky/index",
+	  "style": {
+	    "navigationBarTitleText": "",
+	    "navigationStyle": "default"
+	  }
+	}
   ],
   "tabBar": {
 	  // "selectedColor": "#ffc53c",
