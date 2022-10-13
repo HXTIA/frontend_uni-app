@@ -20,8 +20,8 @@
               <view class="title">
                 <h1>{{ data.title }}</h1>
               </view>
-              <view class="desc">{{ data.desc }}</view>
-              <MyDate :ddl="data.ddl" :isDone="isOK"></MyDate>
+              <view class="desc">{{ data.detail }}</view>
+              <MyDate :ddl="data.deadline" :isDone="isOK"></MyDate>
               <fui-animation :animationType="['zoom-out']" :show="isDone" :styles="{position: 'absoluted'}">
                 <img :src="image" class="image" />
               </fui-animation>
@@ -207,7 +207,7 @@
 
 <style lang="scss" scoped>
   .workItem-wrapper {
-	// font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    // font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     position: relative;
     overflow: hidden;
     box-sizing: border-box;

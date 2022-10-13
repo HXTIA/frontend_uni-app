@@ -4,10 +4,6 @@ import {
 } from "@/utils/shared/createUniInstance.js"
 
 import {
-  createInstance
-} from "@/utils/shared/createUniInstance.js"
-
-import {
   http
 } from "@/request/http.js"
 
@@ -65,14 +61,24 @@ Controller.handleSticky = (id) => {
         value.isTips = true;
       }
       // 无论是置顶还是取消置顶，都是要发起请求
-      // try {
-      //   const res = await http(createInstance, {}, true);
-      //   return;
-      // } catch (e) {
-      //   //TODO handle the exception
-      //   console.log(e);
-      return
-      // }
+      try {
+        const res = await http(uni, {
+          url: 'http://119.29.157.231:8888/wx/userWork/update',
+          method: 'POST',
+          data: {
+            pinStatus: isTips,
+            status: 0,
+            userId: 2,
+            workId: id
+          }
+        }, true);
+        console.log(res);
+        return;
+      } catch (e) {
+        //TODO handle the exception
+        console.log(e);
+        return
+      }
     }
   })
 }
