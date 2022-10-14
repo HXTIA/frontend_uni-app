@@ -58,7 +58,7 @@ export const handleLogin = async (uni) => {
     const pos = data.userVo.avatarUrl.lastIndexOf("132")
     data.userVo.avatarUrl = data.userVo.avatarUrl.substring(0, pos) + "0"
     store.setUserInfo(data.userVo, uni);
-
+    console.log(data);
     return true
   } catch (e) {
     //TODO handle the exception

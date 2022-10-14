@@ -60,21 +60,31 @@ Controller.handleSticky = (id) => {
 				// 未置顶 -> 前往置顶
 				isTips = 1;
 
-				const res = store.data.splice(i, 1);
-				store.data.unshift(...res);
-				value.isTips = true;
-			}
-			// 无论是置顶还是取消置顶，都是要发起请求
-			// try {
-			//   const res = await http(createInstance, {}, true);
-			//   return;
-			// } catch (e) {
-			//   //TODO handle the exception
-			//   console.log(e);
-			return
-			// }
-		}
-	})
+        const res = store.data.splice(i, 1);
+        store.data.unshift(...res);
+        value.isTips = true;
+      }
+      // 无论是置顶还是取消置顶，都是要发起请求
+      try {
+        const res = await http(uni, {
+          url: 'http://119.29.157.231:8888/wx/userWork/update',
+          method: 'POST',
+          data: {
+            pinStatus: isTips,
+            status: 0,
+            userId: 2,
+            workId: id
+          }
+        }, true);
+        console.log(res);
+        return;
+      } catch (e) {
+        //TODO handle the exception
+        console.log(e);
+        return
+      }
+    }
+  })
 }
 
 Controller.handleCancelDone = (id) => {

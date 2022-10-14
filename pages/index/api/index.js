@@ -31,12 +31,15 @@ export const requestData = async (uni) => {
 
   const res = await http(uni, {
     method: "GET",
-    url: "https://console-mock.apipost.cn/app/mock/project/f4b5eed3-856b-4b0a-9ad3-f26bca3ea207/workitem"
+    url: "http://119.29.157.231:8888/wx/works/searchList",
+    data: {
+      userId: 2
+    }
   }, true);
-
-  if (!res.data.length) return []
+  console.log(res);
+  if (res.data.code !== 1) return []
 
   // 存储状态
-  store.setData(res.data);
+  store.setData(res.data.data);
   return store.getData
 }
