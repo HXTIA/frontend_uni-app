@@ -31,7 +31,7 @@ export const handleLogin = async (uni) => {
         code: res.code
       }
     }, false)
-    console.log(reqRes);
+    console.log('token',reqRes);
     // 本地存储code -> 伪token -> 依靠后端返还token做判断
     setStorage(uni, "token", reqRes.data.data);
 

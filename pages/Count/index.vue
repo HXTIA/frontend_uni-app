@@ -16,7 +16,9 @@
       </view>
     </view>
     <view class="count-wrapper-btn">
-      <fui-button text="保存修改" width="300rpx" @click="saveCount"></fui-button>
+	  <fui-button height="86rpx" radius="98rpx" background="linear-gradient(300deg, #6831FF 0%, #465CFF 100%)"
+	  	width="400rpx" :margin="['50rpx','0rpx','0rpx','0rpx']" @click="saveCount">保存修改
+	  </fui-button>
     </view>
   </view>
 </template>
@@ -91,6 +93,7 @@
     width: 100vw;
     height: 100vh;
     padding: 20rpx;
+	background-color: #fafbff;
 
     &-avatar {
       position: relative;

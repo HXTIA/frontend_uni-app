@@ -49,7 +49,7 @@
 
   // 引入图片
   let bgImage = reactive({
-    backgroundImage: `url(${preloadImageList.get("SUGGEST_BGIMAGE")})`
+    backgroundImage: `url(${preloadImageList.get("SUGGEST_BGIMAGE2")})`
   })
 
   // 提交输入的内容

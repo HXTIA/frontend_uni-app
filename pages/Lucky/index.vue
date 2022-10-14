@@ -1,17 +1,18 @@
 <script setup>
 	import {ref,computed} from "vue";
 	import router from "@/router/index.js"
+	import {getUserInfo} from "./api/index.js"
 	//抽奖列表
 	const raffleItem = [
-	  {name: '一等奖', id: 1, probability:0.01,winStatus:1},
-	  {name: '神秘礼物', id: 2, probability:0.2,winStatus:2},
-	  {name: '谢谢', id: 3, probability:0.19,winStatus:0},
-	  {name: '彩蛋', id: 4, probability:0.1,winStatus:0},
-	  {name: '二等奖', id: 5, probability:0.01,winStatus:1},
-	  {name: '彩蛋', id: 6, probability:0.19,winStatus:0},
-	  {name: '谢谢', id: 7, probability:0.1,winStatus:0},
-	  {name: '神秘礼物', id: 8, probability:0.1,winStatus:2},
-	  {name: '三等奖', id: 9, probability:0.1,winStatus:1}
+	  {name: '一等奖', icon:'coupon-fill', id: 1, probability:0,winStatus:1},
+	  {name: '神秘礼物', icon:'invite-fill', id: 2, probability:0.2,winStatus:2},
+	  {name: '谢谢', icon:'face', id: 3, probability:0.2,winStatus:0},
+	  {name: '彩蛋', icon:'help-fill', id: 4, probability:0.1,winStatus:0},
+	  {name: '二等奖', icon:'coupon-fill', id: 5, probability:0.01,winStatus:1},
+	  {name: '彩蛋', icon:'help-fill', id: 6, probability:0.19,winStatus:0},
+	  {name: '谢谢', icon:'face', id: 7, probability:0.1,winStatus:0},
+	  {name: '神秘礼物', icon:'invite-fill', id: 8, probability:0.1,winStatus:2},
+	  {name: '三等奖', icon:'coupon-fill', id: 9, probability:0.1,winStatus:1}
 	];
 	// 当前中奖
 	const winRaffle = ref(null);
@@ -125,14 +126,17 @@
 		console.log(raffleItem[appointRaffle.value].winStatus)
 		if(raffleItem[appointRaffle.value].winStatus === 1){
 			dialogTitle.value = "恭喜你,中奖了!";
+			dialogColor.value = "#f33232";
 			dialogText.value = raffleItem[appointRaffle.value].name;
 			dialogShow.value = true;
 		}else if(raffleItem[appointRaffle.value].winStatus === 2){
 			dialogTitle.value = "鸡汤来喽~~";
+			dialogColor.value = "#333";
 			dialogText.value = "当我在追光，我与光同行！";
 			dialogShow.value = true;
 		}else{
 			dialogTitle.value = "还差一点点，就要中大奖了~";
+			dialogColor.value = "#333";
 			dialogText.value = "相信自己，你今天真好看！";
 			dialogShow.value = true;
 		}
@@ -141,6 +145,8 @@
 	
 	// 对话框标题
 	let dialogTitle = ref('恭喜你,中奖了!');
+	// 对话框标题颜色
+	let dialogColor = ref('#333');
 	// 对话框文本
 	let dialogText = ref('弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内');
 	// 对话框显示
@@ -154,18 +160,28 @@
 
 <template>
 	<view class="lucky-wrapper">
-		<fui-dialog :show="dialogShow" :title="dialogTitle" :content="dialogText" maskClosable @click="onDialogClick" :buttons="[{text: '确定',color: '#465CFF'}]" ></fui-dialog>
+		<fui-dialog :show="dialogShow" :color="dialogColor" :title="dialogTitle" :content="dialogText" maskClosable @click="onDialogClick" :buttons="[{text: '确定',color: '#465CFF'}]" ></fui-dialog>
 		
 		<img class="lucky-wrapper-head" src="../../static/lucky/luckyhead.png" alt="抽奖">
+		<view class="lucky-wrapper-num" >今日抽奖次数：1次</view>
 		<fui-grid class="lucky-wrapper-grid" >
 			<fui-grid-item v-for="(item, index) in raffleItem" :key="index" >
 				<view class="fui-grid__cell" :class="{select: winSelectItem === index}">
-					<fui-icon name="coupon-fill" class="ui-icon" ></fui-icon>
+					<fui-icon :name="item.icon" class="fui-icon" ></fui-icon>
 					<text>{{item.name}}</text>
 				</view>
 			</fui-grid-item>
 		</fui-grid>
-		<button @click="startRaffle">开始抽奖</button>
+		<fui-button background="#17cb9f" color="#ffffff" size="40" :bold="true" @click="startRaffle">开始抽奖</fui-button>
+		<img class="lucky-wrapper-rule" src="../../static/lucky/luckyrule2.png" alt="规则">
+		<fui-collapse-item class="lucky-wrapper-collapse">
+			<view class="fui-title">
+				<text>中奖记录</text>
+			</view>
+			<template v-slot:content>
+				<view class="fui-descr">无</view>
+			</template>
+		</fui-collapse-item>
 	</view>
 </template>
 
@@ -173,16 +189,23 @@
 		
 	.lucky-wrapper{
 		background-color:#f2f6fa;
-		height: 100vh;
+		height: 100%;
 		padding: 20rpx;
 		
 		&-head{
 			width: 94vw;
-			height: 25%;
+			height: 300rpx;
+		}
+		&-num{
+			padding: 0;
+			margin: 0;
+			text-align: center;
+			font-size: 28rpx;
+			color: gray;
 		}
 		
 		&-grid{
-	
+
 			.fui-grid__cell {
 				margin: 30rpx;
 				display: flex;
@@ -204,11 +227,33 @@
 			  background: #17cb9f;
 			}
 			.fui-icon {
-				width: 96rpx;
-				height: 96rpx;
-				margin-bottom: 16rpx;
+				// width: 50%;
 			}
 			
+		}
+		&-rule{
+			width: 100%;
+		}
+		
+		&-collapse {
+				
+			.fui-title{
+				width: 100%;
+				padding: 26rpx 32rpx;
+				box-sizing: border-box;
+				display: flex;
+				align-items: center;
+			}
+
+			.fui-descr {
+				width: 100%;
+				padding: 32rpx;
+				font-size: 28rpx;
+				line-height: 52rpx;
+				color: #7F7F7F;
+				word-break: break-all;
+				box-sizing: border-box;
+			}
 		}
 
 	}

@@ -26,7 +26,7 @@ export const handleInit = (uni) => {
       success: (res) => {
         if (res.confirm) {
           uni.navigateTo({
-            url: "/pages/Count/index"
+            url: "/pages/Count/Initialization/index"
           })
         }
       }

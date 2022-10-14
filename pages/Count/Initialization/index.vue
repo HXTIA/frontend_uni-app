@@ -11,11 +11,13 @@
 				</fui-animation>
 			</view>
 			<view v-show="isSelectClass" class="org-wrapper-header-title">
-				<fui-animation :duration="500" :styles="{position: 'relative'}" :animationType="['slide-left']" :show="isSelectClass">
+				<fui-animation :duration="500" :styles="{position: 'relative'}" :animationType="['slide-left']"
+					:show="isSelectClass">
 					<view>加入一个班级</view>
 				</fui-animation>
-				
-				<fui-animation :duration="500" :styles="{position: 'relative'}" :animationType="['slide-right']" :show="isSelectClass">
+
+				<fui-animation :duration="500" :styles="{position: 'relative'}" :animationType="['slide-right']"
+					:show="isSelectClass">
 					<img class="org-wrapper-header-title-img" src="https://img1.imgtp.com/2022/10/04/c4pxY4lj.png"
 						alt="加入班级">
 				</fui-animation>
@@ -78,6 +80,7 @@
 	import {
 		http
 	} from '@/request/http.js'
+	import router from "@/router/index.js"
 	import {
 		onLoad
 	} from '@dcloudio/uni-app'
@@ -141,6 +144,9 @@
 	}
 	const submitOrgClass = () => {
 		console.log("提交组织班级")
+		router(uni, {
+			url: "Count"
+		})
 	}
 
 	//选择班级
